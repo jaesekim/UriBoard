@@ -7,7 +7,14 @@
 
 import Foundation
 
-struct SignInModel: Encodable {
+// 로그인 요청 쿼리
+struct SignInQuery: Decodable {
     let email: String
     let password: String
+}
+
+// 로그인 성공했을 때 받는 값
+struct SignInModel: Decodable {
+    let token: String
+    let refreshToken: String
 }

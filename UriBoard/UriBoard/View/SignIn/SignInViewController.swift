@@ -9,6 +9,12 @@ import UIKit
 
 final class SignInViewController: BaseViewController {
 
+    let mainView = SignInView()
+
+    override func loadView() {
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
