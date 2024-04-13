@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  AuthNetworkManager.swift
 //  UriBoard
 //
 //  Created by 김재석 on 4/10/24.
@@ -8,9 +8,9 @@
 import Foundation
 import Alamofire
 
-class NetworkManager {
+class AuthNetworkManager {
     
-    static let shared = NetworkManager()
+    static let shared = AuthNetworkManager()
 
     private init() {}
 

@@ -8,5 +8,8 @@
 import Foundation
 
 enum APIError: Error {
-    
+    case keyError
+    case overCall
+    case invalidURL
+    case serverError
 }
