@@ -126,23 +126,18 @@ extension AuthRouter: TargetType {
     }
     
     var body: Data? {
+
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+
         switch self {
         case .signUp(let query):
-            let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
-
             return try? encoder.encode(query)
         case .signIn(let query):
-            let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
-
             return try? encoder.encode(query)
         case .tokenRefresh:
             return nil
         case .emailValidation(let query):
-            let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
-
             return try? encoder.encode(query)
         case .withdraw:
             return nil
