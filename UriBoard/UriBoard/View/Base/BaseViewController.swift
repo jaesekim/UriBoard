@@ -21,8 +21,11 @@ class BaseViewController: UIViewController {
         configureView()
         bind()
     }
+}
+
+extension BaseViewController: NavigationSettings {
     
-    func setNavigationBar() {}
+    @objc func setNavigationBar() {}
 }
 
 extension BaseViewController: UISettings {

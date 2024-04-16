@@ -10,25 +10,39 @@ import SnapKit
 
 final class SignInView: BaseView {
 
-    let emailTextField = {
-        let view = UITextField()
+    let emailLabel = {
+        let view = UILabel()
+        view.text = "이메일"
+        view.font = FontStyle.getFont(
+            scale: .bold, size: .large
+        )
+        view.textColor = ColorStyle.black
         return view
     }()
-    let emailGuide = {
-        let view = UILabel()
+    let emailTextField = {
+        let view = UITextField.authTextField(
+            placeholder: "이메일을 입력해 주세요"
+        )
         view.font = FontStyle.getFont(
-            scale: .regular, size: .small
+            scale: .regular, size: .medium
         )
         return view
     }()
-    let passwordTextField = {
-        let view = UITextField()
+    let passwordLabel = {
+        let view = UILabel()
+        view.text = "비밀번호"
+        view.font = FontStyle.getFont(
+            scale: .bold, size: .large
+        )
+        view.textColor = ColorStyle.black
         return view
     }()
-    let passwordGuide = {
-        let view = UILabel()
+    let passwordTextField = {
+        let view = UITextField.authTextField(
+            placeholder: "비밀번호를 입력해 주세요"
+        )
         view.font = FontStyle.getFont(
-            scale: .regular, size: .small
+            scale: .regular, size: .medium
         )
         return view
     }()
@@ -36,7 +50,7 @@ final class SignInView: BaseView {
         let view = UIButton()
         view.configuration = .confirmButton(
             message: "로그인",
-            color: <#T##UIColor?#>
+            color: ColorStyle.gray
         )
         return view
     }()
@@ -46,10 +60,40 @@ extension SignInView {
 
     override func configureHierarchy() {
         [
+            emailLabel,
+            emailTextField,
+            passwordLabel,
+            passwordTextField,
+            confirmButton
         ].forEach { addSubview($0) }
     }
-    
+
     override func configureConstraints() {
-        <#code#>
+
+        emailLabel.snp.makeConstraints { make in
+            make.height.equalTo(22)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-20)
+        }
+        emailTextField.snp.makeConstraints { make in
+            make.height.equalTo(44)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalTo(passwordLabel.snp.top).offset(-32)
+        }
+        passwordLabel.snp.makeConstraints { make in
+            make.height.equalTo(22)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalTo(passwordTextField.snp.top).offset(-20)
+        }
+        passwordTextField.snp.makeConstraints { make in
+            make.height.equalTo(44)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalTo(snp.centerY).offset(-20)
+        }
+        confirmButton.snp.makeConstraints { make in
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(44)
+        }
     }
 }

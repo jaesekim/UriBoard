@@ -23,6 +23,13 @@
 		7B8D6BEE2BCA6B5300139BB5 /* SignInQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BED2BCA6B5300139BB5 /* SignInQuery.swift */; };
 		7B8D6BF02BCA70DD00139BB5 /* SignUpQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BEF2BCA70DD00139BB5 /* SignUpQuery.swift */; };
 		7B8D6BF42BCA736900139BB5 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BF32BCA736900139BB5 /* HTTPHeader.swift */; };
+		7B8D6C152BCD5C5C00139BB5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6C142BCD5C5C00139BB5 /* SignUpView.swift */; };
+		7B8D6C172BCD5C6B00139BB5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6C162BCD5C6B00139BB5 /* SignUpViewController.swift */; };
+		7B8D6C1A2BCD5CB400139BB5 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6C192BCD5CB400139BB5 /* SignUpViewModel.swift */; };
+		7B98DC422BCD74D40056373D /* NavigationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC412BCD74D40056373D /* NavigationSettings.swift */; };
+		7B98DC622BCE5DAA0056373D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC612BCE5DAA0056373D /* Router.swift */; };
+		7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC642BCE6DD20056373D /* HomeViewController.swift */; };
+		7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC662BCE6DE00056373D /* HomeView.swift */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
 		7BE31C2D2BC680ED00D1EDE6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2C2BC680ED00D1EDE6 /* Base */; };
@@ -68,6 +75,13 @@
 		7B8D6BED2BCA6B5300139BB5 /* SignInQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInQuery.swift; sourceTree = "<group>"; };
 		7B8D6BEF2BCA70DD00139BB5 /* SignUpQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpQuery.swift; sourceTree = "<group>"; };
 		7B8D6BF32BCA736900139BB5 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		7B8D6C142BCD5C5C00139BB5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		7B8D6C162BCD5C6B00139BB5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		7B8D6C192BCD5CB400139BB5 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		7B98DC412BCD74D40056373D /* NavigationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSettings.swift; sourceTree = "<group>"; };
+		7B98DC612BCE5DAA0056373D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		7B98DC642BCE6DD20056373D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7B98DC662BCE6DE00056373D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +172,32 @@
 			path = Comment;
 			sourceTree = "<group>";
 		};
+		7B8D6C132BCD5C4400139BB5 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				7B8D6C142BCD5C5C00139BB5 /* SignUpView.swift */,
+				7B8D6C162BCD5C6B00139BB5 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		7B8D6C182BCD5CA600139BB5 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				7B8D6C192BCD5CB400139BB5 /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		7B98DC632BCE6DC80056373D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B98DC642BCE6DD20056373D /* HomeViewController.swift */,
+				7B98DC662BCE6DE00056373D /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		7BE31C192BC680ED00D1EDE6 = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +239,8 @@
 		7BE31C4F2BC68E0600D1EDE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B98DC632BCE6DC80056373D /* Home */,
+				7B8D6C132BCD5C4400139BB5 /* SignUp */,
 				7BE31C5A2BC68F7B00D1EDE6 /* Base */,
 				7BE31C572BC68F2300D1EDE6 /* SignIn */,
 			);
@@ -208,6 +250,7 @@
 		7BE31C502BC68E0B00D1EDE6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7B8D6C182BCD5CA600139BB5 /* SignUp */,
 				7B4C03B52BC6D8F500593876 /* SignIn */,
 			);
 			path = ViewModel;
@@ -232,6 +275,7 @@
 				7BE31C692BC69CE700D1EDE6 /* APIURL.swift */,
 				7B4C03C92BC7116000593876 /* APIError.swift */,
 				7B8D6BF32BCA736900139BB5 /* HTTPHeader.swift */,
+				7B98DC612BCE5DAA0056373D /* Router.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -253,6 +297,7 @@
 				7BE31C632BC6911500D1EDE6 /* UISettings.swift */,
 				7BE31C652BC6925C00D1EDE6 /* RxBindSettings.swift */,
 				7B8D6BEB2BCA619100139BB5 /* TargetType.swift */,
+				7B98DC412BCD74D40056373D /* NavigationSettings.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -390,21 +435,27 @@
 				7BE31C752BC6D1DC00D1EDE6 /* MyProfile.swift in Sources */,
 				7BE31C5C2BC68F8500D1EDE6 /* BaseViewController.swift in Sources */,
 				7BE31C772BC6D40C00D1EDE6 /* SignUpModel.swift in Sources */,
+				7B98DC422BCD74D40056373D /* NavigationSettings.swift in Sources */,
 				7B4C03D32BC7C75100593876 /* FontStyle.swift in Sources */,
 				7B8D6BF02BCA70DD00139BB5 /* SignUpQuery.swift in Sources */,
 				7BE31C662BC6925C00D1EDE6 /* RxBindSettings.swift in Sources */,
 				7B8D6BEE2BCA6B5300139BB5 /* SignInQuery.swift in Sources */,
 				7BE31C602BC68FFF00D1EDE6 /* SignInView.swift in Sources */,
 				7BE31C642BC6911500D1EDE6 /* UISettings.swift in Sources */,
+				7B8D6C172BCD5C6B00139BB5 /* SignUpViewController.swift in Sources */,
 				7B8D6BEA2BCA60BD00139BB5 /* AuthRouter.swift in Sources */,
 				7BE31C6A2BC69CE700D1EDE6 /* APIURL.swift in Sources */,
 				7B8D6BE52BCA5FDE00139BB5 /* WithdrawModel.swift in Sources */,
 				7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */,
 				7B8D6BEC2BCA619100139BB5 /* TargetType.swift in Sources */,
+				7B98DC622BCE5DAA0056373D /* Router.swift in Sources */,
 				7BE31C682BC69C5300D1EDE6 /* APIKey.swift in Sources */,
+				7B8D6C152BCD5C5C00139BB5 /* SignUpView.swift in Sources */,
 				7B4C03B72BC6D91300593876 /* SignInViewModel.swift in Sources */,
 				7BE31C6E2BC6B7A800D1EDE6 /* SignInModel.swift in Sources */,
 				7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */,
+				7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */,
+				7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */,
 				7BE31C592BC68F6800D1EDE6 /* SignInViewController.swift in Sources */,
 				7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */,
 				7BE31C5E2BC68F9600D1EDE6 /* BaseView.swift in Sources */,
@@ -415,6 +466,7 @@
 				7B8D6BF42BCA736900139BB5 /* HTTPHeader.swift in Sources */,
 				7B4C03CA2BC7116000593876 /* APIError.swift in Sources */,
 				7B4C03DC2BC7CF4500593876 /* UIColor+Extension.swift in Sources */,
+				7B8D6C1A2BCD5CB400139BB5 /* SignUpViewModel.swift in Sources */,
 				7B4C03E12BC7DF0D00593876 /* UIButton+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
