@@ -23,7 +23,7 @@ enum FontStyle {
     static func getFont(scale: FontWeight, size: FontSize) -> UIFont {
         
         guard let font = UIFont(
-            name: "런드리고딕 \(scale)",
+            name: "런드리고딕 \(scale.rawValue)",
             size: size.rawValue
         ) else {
             return .boldSystemFont(ofSize: size.rawValue)

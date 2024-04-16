@@ -14,13 +14,14 @@ extension UITextField {
         let view = UITextField()
         
         let paddingView = UIView(
-            frame: CGRect(x: 0, y: 0, width: 10, height: view.frame.height)
+            frame: CGRect(x: 0, y: 0, width: 20, height: view.frame.height)
         )
         view.leftView = paddingView
         view.leftViewMode = .always
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
-        view.layer.borderWidth = 0.5
+        view.layer.borderWidth = 1
+        view.layer.borderColor = ColorStyle.darkYellow.cgColor
         view.placeholder = placeholder
 
         return view
