@@ -119,7 +119,7 @@ class AuthNetworkManager {
                             single(.success(.success(success)))
                         case .failure(let failure):
                             guard let statusCode = response.response?.statusCode else {
-                                single(.failure(APIError.invalidURL))
+                                single(.success(.failure(APIError.invalidURL)))
                                 return
                             }
                             
