@@ -30,6 +30,17 @@
 		7B98DC622BCE5DAA0056373D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC612BCE5DAA0056373D /* Router.swift */; };
 		7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC642BCE6DD20056373D /* HomeViewController.swift */; };
 		7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC662BCE6DE00056373D /* HomeView.swift */; };
+		7BC78DCD2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */; };
+		7BC78DD02BD0FE6C001C2BE4 /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */; };
+		7BC78DD22BD0FE86001C2BE4 /* BoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */; };
+		7BC78DD52BD10102001C2BE4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD42BD10102001C2BE4 /* CustomButton.swift */; };
+		7BC78DD82BD1047A001C2BE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD72BD1047A001C2BE4 /* TabBarController.swift */; };
+		7BC78DDA2BD104DC001C2BE4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD92BD104DC001C2BE4 /* ProfileViewController.swift */; };
+		7BC78DDC2BD104EE001C2BE4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DDB2BD104EE001C2BE4 /* ProfileView.swift */; };
+		7BC78DDE2BD10520001C2BE4 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DDD2BD10520001C2BE4 /* PostView.swift */; };
+		7BC78DE02BD10538001C2BE4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */; };
+		7BC78DE32BD1077A001C2BE4 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */; };
+		7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE42BD10796001C2BE4 /* LikeView.swift */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
 		7BE31C2D2BC680ED00D1EDE6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2C2BC680ED00D1EDE6 /* Base */; };
@@ -82,6 +93,17 @@
 		7B98DC612BCE5DAA0056373D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7B98DC642BCE6DD20056373D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7B98DC662BCE6DE00056373D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
+		7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetail.swift; sourceTree = "<group>"; };
+		7BC78DD42BD10102001C2BE4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		7BC78DD72BD1047A001C2BE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7BC78DD92BD104DC001C2BE4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7BC78DDB2BD104EE001C2BE4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7BC78DDD2BD10520001C2BE4 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		7BC78DE42BD10796001C2BE4 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,8 +216,61 @@
 			children = (
 				7B98DC642BCE6DD20056373D /* HomeViewController.swift */,
 				7B98DC662BCE6DE00056373D /* HomeView.swift */,
+				7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		7BC78DCA2BD0F9DD001C2BE4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DD92BD104DC001C2BE4 /* ProfileViewController.swift */,
+				7BC78DDB2BD104EE001C2BE4 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7BC78DCB2BD0FA39001C2BE4 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DDD2BD10520001C2BE4 /* PostView.swift */,
+				7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		7BC78DCE2BD0FE47001C2BE4 /* BoardDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */,
+				7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */,
+			);
+			path = BoardDetail;
+			sourceTree = "<group>";
+		};
+		7BC78DD32BD100D8001C2BE4 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DD42BD10102001C2BE4 /* CustomButton.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		7BC78DD62BD10428001C2BE4 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DD72BD1047A001C2BE4 /* TabBarController.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		7BC78DE12BD1076C001C2BE4 /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */,
+				7BC78DE42BD10796001C2BE4 /* LikeView.swift */,
+			);
+			path = Like;
 			sourceTree = "<group>";
 		};
 		7BE31C192BC680ED00D1EDE6 = {
@@ -218,6 +293,7 @@
 		7BE31C242BC680ED00D1EDE6 /* UriBoard */ = {
 			isa = PBXGroup;
 			children = (
+				7BC78DD32BD100D8001C2BE4 /* Custom */,
 				7B4C03D42BC7CB5700593876 /* Resource */,
 				7B4C03D02BC7C73500593876 /* Design */,
 				7BE31C542BC68E3D00D1EDE6 /* Protocol */,
@@ -239,9 +315,14 @@
 		7BE31C4F2BC68E0600D1EDE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7B98DC632BCE6DC80056373D /* Home */,
-				7B8D6C132BCD5C4400139BB5 /* SignUp */,
+				7BC78DD62BD10428001C2BE4 /* Tab */,
 				7BE31C5A2BC68F7B00D1EDE6 /* Base */,
+				7B98DC632BCE6DC80056373D /* Home */,
+				7BC78DCE2BD0FE47001C2BE4 /* BoardDetail */,
+				7B8D6C132BCD5C4400139BB5 /* SignUp */,
+				7BC78DCB2BD0FA39001C2BE4 /* Post */,
+				7BC78DE12BD1076C001C2BE4 /* Like */,
+				7BC78DCA2BD0F9DD001C2BE4 /* Profile */,
 				7BE31C572BC68F2300D1EDE6 /* SignIn */,
 			);
 			path = View;
@@ -439,20 +520,27 @@
 				7B4C03D32BC7C75100593876 /* FontStyle.swift in Sources */,
 				7B8D6BF02BCA70DD00139BB5 /* SignUpQuery.swift in Sources */,
 				7BE31C662BC6925C00D1EDE6 /* RxBindSettings.swift in Sources */,
+				7BC78DE02BD10538001C2BE4 /* PostViewController.swift in Sources */,
+				7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */,
 				7B8D6BEE2BCA6B5300139BB5 /* SignInQuery.swift in Sources */,
 				7BE31C602BC68FFF00D1EDE6 /* SignInView.swift in Sources */,
 				7BE31C642BC6911500D1EDE6 /* UISettings.swift in Sources */,
 				7B8D6C172BCD5C6B00139BB5 /* SignUpViewController.swift in Sources */,
 				7B8D6BEA2BCA60BD00139BB5 /* AuthRouter.swift in Sources */,
+				7BC78DCD2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift in Sources */,
 				7BE31C6A2BC69CE700D1EDE6 /* APIURL.swift in Sources */,
 				7B8D6BE52BCA5FDE00139BB5 /* WithdrawModel.swift in Sources */,
 				7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */,
 				7B8D6BEC2BCA619100139BB5 /* TargetType.swift in Sources */,
+				7BC78DD52BD10102001C2BE4 /* CustomButton.swift in Sources */,
 				7B98DC622BCE5DAA0056373D /* Router.swift in Sources */,
+				7BC78DE32BD1077A001C2BE4 /* LikeViewController.swift in Sources */,
+				7BC78DDC2BD104EE001C2BE4 /* ProfileView.swift in Sources */,
 				7BE31C682BC69C5300D1EDE6 /* APIKey.swift in Sources */,
 				7B8D6C152BCD5C5C00139BB5 /* SignUpView.swift in Sources */,
 				7B4C03B72BC6D91300593876 /* SignInViewModel.swift in Sources */,
 				7BE31C6E2BC6B7A800D1EDE6 /* SignInModel.swift in Sources */,
+				7BC78DD22BD0FE86001C2BE4 /* BoardDetail.swift in Sources */,
 				7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */,
 				7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */,
 				7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */,
@@ -465,8 +553,12 @@
 				7BE31C562BC68E8100D1EDE6 /* ViewModelType.swift in Sources */,
 				7B8D6BF42BCA736900139BB5 /* HTTPHeader.swift in Sources */,
 				7B4C03CA2BC7116000593876 /* APIError.swift in Sources */,
+				7BC78DD02BD0FE6C001C2BE4 /* BoardDetailViewController.swift in Sources */,
 				7B4C03DC2BC7CF4500593876 /* UIColor+Extension.swift in Sources */,
+				7BC78DD82BD1047A001C2BE4 /* TabBarController.swift in Sources */,
+				7BC78DDA2BD104DC001C2BE4 /* ProfileViewController.swift in Sources */,
 				7B8D6C1A2BCD5CB400139BB5 /* SignUpViewModel.swift in Sources */,
+				7BC78DDE2BD10520001C2BE4 /* PostView.swift in Sources */,
 				7B4C03E12BC7DF0D00593876 /* UIButton+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
