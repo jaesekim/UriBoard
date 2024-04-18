@@ -51,6 +51,7 @@ extension SignInViewController {
                     message: "로그인",
                     color: color
                 )
+                owner.mainView.confirmButton.isEnabled = bool
             }
             .disposed(by: disposeBag)
         

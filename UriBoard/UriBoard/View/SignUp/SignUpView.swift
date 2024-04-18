@@ -11,7 +11,7 @@ import SnapKit
 final class SignUpView: BaseView {
 
     let emailTextField = {
-        let view = UITextField.authTextField(
+        let view = UITextField.addLeftPadding(
             placeholder: "이메일"
         )
         view.font = FontStyle.getFont(
@@ -37,7 +37,7 @@ final class SignUpView: BaseView {
         return view
     }()
     let passwordTextField = {
-        let view = UITextField.authTextField(
+        let view = UITextField.addLeftPadding(
             placeholder: "비밀번호"
         )
         
@@ -56,7 +56,7 @@ final class SignUpView: BaseView {
         return view
     }()
     let passwordConfirmTextField = {
-        let view = UITextField.authTextField(
+        let view = UITextField.addLeftPadding(
             placeholder: "비밀번호 재입력"
         )
         view.font = FontStyle.getFont(
@@ -74,7 +74,7 @@ final class SignUpView: BaseView {
         return view
     }()
     let nickTextField = {
-        let view = UITextField.authTextField(
+        let view = UITextField.addLeftPadding(
             placeholder: "닉네임"
         )
         view.font = FontStyle.getFont(

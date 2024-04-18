@@ -41,6 +41,7 @@
 		7BC78DE02BD10538001C2BE4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */; };
 		7BC78DE32BD1077A001C2BE4 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */; };
 		7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE42BD10796001C2BE4 /* LikeView.swift */; };
+		7BC78DE72BD11D47001C2BE4 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE62BD11D47001C2BE4 /* TextButton.swift */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
 		7BE31C2D2BC680ED00D1EDE6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2C2BC680ED00D1EDE6 /* Base */; };
@@ -104,6 +105,7 @@
 		7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		7BC78DE42BD10796001C2BE4 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
+		7BC78DE62BD11D47001C2BE4 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,12 +250,13 @@
 			path = BoardDetail;
 			sourceTree = "<group>";
 		};
-		7BC78DD32BD100D8001C2BE4 /* Custom */ = {
+		7BC78DD32BD100D8001C2BE4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				7BC78DD42BD10102001C2BE4 /* CustomButton.swift */,
+				7BC78DE62BD11D47001C2BE4 /* TextButton.swift */,
 			);
-			path = Custom;
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		7BC78DD62BD10428001C2BE4 /* Tab */ = {
@@ -293,7 +296,7 @@
 		7BE31C242BC680ED00D1EDE6 /* UriBoard */ = {
 			isa = PBXGroup;
 			children = (
-				7BC78DD32BD100D8001C2BE4 /* Custom */,
+				7BC78DD32BD100D8001C2BE4 /* CustomView */,
 				7B4C03D42BC7CB5700593876 /* Resource */,
 				7B4C03D02BC7C73500593876 /* Design */,
 				7BE31C542BC68E3D00D1EDE6 /* Protocol */,
@@ -542,6 +545,7 @@
 				7BE31C6E2BC6B7A800D1EDE6 /* SignInModel.swift in Sources */,
 				7BC78DD22BD0FE86001C2BE4 /* BoardDetail.swift in Sources */,
 				7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */,
+				7BC78DE72BD11D47001C2BE4 /* TextButton.swift in Sources */,
 				7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */,
 				7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */,
 				7BE31C592BC68F6800D1EDE6 /* SignInViewController.swift in Sources */,

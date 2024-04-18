@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let vc = UINavigationController(
-            rootViewController: SignUpViewController()
+            rootViewController: SignInViewController()
         )
         
         window?.rootViewController = vc
