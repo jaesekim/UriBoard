@@ -11,6 +11,7 @@ class TabBarController: UITabBarController {
 
     enum TabBarItem: CaseIterable {
         case home
+        case search
         case post
         case like
         case profile
@@ -19,6 +20,8 @@ class TabBarController: UITabBarController {
             switch self {
             case .home:
                 return HomeViewController()
+            case .search:
+                return SearchViewController()
             case .post:
                 return PostViewController()
             case .like:
@@ -32,6 +35,8 @@ class TabBarController: UITabBarController {
             switch self {
             case .home:
                 return UIImage(systemName: "house.scale.up.byLayer")
+            case .search:
+                return UIImage(systemName: "number.scale.up.byLayer")
             case .post:
                 return UIImage(systemName: "square.and.pencil.scale.up.byLayer")
             case .like:
@@ -45,6 +50,8 @@ class TabBarController: UITabBarController {
             switch self {
             case .home:
                 return UIImage(systemName: "house.fill.scale.up.byLayer")
+            case .search:
+                return UIImage(systemName: "number.scale.up.byLayer")
             case .post:
                 return UIImage(systemName: "square.and.pencil.scale.up.byLayer")
             case .like:
