@@ -13,4 +13,6 @@ enum ColorStyle {
     static let darkYellow = UIColor(hexCode: "FCA311")
     static let gray = UIColor(hexCode: "E5E5E5")
     static let white = UIColor(hexCode: "FFFFFF")
+    static let reject = UIColor(hexCode: "FF6D60")
+    static let confirm = UIColor(hexCode: "98D8AA")
 }
