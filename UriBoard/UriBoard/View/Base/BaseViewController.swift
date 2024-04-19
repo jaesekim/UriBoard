@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 class BaseViewController: UIViewController {
-
+    
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -25,11 +25,21 @@ class BaseViewController: UIViewController {
 
 extension BaseViewController: NavigationSettings {
     
-    @objc func setNavigationBar() {}
+    @objc func setNavigationBar() {
+        // push해서 들어간 ViewController NavigationItem 설정
+        let backBarButtonItem = UIBarButtonItem(
+            title: nil,
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        backBarButtonItem.tintColor = ColorStyle.darkBlue
+        navigationItem.backBarButtonItem = backBarButtonItem
+    }
 }
 
 extension BaseViewController: UISettings {
-
+    
     @objc func configureHierarchy() {}
     @objc func configureConstraints() {}
     @objc func configureView() {}
