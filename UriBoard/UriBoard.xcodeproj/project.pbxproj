@@ -42,9 +42,14 @@
 		7BC78DE32BD1077A001C2BE4 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */; };
 		7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE42BD10796001C2BE4 /* LikeView.swift */; };
 		7BC78DE72BD11D47001C2BE4 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DE62BD11D47001C2BE4 /* TextButton.swift */; };
+		7BC78E062BD215AE001C2BE4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E052BD215AE001C2BE4 /* SearchView.swift */; };
+		7BC78E082BD215C3001C2BE4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E072BD215C3001C2BE4 /* SearchViewController.swift */; };
+		7BC78E0A2BD23804001C2BE4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E092BD23804001C2BE4 /* UIViewController+Extension.swift */; };
+		7BC78E0D2BD23FEB001C2BE4 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 7BC78E0C2BD23FEB001C2BE4 /* Toast */; };
+		7BC78E0F2BD26044001C2BE4 /* EmailValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E0E2BD26044001C2BE4 /* EmailValidationModel.swift */; };
+		7BC78E112BD276EF001C2BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC78E102BD276EF001C2BE4 /* Main.storyboard */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
-		7BE31C2D2BC680ED00D1EDE6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2C2BC680ED00D1EDE6 /* Base */; };
 		7BE31C2F2BC680F000D1EDE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2E2BC680F000D1EDE6 /* Assets.xcassets */; };
 		7BE31C322BC680F000D1EDE6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C312BC680F000D1EDE6 /* Base */; };
 		7BE31C3A2BC6814200D1EDE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C392BC6814200D1EDE6 /* .gitignore */; };
@@ -106,10 +111,14 @@
 		7BC78DE22BD1077A001C2BE4 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		7BC78DE42BD10796001C2BE4 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		7BC78DE62BD11D47001C2BE4 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		7BC78E052BD215AE001C2BE4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		7BC78E072BD215C3001C2BE4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7BC78E092BD23804001C2BE4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		7BC78E0E2BD26044001C2BE4 /* EmailValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationModel.swift; sourceTree = "<group>"; };
+		7BC78E102BD276EF001C2BE4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7BE31C2C2BC680ED00D1EDE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BE31C2E2BC680F000D1EDE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BE31C312BC680F000D1EDE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BE31C332BC680F000D1EDE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,6 +149,7 @@
 				7BE31C462BC682C300D1EDE6 /* SnapKit in Frameworks */,
 				7BE31C492BC682D100D1EDE6 /* RxCocoa in Frameworks */,
 				7BE31C3D2BC682A000D1EDE6 /* Alamofire in Frameworks */,
+				7BC78E0D2BD23FEB001C2BE4 /* Toast in Frameworks */,
 				7BE31C402BC682B000D1EDE6 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +286,15 @@
 			path = Like;
 			sourceTree = "<group>";
 		};
+		7BC78E042BD215A1001C2BE4 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7BC78E052BD215AE001C2BE4 /* SearchView.swift */,
+				7BC78E072BD215C3001C2BE4 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		7BE31C192BC680ED00D1EDE6 = {
 			isa = PBXGroup;
 			children = (
@@ -305,10 +324,10 @@
 				7BE31C512BC68E1F00D1EDE6 /* Model */,
 				7BE31C502BC68E0B00D1EDE6 /* ViewModel */,
 				7BE31C4F2BC68E0600D1EDE6 /* View */,
-				7BE31C2B2BC680ED00D1EDE6 /* Main.storyboard */,
 				7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */,
 				7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */,
 				7BE31C2E2BC680F000D1EDE6 /* Assets.xcassets */,
+				7BC78E102BD276EF001C2BE4 /* Main.storyboard */,
 				7BE31C302BC680F000D1EDE6 /* LaunchScreen.storyboard */,
 				7BE31C332BC680F000D1EDE6 /* Info.plist */,
 			);
@@ -321,12 +340,13 @@
 				7BC78DD62BD10428001C2BE4 /* Tab */,
 				7BE31C5A2BC68F7B00D1EDE6 /* Base */,
 				7B98DC632BCE6DC80056373D /* Home */,
+				7BC78E042BD215A1001C2BE4 /* Search */,
 				7BC78DCE2BD0FE47001C2BE4 /* BoardDetail */,
 				7B8D6C132BCD5C4400139BB5 /* SignUp */,
+				7BE31C572BC68F2300D1EDE6 /* SignIn */,
 				7BC78DCB2BD0FA39001C2BE4 /* Post */,
 				7BC78DE12BD1076C001C2BE4 /* Like */,
 				7BC78DCA2BD0F9DD001C2BE4 /* Profile */,
-				7BE31C572BC68F2300D1EDE6 /* SignIn */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,6 +390,7 @@
 				7B4C03DB2BC7CF4500593876 /* UIColor+Extension.swift */,
 				7B4C03E02BC7DF0D00593876 /* UIButton+Extension.swift */,
 				7B4C03E22BC7E13F00593876 /* UITextField+Extension.swift */,
+				7BC78E092BD23804001C2BE4 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -414,6 +435,7 @@
 				7BE31C712BC6D16500D1EDE6 /* TokenRefresh.swift */,
 				7B8D6BE62BCA603600139BB5 /* EmailValidationQuery.swift */,
 				7B8D6BE42BCA5FDE00139BB5 /* WithdrawModel.swift */,
+				7BC78E0E2BD26044001C2BE4 /* EmailValidationModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -449,6 +471,7 @@
 				7BE31C452BC682C300D1EDE6 /* SnapKit */,
 				7BE31C482BC682D100D1EDE6 /* RxCocoa */,
 				7BE31C4A2BC682D100D1EDE6 /* RxSwift */,
+				7BC78E0C2BD23FEB001C2BE4 /* Toast */,
 			);
 			productName = UriBoard;
 			productReference = 7BE31C222BC680ED00D1EDE6 /* UriBoard.app */;
@@ -484,6 +507,7 @@
 				7BE31C412BC682B900D1EDE6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7BE31C442BC682C200D1EDE6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7BE31C472BC682D100D1EDE6 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7BC78E0B2BD23FEB001C2BE4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 7BE31C232BC680ED00D1EDE6 /* Products */;
 			projectDirPath = "";
@@ -502,9 +526,9 @@
 				7BE31C3A2BC6814200D1EDE6 /* .gitignore in Resources */,
 				7B4C03D72BC7CB6400593876 /* 런드리고딕 Bold.ttf in Resources */,
 				7B4C03D82BC7CB6400593876 /* 런드리고딕 Regular.ttf in Resources */,
+				7BC78E112BD276EF001C2BE4 /* Main.storyboard in Resources */,
 				7BE31C2F2BC680F000D1EDE6 /* Assets.xcassets in Resources */,
 				7BE31C322BC680F000D1EDE6 /* Base in Resources */,
-				7BE31C2D2BC680ED00D1EDE6 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,12 +542,14 @@
 				7BE31C6C2BC6B79E00D1EDE6 /* AuthNetworkManager.swift in Sources */,
 				7BE31C752BC6D1DC00D1EDE6 /* MyProfile.swift in Sources */,
 				7BE31C5C2BC68F8500D1EDE6 /* BaseViewController.swift in Sources */,
+				7BC78E082BD215C3001C2BE4 /* SearchViewController.swift in Sources */,
 				7BE31C772BC6D40C00D1EDE6 /* SignUpModel.swift in Sources */,
 				7B98DC422BCD74D40056373D /* NavigationSettings.swift in Sources */,
 				7B4C03D32BC7C75100593876 /* FontStyle.swift in Sources */,
 				7B8D6BF02BCA70DD00139BB5 /* SignUpQuery.swift in Sources */,
 				7BE31C662BC6925C00D1EDE6 /* RxBindSettings.swift in Sources */,
 				7BC78DE02BD10538001C2BE4 /* PostViewController.swift in Sources */,
+				7BC78E0F2BD26044001C2BE4 /* EmailValidationModel.swift in Sources */,
 				7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */,
 				7B8D6BEE2BCA6B5300139BB5 /* SignInQuery.swift in Sources */,
 				7BE31C602BC68FFF00D1EDE6 /* SignInView.swift in Sources */,
@@ -554,7 +580,9 @@
 				7BE31C722BC6D16500D1EDE6 /* TokenRefresh.swift in Sources */,
 				7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */,
 				7B4C03E32BC7E13F00593876 /* UITextField+Extension.swift in Sources */,
+				7BC78E0A2BD23804001C2BE4 /* UIViewController+Extension.swift in Sources */,
 				7BE31C562BC68E8100D1EDE6 /* ViewModelType.swift in Sources */,
+				7BC78E062BD215AE001C2BE4 /* SearchView.swift in Sources */,
 				7B8D6BF42BCA736900139BB5 /* HTTPHeader.swift in Sources */,
 				7B4C03CA2BC7116000593876 /* APIError.swift in Sources */,
 				7BC78DD02BD0FE6C001C2BE4 /* BoardDetailViewController.swift in Sources */,
@@ -570,14 +598,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7BE31C2B2BC680ED00D1EDE6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7BE31C2C2BC680ED00D1EDE6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7BE31C302BC680F000D1EDE6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -720,6 +740,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -752,6 +773,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -796,6 +818,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7BC78E0B2BD23FEB001C2BE4 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		7BE31C3B2BC682A000D1EDE6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -839,6 +869,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7BC78E0C2BD23FEB001C2BE4 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BC78E0B2BD23FEB001C2BE4 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		7BE31C3C2BC682A000D1EDE6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7BE31C3B2BC682A000D1EDE6 /* XCRemoteSwiftPackageReference "Alamofire" */;

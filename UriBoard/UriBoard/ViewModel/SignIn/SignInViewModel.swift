@@ -17,17 +17,24 @@ final class SignInViewModel: ViewModelType {
         let emailText: Observable<String>
         let passwordText: Observable<String>
         let signInOnClick: Observable<Void>
+        let signUpOnClick: Observable<Void>
     }
 
     struct Output {
         let signInValidation: Driver<Bool>
         let signInButtonOnClick: Driver<Void>
+        let signUpbuttonOnClick: Driver<Void>
     }
 
+    
+}
+// MARK: transform
+extension SignInViewModel {
     func transform(input: Input) -> Output {
         
         let signInValid = BehaviorRelay(value: false)
         let signInButtonTrigger = PublishRelay<Void>()
+        let signUpButtonTrigger = PublishRelay<Void>()
         
         let signInObservable = Observable
             .combineLatest(
@@ -52,7 +59,7 @@ final class SignInViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.signInOnClick
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(signInObservable)
             .distinctUntilChanged { past, cur in
                 past.email != cur.email || past.password != cur.password
@@ -72,10 +79,18 @@ final class SignInViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        input.signUpOnClick
+        // 버튼 과호출 방지
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                signUpButtonTrigger.accept(())
+            }
+            .disposed(by: disposeBag)
         
         return Output(
             signInValidation: signInValid.asDriver(),
-            signInButtonOnClick: signInButtonTrigger.asDriver(onErrorJustReturn: ())
+            signInButtonOnClick: signInButtonTrigger.asDriver(onErrorJustReturn: ()),
+            signUpbuttonOnClick: signUpButtonTrigger.asDriver(onErrorJustReturn: ())
         )
     }
 }

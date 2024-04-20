@@ -34,30 +34,30 @@ class TabBarController: UITabBarController {
         var iconInactive: UIImage? {
             switch self {
             case .home:
-                return UIImage(systemName: "house.scale.up.byLayer")
+                return UIImage(systemName: "house")
             case .search:
-                return UIImage(systemName: "number.scale.up.byLayer")
+                return UIImage(systemName: "number")
             case .post:
-                return UIImage(systemName: "square.and.pencil.scale.up.byLayer")
+                return UIImage(systemName: "square.and.pencil")
             case .like:
-                return UIImage(systemName: "heart.scale.up.byLayer")
+                return UIImage(systemName: "heart")
             case .profile:
-                return UIImage(systemName: "person.scale.up.byLayer")
+                return UIImage(systemName: "person")
             }
         }
         
         var iconActive: UIImage? {
             switch self {
             case .home:
-                return UIImage(systemName: "house.fill.scale.up.byLayer")
+                return UIImage(systemName: "house")
             case .search:
-                return UIImage(systemName: "number.scale.up.byLayer")
+                return UIImage(systemName: "number")
             case .post:
-                return UIImage(systemName: "square.and.pencil.scale.up.byLayer")
+                return UIImage(systemName: "square.and.pencil")
             case .like:
-                return UIImage(systemName: "heart.fill.scale.up.byLayer")
+                return UIImage(systemName: "heart.fill")
             case .profile:
-                return UIImage(systemName: "person.fill.scale.up.byLayer")
+                return UIImage(systemName: "person.fill")
             }
         }
     }

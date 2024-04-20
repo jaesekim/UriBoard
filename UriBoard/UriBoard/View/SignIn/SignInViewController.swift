@@ -17,28 +17,31 @@ final class SignInViewController: BaseViewController {
         view = mainView
     }
     
-    let viewModel = SignInViewModel()
-    
+    private let viewModel = SignInViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
 }
-
+// MARK: 네비게이션 바 설정
 extension SignInViewController {
     override func setNavigationBar() {
+        super.setNavigationBar()
+
         navigationItem.title = "로그인"
     }
 }
-
+// MARK: RX - ViewModel 바인딩
 extension SignInViewController {
 
     override func bind() {
         let input = SignInViewModel.Input(
             emailText: mainView.emailTextField.rx.text.orEmpty.asObservable(),
             passwordText: mainView.passwordTextField.rx.text.orEmpty.asObservable(),
-            signInOnClick: mainView.confirmButton.rx.tap.asObservable()
+            signInOnClick: mainView.confirmButton.rx.tap.asObservable(),
+            signUpOnClick: mainView.singUpButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -57,11 +60,15 @@ extension SignInViewController {
         
         output.signInButtonOnClick
             .drive(with: self) { owner, _ in
-                
-                let vc = HomeViewController()
-
+    
+                owner.rootViewTransition()
+            }
+            .disposed(by: disposeBag)
+        
+        output.signUpbuttonOnClick
+            .drive(with: self) { owner, _ in
                 owner.navigationController?.pushViewController(
-                    vc,
+                    SignUpViewController(),
                     animated: true
                 )
             }

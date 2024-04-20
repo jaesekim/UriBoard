@@ -9,9 +9,12 @@ import UIKit
 
 final class PostViewController: BaseViewController {
 
+    let mainView = PostView()
+    override func loadView() {
+        view = mainView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-
 }

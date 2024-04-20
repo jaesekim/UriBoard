@@ -14,48 +14,6 @@ class AuthNetworkManager {
     static let shared = AuthNetworkManager()
 
     private init() {}
-
-    func apiCall(query: SignInQuery) -> Single<SignInModel> {
-
-        return Single.create { single in
-            do {
-                let urlRequest = try AuthRouter.signIn(query: query).asURLRequest()
-                AF
-                    .request(urlRequest)
-                    .validate(statusCode: 200..<300)
-                    .responseDecodable(of: SignInModel.self) { response in
-                        switch response.result {
-                        case .success(let success):
-                            single(.success(success))
-                        case .failure(let failure):
-                            guard let statusCode = response.response?.statusCode else {
-                                single(.failure(APIError.invalidURL))
-                                return
-                            }
-                            switch statusCode {
-                            case 400:
-                                return single(.failure(SignInError.requiredError))
-                            case 401:
-                                return single(.failure(SignInError.invalidAccount))
-                            case 420:
-                                return single(.failure(APIError.keyError))
-                            case 429:
-                                return single(.failure(APIError.overCall))
-                            case 444:
-                                return single(.failure(APIError.invalidURL))
-                            case 500:
-                                return single(.failure(APIError.serverError))
-                            default:
-                                single(.failure(APIError.invalidURL))
-                            }
-                        }
-                    }
-            } catch {
-                single(.failure(APIError.invalidURL))
-            }
-            return Disposables.create()
-        }
-    }
     
     func requestAPI<T: Decodable, R: TargetType>(
         type: T.Type,
@@ -119,16 +77,16 @@ class AuthNetworkManager {
                             single(.success(.success(success)))
                         case .failure(let failure):
                             guard let statusCode = response.response?.statusCode else {
-                                single(.success(.failure(APIError.invalidURL)))
+                                single(.success(.failure(APIError.serverError)))
                                 return
                             }
                             
-                            let apiError = APIError(rawValue: statusCode) ?? APIError.invalidURL
+                            let apiError = APIError(rawValue: statusCode) ?? APIError.serverError
                             single(.success(.failure(apiError)))
                         }
                     }
             } catch {
-                single(.failure(APIError.invalidURL))
+                single(.failure(APIError.serverError))
             }
             return Disposables.create()
         }

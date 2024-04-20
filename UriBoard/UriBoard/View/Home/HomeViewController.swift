@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class HomeViewController: BaseViewController {
 
@@ -30,6 +32,20 @@ extension HomeViewController {
 
 extension HomeViewController {
     override func bind() {
-        
+        let items = Observable.just([
+            1,
+            2,
+            3
+        ])
+
+        items
+            .bind(to: mainView.boardCollectionView.rx.items(
+                cellIdentifier: "BoardCollectionViewCell",
+                cellType: BoardCollectionViewCell.self)
+            ) { (row, element, cell) in
+                cell.nicknameLabel.text = "test"
+                cell.contentLabel.text = "content test content test content test content test content test content test content test content test content test"
+            }
+            .disposed(by: disposeBag)
     }
 }

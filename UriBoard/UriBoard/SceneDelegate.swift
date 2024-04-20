@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             rootViewController: SignInViewController()
         )
         
-        window?.rootViewController = vc
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
 
