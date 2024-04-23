@@ -12,10 +12,5 @@ enum APIError: Int, Error {
     case overCall = 429
     case invalidURL = 444
     case serverError = 500
-    
-    enum Specific {
-        
-        case 
-    }
 }
 
