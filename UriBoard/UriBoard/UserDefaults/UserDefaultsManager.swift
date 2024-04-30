@@ -10,8 +10,32 @@ import Foundation
 enum UserDefaultsManager {
     
     enum Key: String {
-        case accessToken, refreshToken
+        case userEmail, nickname, userId, profileImage, accessToken, refreshToken
     }
+    
+    @UserDefaultsWrapper(
+        key: Key.userEmail.rawValue,
+        defaultValue: ""
+    )
+    static var userEmail
+    
+    @UserDefaultsWrapper(
+        key: Key.nickname.rawValue,
+        defaultValue: ""
+    )
+    static var nickname
+    
+    @UserDefaultsWrapper(
+        key: Key.userId.rawValue,
+        defaultValue: ""
+    )
+    static var userId
+    
+    @UserDefaultsWrapper(
+        key: Key.profileImage.rawValue,
+        defaultValue: ""
+    )
+    static var profileImage
     
     @UserDefaultsWrapper(
         key: Key.accessToken.rawValue,

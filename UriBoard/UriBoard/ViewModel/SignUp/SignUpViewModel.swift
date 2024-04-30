@@ -80,7 +80,7 @@ extension SignUpViewModel {
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(emailObservable)
             .flatMap {
-                AuthNetworkManager.shared.requestAPIResult(
+                NetworkManager.shared.requestAPIResult(
                     type: EmailValidationModel.self,
                     router: Router.auth(
                         router: .emailValidation(query: $0)
@@ -204,7 +204,7 @@ extension SignUpViewModel {
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(signUpObservable)
             .flatMap {
-                AuthNetworkManager.shared.requestAPIResult(
+                NetworkManager.shared.requestAPIResult(
                     type: SignUpModel.self,
                     router: Router.auth(router: .signUp(query: $0))
                 )

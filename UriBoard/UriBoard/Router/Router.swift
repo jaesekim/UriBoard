@@ -10,13 +10,15 @@ import Alamofire
 
 enum Router {
     case auth(router: AuthRouter)
-
+    case post(router: PostRouter)
 }
 
 extension Router: TargetType {
     var baseUrl: String {
         switch self {
         case .auth(let router):
+            return router.baseUrl
+        case .post(let router):
             return router.baseUrl
         }
     }
@@ -25,12 +27,16 @@ extension Router: TargetType {
         switch self {
         case .auth(let router):
             return router.method
+        case .post(let router):
+            return router.method
         }
     }
     
     var path: String {
         switch self {
         case .auth(let router):
+            return router.path
+        case .post(let router):
             return router.path
         }
     }
@@ -39,12 +45,16 @@ extension Router: TargetType {
         switch self {
         case .auth(let router):
             return router.header
+        case .post(let router):
+            return router.header
         }
     }
     
     var parameters: String? {
         switch self {
         case .auth(let router):
+            return router.parameters
+        case .post(let router):
             return router.parameters
         }
     }
@@ -53,12 +63,16 @@ extension Router: TargetType {
         switch self {
         case .auth(let router):
             return router.queryItems
+        case .post(let router):
+            return router.queryItems
         }
     }
     
     var body: Data? {
         switch self {
         case .auth(let router):
+            return router.body
+        case .post(let router):
             return router.body
         }
     }

@@ -13,8 +13,10 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
     let profileImage = UIImageView(frame: .zero).then {
         $0.image = UIImage(systemName: "person")
-        $0.tintColor = ColorStyle.darkYellow
+        $0.tintColor = ColorStyle.lightPurple
         $0.contentMode = .scaleAspectFill
+        $0.backgroundColor = .white
+        
     }
     let nicknameLabel = UILabel().then {
         $0.font = FontStyle.getFont(
@@ -31,13 +33,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         $0.textColor = ColorStyle.black
         $0.numberOfLines = 0
     }
-    // 게시글에 누를 수 있는 버튼 보여주는 스택 뷰
-    let buttonStack = UIStackView().then {
-        $0.axis = .horizontal
-        $0.distribution = .fillEqually
-        $0.alignment = .firstBaseline
-        $0.spacing = 0
-    }
+
     let likeButton = CustomButton("heart")
     let commentButton = CustomButton("message")
     let repeatButton = CustomButton("repeat")
@@ -51,24 +47,23 @@ class BoardCollectionViewCell: UICollectionViewCell {
         )
     }
     let sendButton = CustomButton("paperplane")
-    // 댓글, 좋아요 개수 보여주는 스택 뷰
-    let statusStack = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 12
-    }
     let commentLabel = UILabel().then {
         $0.font = FontStyle.getFont(
-            scale: .regular,
+            scale: .bold,
             size: .small
         )
-        $0.textColor = ColorStyle.gray
+        $0.textColor = .lightGray
+        $0.text = "답글 0개"
+        $0.textAlignment = .center
     }
     let likeLabel = UILabel().then {
         $0.font = FontStyle.getFont(
-            scale: .regular,
+            scale: .bold,
             size: .small
         )
-        $0.textColor = ColorStyle.gray
+        $0.textColor = .lightGray
+        $0.text = "좋아요 0개"
+        $0.textAlignment = .center
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,23 +85,14 @@ extension BoardCollectionViewCell: UISettings {
             profileImage,
             nicknameLabel,
             contentLabel,
-            buttonStack,
-            commentTextField,
-            sendButton,
-//            statusStack,
-        ].forEach { contentView.addSubview($0) }
-        
-        [
             likeButton,
             commentButton,
             repeatButton,
-        ].forEach { buttonStack.addArrangedSubview($0) }
-        
-//        [
-//            commentLabel,
-//            likeLabel,
-//            
-//        ].forEach { statusStack.addArrangedSubview($0) }
+            commentTextField,
+            sendButton,
+            commentLabel,
+            likeLabel
+        ].forEach { contentView.addSubview($0) }
     }
     
     func configureConstraints() {
@@ -126,36 +112,47 @@ extension BoardCollectionViewCell: UISettings {
             make.leading.equalTo(nicknameLabel.snp.leading)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
-        buttonStack.snp.makeConstraints { make in
-            make.top.equalTo(contentLabel.snp.bottom).offset(8)
+        likeButton.snp.makeConstraints { make in
+            make.size.equalTo(20)
+            make.top.equalTo(contentLabel.snp.bottom).offset(24)
             make.leading.equalTo(contentLabel.snp.leading)
-            make.height.equalTo(40)
-            make.trailing.lessThanOrEqualTo(contentView.safeAreaLayoutGuide)
+        }
+        commentButton.snp.makeConstraints { make in
+            make.size.equalTo(20)
+            make.top.equalTo(contentLabel.snp.bottom).offset(24)
+            make.leading.equalTo(likeButton.snp.trailing).offset(16)
+        }
+        repeatButton.snp.makeConstraints { make in
+            make.size.equalTo(20)
+            make.top.equalTo(contentLabel.snp.bottom).offset(24)
+            make.leading.equalTo(commentButton.snp.trailing).offset(16)
         }
         commentTextField.snp.makeConstraints { make in
             make.height.equalTo(32)
-            make.top.equalTo(buttonStack.snp.bottom).offset(8)
-            make.leading.equalTo(buttonStack.snp.leading)
+            make.top.equalTo(likeButton.snp.bottom).offset(24)
+            make.leading.equalTo(contentLabel.snp.leading)
             make.trailing.equalTo(sendButton.snp.leading).offset(-8)
         }
         sendButton.snp.makeConstraints { make in
             make.size.equalTo(32)
-            make.top.equalTo(buttonStack.snp.bottom).offset(8)
+            make.top.equalTo(likeButton.snp.bottom).offset(24)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
-//        statusStack.snp.makeConstraints { make in
-//            if buttonStack.isHidden {
-//                make.top.equalTo(contentLabel.snp.bottom).offset(8)
-//            } else {
-//                make.top.equalTo(buttonStack.snp.bottom).offset(8)
-//            }
-//            make.leading.equalTo(contentLabel.snp.leading)
-//            make.trailing.lessThanOrEqualTo(contentView.snp.trailing)
-//            make.height.equalTo(20)
-//        }
+        commentLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.top.equalTo(commentTextField.snp.bottom).offset(16)
+            make.leading.equalTo(contentLabel.snp.leading)
+            make.trailing.lessThanOrEqualTo(contentView.snp.centerX)
+        }
+        likeLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.top.equalTo(commentTextField.snp.bottom).offset(16)
+            make.trailing.lessThanOrEqualTo(contentView.safeAreaLayoutGuide).offset(-16)
+            make.leading.equalTo(commentLabel.snp.trailing).offset(8)
+        }
     }
     
     func configureView() {
-        contentView.backgroundColor = ColorStyle.gray
+        contentView.backgroundColor = .clear
     }
 }

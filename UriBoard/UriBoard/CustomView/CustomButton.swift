@@ -25,7 +25,7 @@ extension CustomButton {
     private func configureView(image: String) {
         var config = UIButton.Configuration.plain()
         
-        config.baseForegroundColor = ColorStyle.darkYellow
+        config.baseForegroundColor = ColorStyle.lightPurple
         config.image = UIImage(systemName: image)
 
         self.configuration = config

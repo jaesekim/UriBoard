@@ -38,7 +38,7 @@ extension BaseViewController: NavigationSettings {
             target: self,
             action: nil
         )
-        backBarButtonItem.tintColor = ColorStyle.darkBlue
+        backBarButtonItem.tintColor = ColorStyle.darkPurple
         navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

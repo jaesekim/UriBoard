@@ -32,7 +32,7 @@ final class SignUpView: BaseView {
         let view = UIButton()
         view.configuration = .confirmButton(
             message: "중복확인",
-            color: ColorStyle.darkYellow
+            color: ColorStyle.lightPurple
         )
         return view
     }()

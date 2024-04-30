@@ -49,15 +49,15 @@ extension AuthRouter: TargetType {
     var path: String {
         switch self {
         case .signUp:
-            return "/users/join"
+            return "/v1/users/join"
         case .signIn:
-            return "/users/login"
+            return "/v1/users/login"
         case .tokenRefresh:
-            return "/auth/refresh"
+            return "/v1/auth/refresh"
         case .emailValidation:
-            return "/validation/email"
+            return "/v1/validation/email"
         case .withdraw:
-            return "/users/withdraw"
+            return "/v1/users/withdraw"
         }
     }
     
@@ -69,27 +69,14 @@ extension AuthRouter: TargetType {
                 HTTPHeader.sesacKey.rawValue: APIKey.key
             ]
         case .tokenRefresh:
-            
-            guard let accessToken = UserDefaults.standard.string(
-                forKey: "AccessToken"
-            ) else { return [:] }
-
-            guard let refreshToken = UserDefaults.standard.string(
-                forKey: "RefreshToken"
-            ) else { return [:] }
-
             return [
-                HTTPHeader.auth.rawValue: accessToken,
+                HTTPHeader.auth.rawValue: UserDefaultsManager.accessToken,
                 HTTPHeader.sesacKey.rawValue: APIKey.key,
-                HTTPHeader.refresh.rawValue: refreshToken
+                HTTPHeader.refresh.rawValue: UserDefaultsManager.refreshToken
             ]
         case .withdraw:
-            guard let accessToken = UserDefaults.standard.string(
-                forKey: "AccessToken"
-            ) else { return [:] }
-
             return [
-                HTTPHeader.auth.rawValue: accessToken,
+                HTTPHeader.auth.rawValue: UserDefaultsManager.accessToken,
                 HTTPHeader.sesacKey.rawValue: APIKey.key
             ]
         }

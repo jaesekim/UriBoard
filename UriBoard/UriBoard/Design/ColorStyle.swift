@@ -9,8 +9,10 @@ import UIKit
 
 enum ColorStyle {
     static let black = UIColor(hexCode: "000000")
-    static let darkBlue = UIColor(hexCode: "14213D")
-    static let darkYellow = UIColor(hexCode: "FCA311")
+    static let deepPurple = UIColor(hexCode: "86469C")
+    static let darkPurple = UIColor(hexCode: "BEADFA")
+    static let lightPurple = UIColor(hexCode: "DFCCFB")
+    static let pastelYellow = UIColor(hexCode: "FFF8C9")
     static let gray = UIColor(hexCode: "E5E5E5")
     static let white = UIColor(hexCode: "FFFFFF")
     static let reject = UIColor(hexCode: "FF6D60")

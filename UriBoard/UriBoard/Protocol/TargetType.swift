@@ -22,10 +22,22 @@ protocol TargetType: URLRequestConvertible {
 extension TargetType {
 
     func asURLRequest() throws -> URLRequest {
+
+        var url: String
+
+        if let parameters {
+            url = baseUrl + "/\(parameters)"
+        } else {
+            url = baseUrl
+        }
         
-        let url = try baseUrl.asURL()
+        var components = URLComponents(string: url)
+        components?.queryItems = queryItems
+
+        let targetURL = try components?.url?.asURL() ?? url.asURL()
+
         var urlRequest = try URLRequest(
-            url: url.appendingPathComponent(path),
+            url: targetURL.appendingPathComponent(path),
             method: method
         )
         

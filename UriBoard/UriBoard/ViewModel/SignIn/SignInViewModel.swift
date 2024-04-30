@@ -22,6 +22,7 @@ final class SignInViewModel: ViewModelType {
 
     struct Output {
         let signInValidation: Driver<Bool>
+        let signInGuide: Driver<String>
         let signInButtonOnClick: Driver<Void>
         let signUpbuttonOnClick: Driver<Void>
     }
@@ -33,6 +34,7 @@ extension SignInViewModel {
     func transform(input: Input) -> Output {
         
         let signInValid = BehaviorRelay(value: false)
+        let signInGuide = PublishRelay<String>()
         let signInButtonTrigger = PublishRelay<Void>()
         let signUpButtonTrigger = PublishRelay<Void>()
         
@@ -57,7 +59,7 @@ extension SignInViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         input.signInOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(signInObservable)
@@ -65,20 +67,47 @@ extension SignInViewModel {
                 past.email != cur.email || past.password != cur.password
             }
             .flatMap {
-                AuthNetworkManager.shared.requestAPI(
+                NetworkManager.shared.requestAPIResult(
                     type: SignInModel.self,
                     router: Router.auth(router: .signIn(query: $0))
-                )
+                ).catch { error in
+                    return Single<Result<SignInModel, APIError>>.never()
+                }
             }.debug()
-            .subscribe(with: self) { owner, _ in
-                signInButtonTrigger.accept(())
-            } onError: { a, b in
-                print(a)
-                print("=========")
-                print(b)
+            .subscribe(with: self) { owner, value in
+                switch value {
+                case .success(let success):
+                    UserDefaultsManager.userEmail = success.email
+                    UserDefaultsManager.nickname = success.nick
+                    UserDefaultsManager.userId = success.user_id
+                    UserDefaultsManager.profileImage = success.profileImage ?? ""
+                    UserDefaultsManager.accessToken = success.accessToken
+                    UserDefaultsManager.refreshToken = success.refreshToken
+                    signInButtonTrigger.accept(())
+                case .failure(let failure):
+                    print(failure)
+                    switch failure {
+                    case .keyError:
+                        signInGuide.accept("KEY ERROR")
+                    case .overCall:
+                        signInGuide.accept("과호출입니다. 잠시 후 다시 시도해 주세요")
+                    case .invalidURL:
+                        signInGuide.accept("잘못된 경로 접근입니다. 잠시 후 다시 시도해 주세요")
+                    case .serverError:
+                        signInGuide.accept("에러: 잠시 후 다시 시도해 주세요")
+                    case .invalidRequest:
+                        signInGuide.accept("이메일 및 비밀번호를 입력해 주세요")
+                    case .invalidAccess:
+                        print("가입되지 않은 계정이거나 비밀번호가 일치하지 않습니다")
+                        signInGuide.accept("가입되지 않은 계정이거나 비밀번호가 일치하지 않습니다")
+                    default:
+                        signInGuide.accept("에러: 잠시 후 다시 시도해 주세요")
+                    }
+                }
             }
             .disposed(by: disposeBag)
-
+        //  연습 끝
+    
         input.signUpOnClick
         // 버튼 과호출 방지
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
@@ -89,6 +118,7 @@ extension SignInViewModel {
         
         return Output(
             signInValidation: signInValid.asDriver(),
+            signInGuide: signInGuide.asDriver(onErrorJustReturn: ""),
             signInButtonOnClick: signInButtonTrigger.asDriver(onErrorJustReturn: ()),
             signUpbuttonOnClick: signUpButtonTrigger.asDriver(onErrorJustReturn: ())
         )

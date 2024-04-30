@@ -89,7 +89,7 @@ extension SignUpViewController{
         
         output.signUpValidation
             .drive(with: self) { owner, bool in
-                let color = bool ? ColorStyle.darkYellow : ColorStyle.gray
+                let color = bool ? ColorStyle.lightPurple : ColorStyle.gray
                 owner.mainView.confirmButton.configuration = .confirmButton(
                     message: "회원가입", color: color
                 )

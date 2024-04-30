@@ -19,6 +19,7 @@ final class HomeView: BaseView {
             BoardCollectionViewCell.self,
             forCellWithReuseIdentifier: "BoardCollectionViewCell"
         )
+        
     }
 }
 
@@ -31,7 +32,8 @@ extension HomeView {
     
     override func configureConstraints() {
         boardCollectionView.snp.makeConstraints { make in
-            make.top.bottom.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.top.bottom.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview().inset(10)
         }
     }
 }
@@ -41,13 +43,13 @@ extension HomeView {
             
             let itemSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0)
+                heightDimension: .fractionalWidth(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(0.5)
+                heightDimension: .fractionalWidth(1.0)
             )
             
             let group = NSCollectionLayoutGroup.vertical(

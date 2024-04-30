@@ -37,6 +37,7 @@ extension SignInViewController {
 extension SignInViewController {
 
     override func bind() {
+
         let input = SignInViewModel.Input(
             emailText: mainView.emailTextField.rx.text.orEmpty.asObservable(),
             passwordText: mainView.passwordTextField.rx.text.orEmpty.asObservable(),
@@ -48,14 +49,19 @@ extension SignInViewController {
         
         output.signInValidation
             .drive(with: self) { owner, bool in
-                let color: UIColor = bool ? ColorStyle.darkYellow : ColorStyle.gray
+                let color: UIColor = bool ? ColorStyle.lightPurple : ColorStyle.gray
 
                 owner.mainView.confirmButton.configuration = .confirmButton(
                     message: "로그인",
                     color: color
                 )
                 owner.mainView.confirmButton.isEnabled = bool
+                
             }
+            .disposed(by: disposeBag)
+    
+        output.signInGuide
+            .drive(mainView.signInGuide.rx.text)
             .disposed(by: disposeBag)
         
         output.signInButtonOnClick

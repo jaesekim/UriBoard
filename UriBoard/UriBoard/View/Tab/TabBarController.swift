@@ -73,7 +73,7 @@ extension TabBarController {
 
     private func setTabBar() {
         var tabList: [UIViewController] = []
-        tabBar.tintColor = ColorStyle.darkBlue
+        tabBar.tintColor = ColorStyle.darkPurple
         
         for item in TabBarItem.allCases {
             // NavigationController 달아주기

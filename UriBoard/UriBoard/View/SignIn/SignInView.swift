@@ -46,6 +46,16 @@ final class SignInView: BaseView {
         )
         return view
     }()
+    let signInGuide = {
+        let view = UILabel()
+        view.font = FontStyle.getFont(
+            scale: .regular,
+            size: .small
+        )
+        view.textColor = ColorStyle.reject
+        view.textAlignment = .center
+        return view
+    }()
     let confirmButton = {
         let view = UIButton()
         view.configuration = .confirmButton(
@@ -56,7 +66,7 @@ final class SignInView: BaseView {
     }()
     let singUpButton = TextButton(
         text: "회원이 아니십니까?",
-        color: ColorStyle.darkBlue
+        color: ColorStyle.deepPurple
     )
 }
 
@@ -68,6 +78,7 @@ extension SignInView {
             emailTextField,
             passwordLabel,
             passwordTextField,
+            signInGuide,
             confirmButton,
             singUpButton
         ].forEach { addSubview($0) }
@@ -94,6 +105,11 @@ extension SignInView {
             make.height.equalTo(44)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalTo(snp.centerY).offset(-20)
+        }
+        signInGuide.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(20)
         }
         confirmButton.snp.makeConstraints { make in
             make.bottom.equalTo(singUpButton.snp.top).offset(-20)

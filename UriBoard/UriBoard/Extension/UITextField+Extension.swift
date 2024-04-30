@@ -21,7 +21,7 @@ extension UITextField {
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         view.layer.borderWidth = 1
-        view.layer.borderColor = ColorStyle.darkYellow.cgColor
+        view.layer.borderColor = ColorStyle.lightPurple.cgColor
         view.placeholder = placeholder
 
         return view
@@ -43,7 +43,7 @@ extension UITextField {
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         view.layer.borderWidth = 1
-        view.layer.borderColor = ColorStyle.darkYellow.cgColor
+        view.layer.borderColor = ColorStyle.lightPurple.cgColor
         view.placeholder = placeholder
 
         return view
