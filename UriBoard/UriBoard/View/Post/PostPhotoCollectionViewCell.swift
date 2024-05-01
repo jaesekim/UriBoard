@@ -50,7 +50,7 @@ extension PostPhotoCollectionViewCell: UISettings {
             make.centerX.centerY.equalToSuperview()
         }
         deleteButton.snp.makeConstraints { make in
-            make.size.equalTo(24)
+            make.size.equalTo(32)
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
         }

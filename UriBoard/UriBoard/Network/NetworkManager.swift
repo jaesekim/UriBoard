@@ -71,17 +71,19 @@ extension NetworkManager {
         imgData: [Data]
     ) -> Single<Result<T, APIError>> {
         return Single.create { single -> Disposable in
+
             do {
                 let urlRequest = try router.asURLRequest()
-                
+
                 AF.upload(
                     multipartFormData: { multipartFormData in
                         imgData.forEach {
+                            print($0)
                             multipartFormData.append(
                                 $0,
                                 withName: "files",
-                                fileName: "\($0).png",
-                                mimeType: "image/png")
+                                fileName: "\($0).jpg",
+                                mimeType: "image/jpg")
                         }
                     },
                     with: urlRequest,

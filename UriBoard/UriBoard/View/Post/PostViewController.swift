@@ -77,25 +77,36 @@ extension PostViewController {
         )
 
         let output = viewModel.transform(input: input)
+
         // 게시글 등록 버튼 활성화 유무
         output.rightNavButtonValid
             .drive(with: self) { owner, bool in
                 owner.navigationItem.rightBarButtonItem?.isEnabled = bool
             }
             .disposed(by: disposeBag)
+
         // 등록 취소
         output.cancelOnClick
             .drive(with: self) { owner, _ in
                 owner.tabBarController?.selectedIndex = 0
             }
             .disposed(by: disposeBag)
-        // 게시글 등록
+
+        // 게시글 등록 성공하면 메인화면으로 가기
         output.postingOnClick
             .drive(with: self) { owner, _ in
                 print("onclick")
                 owner.tabBarController?.selectedIndex = 0
             }
             .disposed(by: disposeBag)
+
+        // 게시글 등록 실패
+        output.errorMessage
+            .drive(with: self) { owner, text in
+                owner.showToast(text)
+            }
+            .disposed(by: disposeBag)
+
         // 사진 추가 버튼 눌렀을 때 로직
         output.addPhotoButtonOnClick
             .drive(with: self) { owner, _ in
@@ -121,7 +132,7 @@ extension PostViewController: PHPickerViewControllerDelegate {
     // PHPicker 열리게 하는 함수
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 4  // 최대한 선택 가능한 사진 숫자
+        configuration.selectionLimit = 5  // 최대한 선택 가능한 사진 숫자
         configuration.filter = .images
         
         let picker = PHPickerViewController(

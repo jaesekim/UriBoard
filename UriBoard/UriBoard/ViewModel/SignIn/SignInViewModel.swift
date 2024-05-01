@@ -77,7 +77,6 @@ extension SignInViewModel {
             .subscribe(with: self) { owner, value in
                 switch value {
                 case .success(let success):
-                    print(success)
                     UserDefaultsManager.userEmail = success.email
                     UserDefaultsManager.nickname = success.nick
                     UserDefaultsManager.userId = success.user_id
@@ -86,7 +85,6 @@ extension SignInViewModel {
                     UserDefaultsManager.refreshToken = success.refreshToken
                     signInButtonTrigger.accept(())
                 case .failure(let failure):
-                    print(failure)
                     switch failure {
                     case .keyError:
                         signInGuide.accept("KEY ERROR")
