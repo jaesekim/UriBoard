@@ -45,7 +45,9 @@ extension TargetType {
         urlRequest.allHTTPHeaderFields = header
         urlRequest.httpBody = parameters?.data(using: .utf8)
         urlRequest.httpBody = body
-        
+        print("=====================")
+        print(body)
+        print(urlRequest.httpBody)
         return urlRequest
     }
 }

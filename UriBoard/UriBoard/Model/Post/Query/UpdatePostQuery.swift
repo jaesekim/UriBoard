@@ -9,6 +9,6 @@ import Foundation
 
 struct UpdatePostQuery: Encodable {
     let content: String
-    let product_id: String
+    let product_id = "uriBoard"
     let files: [String]?
 }

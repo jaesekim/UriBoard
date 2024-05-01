@@ -83,12 +83,12 @@ extension TabBarController {
             
             tabVC.tabBarItem.selectedImage = item.iconActive
             tabVC.tabBarItem.image = item.iconInactive
-            
+
             tabList.append(tabVC)
         }
         viewControllers = tabList
         
         // navigationViewController로 화면 전환 시 탭 사라지지 않도록
-        // hidesBottomBarWhenPushed = false
+         
     }
 }

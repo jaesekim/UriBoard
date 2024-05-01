@@ -39,9 +39,9 @@ extension HomeViewController {
         ])
 
         items
-            .bind(to: mainView.boardCollectionView.rx.items(
-                cellIdentifier: "BoardCollectionViewCell",
-                cellType: BoardCollectionViewCell.self)
+            .bind(to: mainView.boardTableView.rx.items(
+                cellIdentifier: "BoardTableViewCell",
+                cellType: BoardTableViewCell.self)
             ) { (row, element, cell) in
                 cell.nicknameLabel.text = "test"
                 cell.contentLabel.text = "content test content test content test content test content test content test content test content test content test"

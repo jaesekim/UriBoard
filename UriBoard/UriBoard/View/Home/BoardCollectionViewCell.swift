@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BoardCollectionViewCell: UICollectionViewCell {
+class BoardTableViewCell: UITableViewCell {
     
     let profileImage = UIImageView(frame: .zero).then {
         $0.image = UIImage(systemName: "person")
@@ -65,9 +65,9 @@ class BoardCollectionViewCell: UICollectionViewCell {
         $0.text = "좋아요 0개"
         $0.textAlignment = .center
     }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureHierarchy()
         configureConstraints()
         configureView()
@@ -79,7 +79,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: layout 세팅
-extension BoardCollectionViewCell: UISettings {
+extension BoardTableViewCell: UISettings {
     func configureHierarchy() {
         [
             profileImage,
@@ -105,12 +105,13 @@ extension BoardCollectionViewCell: UISettings {
             make.trailing.equalToSuperview().offset(-16)
             make.leading.equalTo(profileImage.snp.trailing).offset(16)
             make.height.equalTo(20)
+
         }
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
-            make.height.lessThanOrEqualTo(120)
+            make.height.lessThanOrEqualTo(200)
+            make.trailing.equalToSuperview().offset(-16)
             make.leading.equalTo(nicknameLabel.snp.leading)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
         likeButton.snp.makeConstraints { make in
             make.size.equalTo(20)
@@ -139,14 +140,14 @@ extension BoardCollectionViewCell: UISettings {
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
         commentLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
             make.top.equalTo(commentTextField.snp.bottom).offset(16)
+            make.bottom.equalToSuperview().inset(16)
             make.leading.equalTo(contentLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(contentView.snp.centerX)
         }
         likeLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
             make.top.equalTo(commentTextField.snp.bottom).offset(16)
+            make.bottom.equalToSuperview().inset(16)
             make.trailing.lessThanOrEqualTo(contentView.safeAreaLayoutGuide).offset(-16)
             make.leading.equalTo(commentLabel.snp.trailing).offset(8)
         }

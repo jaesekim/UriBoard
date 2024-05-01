@@ -26,6 +26,7 @@ final class InterceptorManager: RequestInterceptor {
             accessToken,
             forHTTPHeaderField: HTTPHeader.auth.rawValue
         )
+        
         completion(.success(urlRequest))
     }
     

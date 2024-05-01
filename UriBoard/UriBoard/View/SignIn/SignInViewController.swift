@@ -56,7 +56,6 @@ extension SignInViewController {
                     color: color
                 )
                 owner.mainView.confirmButton.isEnabled = bool
-                
             }
             .disposed(by: disposeBag)
     
@@ -66,7 +65,6 @@ extension SignInViewController {
         
         output.signInButtonOnClick
             .drive(with: self) { owner, _ in
-    
                 owner.rootViewTransition()
             }
             .disposed(by: disposeBag)

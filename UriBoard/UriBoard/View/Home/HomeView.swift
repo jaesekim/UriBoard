@@ -10,29 +10,28 @@ import SnapKit
 import Then
 final class HomeView: BaseView {
     
-    lazy var boardCollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: createLayout()
-    ).then {
+    lazy var boardTableView = UITableView().then {
         $0.backgroundColor = .clear
         $0.register(
-            BoardCollectionViewCell.self,
-            forCellWithReuseIdentifier: "BoardCollectionViewCell"
+            BoardTableViewCell.self,
+            forCellReuseIdentifier: "BoardTableViewCell"
         )
-        
+        $0.showsVerticalScrollIndicator = false
+        $0.rowHeight = UITableView.automaticDimension
+        $0.estimatedRowHeight = 200
     }
 }
 
 extension HomeView {
     override func configureHierarchy() {
         [
-            boardCollectionView,
+            boardTableView,
         ].forEach { addSubview($0) }
     }
     
     override func configureConstraints() {
-        boardCollectionView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(safeAreaLayoutGuide)
+        boardTableView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(10)
         }
     }
@@ -65,3 +64,4 @@ extension HomeView {
             return layout
         }
 }
+

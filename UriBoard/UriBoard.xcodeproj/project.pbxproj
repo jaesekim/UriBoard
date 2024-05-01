@@ -17,6 +17,7 @@
 		7B4C03E12BC7DF0D00593876 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4C03E02BC7DF0D00593876 /* UIButton+Extension.swift */; };
 		7B4C03E32BC7E13F00593876 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4C03E22BC7E13F00593876 /* UITextField+Extension.swift */; };
 		7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4C03E42BC7EBF300593876 /* ColorStyle.swift */; };
+		7B5D75312BE2B58B0071EA59 /* PostPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D75302BE2B58B0071EA59 /* PostPhotoCollectionViewCell.swift */; };
 		7B8D6BE52BCA5FDE00139BB5 /* WithdrawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BE42BCA5FDE00139BB5 /* WithdrawModel.swift */; };
 		7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BE62BCA603600139BB5 /* EmailValidationQuery.swift */; };
 		7B8D6BEA2BCA60BD00139BB5 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8D6BE92BCA60BD00139BB5 /* AuthRouter.swift */; };
@@ -101,6 +102,7 @@
 		7B4C03E02BC7DF0D00593876 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		7B4C03E22BC7E13F00593876 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		7B4C03E42BC7EBF300593876 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
+		7B5D75302BE2B58B0071EA59 /* PostPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		7B8D6BE42BCA5FDE00139BB5 /* WithdrawModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawModel.swift; sourceTree = "<group>"; };
 		7B8D6BE62BCA603600139BB5 /* EmailValidationQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationQuery.swift; sourceTree = "<group>"; };
 		7B8D6BE92BCA60BD00139BB5 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			children = (
 				7BC78DDD2BD10520001C2BE4 /* PostView.swift */,
 				7BC78DDF2BD10538001C2BE4 /* PostViewController.swift */,
+				7B5D75302BE2B58B0071EA59 /* PostPhotoCollectionViewCell.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */,
 				7BC78E512BD9E559001C2BE4 /* ImageFilesModel.swift in Sources */,
 				7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */,
+				7B5D75312BE2B58B0071EA59 /* PostPhotoCollectionViewCell.swift in Sources */,
 				7BC78E572BD9F415001C2BE4 /* ReadPostsModel.swift in Sources */,
 				7BE31C592BC68F6800D1EDE6 /* SignInViewController.swift in Sources */,
 				7BC78E312BD765B5001C2BE4 /* UserDefaultsWrapper.swift in Sources */,

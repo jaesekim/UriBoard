@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 enum PostRouter {
     case imageUpload
-    case createPost
+    case createPost(query: CreatePostQuery)
     case readPosts(query: ReadPostsQueryString)
     case readDetailPost(id: String)
-    case updatePost(id: String)
+    case updatePost(id: String, query: UpdatePostQuery)
     case deletePost(id: String)
     case readUserPosts(id: String, query: ReadUserPostsQueryString)
 }
@@ -108,7 +108,7 @@ extension PostRouter: TargetType {
             return nil
         case .readDetailPost(let id):
             return id
-        case .updatePost(let id):
+        case .updatePost(let id, let query):
             return id
         case .deletePost(let id):
             return id
@@ -146,12 +146,12 @@ extension PostRouter: TargetType {
     
     var body: Data? {
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.keyEncodingStrategy = .useDefaultKeys
         switch self {
         case .imageUpload:
             return nil
-        case .createPost:
-            return nil
+        case .createPost(let query):
+            return try? encoder.encode(query)
         case .readPosts:
             return nil
         case .readDetailPost:

@@ -9,6 +9,8 @@ import Foundation
 
 struct CreatePostModel: Decodable {
     let post_id: String
+    let product_id: String
+    let createdAt: String
     let content: String
     let creator: PostCreator
     let files: [String]

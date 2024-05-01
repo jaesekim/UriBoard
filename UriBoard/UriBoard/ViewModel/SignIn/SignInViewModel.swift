@@ -63,20 +63,21 @@ extension SignInViewModel {
         input.signInOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(signInObservable)
-            .distinctUntilChanged { past, cur in
-                past.email != cur.email || past.password != cur.password
-            }
+//            .distinctUntilChanged { past, cur in
+//                past.email != cur.email || past.password != cur.password
+//            }
+            .debug()
             .flatMap {
                 NetworkManager.shared.requestAPIResult(
                     type: SignInModel.self,
                     router: Router.auth(router: .signIn(query: $0))
-                ).catch { error in
-                    return Single<Result<SignInModel, APIError>>.never()
-                }
-            }.debug()
+                )
+            }
+            .debug()
             .subscribe(with: self) { owner, value in
                 switch value {
                 case .success(let success):
+                    print(success)
                     UserDefaultsManager.userEmail = success.email
                     UserDefaultsManager.nickname = success.nick
                     UserDefaultsManager.userId = success.user_id
@@ -104,6 +105,10 @@ extension SignInViewModel {
                         signInGuide.accept("에러: 잠시 후 다시 시도해 주세요")
                     }
                 }
+            } onError: { _, _ in
+                print("onerror")
+            } onDisposed: { _ in
+                print("ondisposed")
             }
             .disposed(by: disposeBag)
         //  연습 끝
