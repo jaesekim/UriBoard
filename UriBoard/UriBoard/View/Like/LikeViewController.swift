@@ -18,6 +18,6 @@ final class LikeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        print("Like VC")
     }
 }

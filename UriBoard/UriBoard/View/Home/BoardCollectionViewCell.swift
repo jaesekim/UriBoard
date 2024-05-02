@@ -65,6 +65,13 @@ class BoardTableViewCell: UITableViewCell {
         $0.text = "좋아요 0개"
         $0.textAlignment = .center
     }
+    let commentStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 10
+    }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -88,11 +95,15 @@ extension BoardTableViewCell: UISettings {
             likeButton,
             commentButton,
             repeatButton,
+            commentLabel,
+            likeLabel,
+            commentStackView
+        ].forEach { contentView.addSubview($0) }
+        
+        [
             commentTextField,
             sendButton,
-            commentLabel,
-            likeLabel
-        ].forEach { contentView.addSubview($0) }
+        ].forEach { commentStackView.addArrangedSubview($0) }
     }
     
     func configureConstraints() {
@@ -128,20 +139,9 @@ extension BoardTableViewCell: UISettings {
             make.top.equalTo(contentLabel.snp.bottom).offset(24)
             make.leading.equalTo(commentButton.snp.trailing).offset(16)
         }
-        commentTextField.snp.makeConstraints { make in
-            make.height.equalTo(32)
-            make.top.equalTo(likeButton.snp.bottom).offset(24)
-            make.leading.equalTo(contentLabel.snp.leading)
-            make.trailing.equalTo(sendButton.snp.leading).offset(-8)
-        }
-        sendButton.snp.makeConstraints { make in
-            make.size.equalTo(32)
-            make.top.equalTo(likeButton.snp.bottom).offset(24)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
-        }
         commentLabel.snp.makeConstraints { make in
             make.top.equalTo(commentTextField.snp.bottom).offset(16)
-            make.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(24)
             make.leading.equalTo(contentLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(contentView.snp.centerX)
         }
@@ -150,6 +150,12 @@ extension BoardTableViewCell: UISettings {
             make.bottom.equalToSuperview().inset(16)
             make.trailing.lessThanOrEqualTo(contentView.safeAreaLayoutGuide).offset(-16)
             make.leading.equalTo(commentLabel.snp.trailing).offset(8)
+        }
+        commentStackView.snp.makeConstraints { make in
+            make.top.equalTo(commentLabel.snp.bottom).offset(16)
+            make.leading.equalTo(contentLabel.snp.leading)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().inset(16)
         }
     }
     

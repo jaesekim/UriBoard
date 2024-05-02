@@ -23,19 +23,11 @@ final class SignInViewController: BaseViewController {
         super.viewDidLoad()
 
     }
-
-}
-// MARK: 네비게이션 바 설정
-extension SignInViewController {
     override func setNavigationBar() {
         super.setNavigationBar()
 
         navigationItem.title = "로그인"
     }
-}
-// MARK: RX - ViewModel 바인딩
-extension SignInViewController {
-
     override func bind() {
 
         let input = SignInViewModel.Input(
@@ -78,4 +70,6 @@ extension SignInViewController {
             }
             .disposed(by: disposeBag)
     }
+
 }
+

@@ -12,18 +12,17 @@ import RxCocoa
 class PostViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
-    let photoData = BehaviorSubject<[Data]>(value: [])
-    
+    let photoData = BehaviorRelay<[Data]>(value: [])
     
     struct Input {
         let rightNavButtonOnclick: Observable<()>?
         let leftNavButtonOnClick: Observable<()>?
-        let addPhotoButtonOnClick: Observable<Void>
+        let addContentButtonOnClick: Observable<Void>
         let boardContent: Observable<String>
     }
     
     struct Output {
-        let rightNavButtonValid: Driver<Bool>
+        let addContentButtonValid: Driver<Bool>
         let cancelOnClick: Driver<Void>
         let postingOnClick: Driver<Void>
         // 사진 추가 output
@@ -32,17 +31,24 @@ class PostViewModel: ViewModelType {
         let photoDataList: Observable<[Data]>
         // 에러메시지
         let errorMessage: Driver<String>
+        let result: PublishRelay<Result<CreatePostModel, APIError>>
     }
 }
 
 extension PostViewModel {
-    
+
     func transform(input: Input) -> Output {
         let cancelButtonTrigger = PublishRelay<Void>()
-        let postingTrigger = PublishRelay<Void>()
+        let postingTrigger = BehaviorRelay<Void>(value: ())
         let postingValid = BehaviorRelay(value: false)
         let addPhotoButtonTrigger = PublishRelay<Void>()
         let errorMessage = BehaviorRelay<String>(value: "")
+        
+        // 사진 데이터 넣는 배열
+        let photoStringArr = PublishRelay<[String]>()
+        
+        let result = PublishRelay<Result<CreatePostModel, APIError>>()
+        var contentText = ""
         
         // 게시물 등록 취소
         input.leftNavButtonOnClick?
@@ -64,73 +70,97 @@ extension PostViewModel {
                     postingValid.accept(false)
                 } else {
                     postingValid.accept(true)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // 게시물 등록 버튼 누르기
-        input.rightNavButtonOnclick?
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .flatMap { [weak self] _ in
-                NetworkManager.shared.uploadFiles(
-                    type: ImageFilesModel.self,
-                    router: Router.post(router: .imageUpload),
-                    imgData: try self?.photoData.value() ?? []
-                )
-            }
-            .subscribe(with: self) { owner, value in
-                switch value {
-                case .success(let success):
-                    postContent(files: success.files)
-                case .failure(let failure):
-                    print(failure)
-                    errorMessage.accept("이미지 업로드 실패")
+                    contentText = content
                 }
             }
             .disposed(by: disposeBag)
         
         // 이미지 추가 버튼 눌렀을 때
-        input.addPhotoButtonOnClick
+        input.rightNavButtonOnclick?
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, _ in
                 addPhotoButtonTrigger.accept(())
             }
             .disposed(by: disposeBag)
         
-        // 등록버튼 눌렀을 때 이미지 업로드 이후 전체적인 게시글 업로드 로직 함수
-        func postContent(files: [String]) {
-            
-            let postingObservable = input.boardContent
-                .map {
-                    CreatePostQuery(
-                        content: $0,
-                        files: files)
+        // 게시물 등록 클릭 + 사진을 선택하지 않았을 때 경우
+        input.addContentButtonOnClick
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .filter { [weak self] _ in
+                guard let data = self?.photoData.value else {
+                    return false
                 }
+                return data.isEmpty
+            }
+            .map {
+                CreatePostQuery(
+                    content: contentText,
+                    files: []
+                )
+            }
+            .flatMap {
+                NetworkManager.shared.requestAPIResult(
+                    type: CreatePostModel.self,
+                    router: Router.post(router: .createPost(query: $0))
+                )
+            }
+            .bind(to: result)
+            .disposed(by: disposeBag)
 
-            postingObservable
-                .flatMap {
-                    NetworkManager.shared.requestAPIResult(
-                        type: CreatePostModel.self,
-                        router: Router.post(router: .createPost(query: $0)))
+        // 게시물 등록 클릭 + 사진을 선택했을 때
+        input.addContentButtonOnClick
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .filter { [weak self] _ in
+                guard let data = self?.photoData.value else {
+                    return false
                 }
-                .subscribe(with: self) { owner, value in
-                    switch value {
-                    case .success(let success):
-                        postingTrigger.accept(())
-                    case .failure(_):
-                        errorMessage.accept("업로드를 실패했습니다")
-                    }
+                return !data.isEmpty
+            }
+            .flatMap { [weak self] _ -> Single<Result<ImageFilesModel, APIError>> in
+                
+                guard let data = self?.photoData.value else {
+                    return Single.just(.failure(.serverError))
                 }
-                .disposed(by: disposeBag)
-        }
+                return NetworkManager.shared.uploadFiles(
+                    type: ImageFilesModel.self,
+                    router: Router.post(router: .imageUpload),
+                    imgData: data
+                )
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    photoStringArr.accept(success.files)
+                case .failure(_):
+                    errorMessage.accept("이미지 업로드 실패")
+                }
+            }
+            .disposed(by: disposeBag)
+
+        photoStringArr
+            .map {
+                CreatePostQuery(content: contentText, files: $0)
+            }
+            .flatMap {
+                NetworkManager.shared.requestAPIResult(
+                    type: CreatePostModel.self,
+                    router: Router.post(router: .createPost(query: $0))
+                )
+            }
+            .bind(to: result)
+            .disposed(by: disposeBag)
+            
+            
         
         return Output(
-            rightNavButtonValid: postingValid.asDriver(),
+            addContentButtonValid: postingValid.asDriver(),
             cancelOnClick: cancelButtonTrigger.asDriver(onErrorJustReturn: ()),
-            postingOnClick: postingTrigger.asDriver(onErrorJustReturn: ()),
+            postingOnClick: postingTrigger.asDriver(),
             addPhotoButtonOnClick: addPhotoButtonTrigger.asDriver(onErrorJustReturn: ()),
-            photoDataList: photoData.asObserver(),
-            errorMessage: errorMessage.asDriver()
+            photoDataList: photoData.asObservable(),
+            errorMessage: errorMessage.asDriver(),
+            result: result
         )
     }
 }
+

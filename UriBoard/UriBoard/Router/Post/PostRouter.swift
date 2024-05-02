@@ -11,6 +11,7 @@ enum PostRouter {
     case imageUpload
     case createPost(query: CreatePostQuery)
     case readPosts(query: ReadPostsQueryString)
+    case readProfileImg(profile: String)
     case readDetailPost(id: String)
     case updatePost(id: String, query: UpdatePostQuery)
     case deletePost(id: String)
@@ -24,6 +25,7 @@ extension PostRouter: TargetType {
                 .imageUpload,
                 .createPost,
                 .readPosts,
+                .readProfileImg,
                 .readDetailPost,
                 .updatePost,
                 .deletePost,
@@ -39,6 +41,8 @@ extension PostRouter: TargetType {
         case .createPost:
             return .post
         case .readPosts:
+            return .get
+        case .readProfileImg:
             return .get
         case .readDetailPost:
             return .get
@@ -59,6 +63,8 @@ extension PostRouter: TargetType {
             return "/v1/posts"
         case .readPosts:
             return "/v1/posts"
+        case .readProfileImg(let profile):
+            return "/v1/" + profile
         case .readDetailPost:
             return "/v1/posts"
         case .updatePost:
@@ -95,6 +101,8 @@ extension PostRouter: TargetType {
                 HTTPHeader.auth.rawValue: UserDefaultsManager.accessToken,
                 HTTPHeader.sesacKey.rawValue: APIKey.key
             ]
+        case .readProfileImg:
+            return [:]
         }
     }
     
@@ -105,6 +113,8 @@ extension PostRouter: TargetType {
         case .createPost:
             return nil
         case .readPosts:
+            return nil
+        case .readProfileImg:
             return nil
         case .readDetailPost(let id):
             return id
@@ -129,6 +139,8 @@ extension PostRouter: TargetType {
                 URLQueryItem(name: "limit", value: query.limit),
                 URLQueryItem(name: "product_id", value: query.product_id)
             ]
+        case .readProfileImg:
+            return nil
         case .readDetailPost:
             return nil
         case .updatePost:
@@ -153,6 +165,8 @@ extension PostRouter: TargetType {
         case .createPost(let query):
             return try? encoder.encode(query)
         case .readPosts:
+            return nil
+        case .readProfileImg:
             return nil
         case .readDetailPost:
             return nil

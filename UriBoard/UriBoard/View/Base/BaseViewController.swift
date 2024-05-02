@@ -6,12 +6,30 @@
 //
 
 import UIKit
+import Kingfisher
 import RxSwift
 import Toast
 
 class BaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
+
+    let modifier = AnyModifier { request in
+        var request = request
+        request.setValue(
+            HTTPHeader.json.rawValue,
+            forHTTPHeaderField: HTTPHeader.contentType.rawValue
+        )
+        request.setValue(
+            APIKey.key,
+            forHTTPHeaderField: HTTPHeader.sesacKey.rawValue
+        )
+        request.setValue(
+            UserDefaultsManager.accessToken,
+            forHTTPHeaderField: HTTPHeader.auth.rawValue
+        )
+        return request
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

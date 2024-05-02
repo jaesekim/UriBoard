@@ -12,10 +12,10 @@ import Then
 final class PostView: BaseView {
 
     let profileImage = UIImageView(frame: .zero).then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.image = UIImage(systemName: "person")
         $0.tintColor = ColorStyle.deepPurple
-        $0.backgroundColor = ColorStyle.gray
+        $0.backgroundColor = ColorStyle.silver
         $0.clipsToBounds = true
     }
     let nickLabel = UILabel().then {
@@ -23,15 +23,6 @@ final class PostView: BaseView {
             scale: .regular,
             size: .medium
         )
-    }
-    let photoAddButton = UIButton().then {
-        var config = UIButton.Configuration.filled()
-        config.image = UIImage(systemName: "photo.badge.plus")
-        config.cornerStyle = .medium
-        config.baseForegroundColor = .lightGray
-        config.baseBackgroundColor = .systemGray6
-        
-        $0.configuration = config
     }
     let boardTextView = UITextView().then {
         $0.font = FontStyle.getFont(
@@ -53,6 +44,14 @@ final class PostView: BaseView {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
     }
+    let contentAddButton = UIButton().then {
+        var config = UIButton.Configuration.filled()
+        config.title = "등록"
+        config.cornerStyle = .medium
+        config.baseBackgroundColor = ColorStyle.confirm
+        
+        $0.configuration = config
+    }
 }
 
 extension PostView {
@@ -61,8 +60,8 @@ extension PostView {
             profileImage,
             nickLabel,
             boardTextView,
-            photoAddButton,
             photoCollectionView,
+            contentAddButton,
         ].forEach { addSubview($0) }
     }
     override func configureConstraints() {
@@ -72,27 +71,26 @@ extension PostView {
             make.size.equalTo(44)
         }
         nickLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(20)
+            make.centerY.equalTo(profileImage.snp.centerY)
             make.leading.equalTo(profileImage.snp.trailing).offset(20)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(20)
         }
         boardTextView.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.bottom).offset(16)
+            make.top.equalTo(profileImage.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.lessThanOrEqualTo(200)
         }
-        photoAddButton.snp.makeConstraints { make in
-            make.size.equalTo(60)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalTo(photoCollectionView.snp.centerY)
-        }
         photoCollectionView.snp.makeConstraints { make in
             make.top.equalTo(boardTextView.snp.bottom).offset(40)
-            make.leading.equalTo(photoAddButton.snp.trailing).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(120)
-            make.trailing.equalToSuperview().offset(-16)
+        }
+        contentAddButton.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(44)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
         }
     }
     override func configureView() {

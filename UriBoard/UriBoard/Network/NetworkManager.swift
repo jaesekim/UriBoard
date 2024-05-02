@@ -36,7 +36,7 @@ extension NetworkManager {
                         urlRequest,
                         interceptor: InterceptorManager()
                     )
-                    .validate(statusCode: 200..<300)
+                    .validate(statusCode: 200..<401)
                     .responseDecodable(of: T.self) { response in
                         switch response.result {
                         case .success(let success):
@@ -51,7 +51,6 @@ extension NetworkManager {
                             let errorCode = APIError(
                                 rawValue: statusCode
                             ) ?? APIError.serverError
-
                             single(.success(.failure(errorCode)))
                         }
                     }
@@ -74,11 +73,10 @@ extension NetworkManager {
 
             do {
                 let urlRequest = try router.asURLRequest()
-
+                
                 AF.upload(
                     multipartFormData: { multipartFormData in
                         imgData.forEach {
-                            print($0)
                             multipartFormData.append(
                                 $0,
                                 withName: "files",
@@ -102,19 +100,15 @@ extension NetworkManager {
                         let errorCode = APIError(
                             rawValue: statusCode
                         ) ?? APIError.serverError
-
+                        
                         single(.success(.failure(errorCode)))
                     }
                 }
             } catch {
                 single(.success(.failure(.serverError)))
             }
+            
             return Disposables.create()
         }
     }
-}
-
-// MARK: Token Refresh
-extension NetworkManager {
-    
 }

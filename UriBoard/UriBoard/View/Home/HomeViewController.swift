@@ -19,7 +19,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        print("Home VC")
     }
 }
 
@@ -45,6 +45,7 @@ extension HomeViewController {
             ) { (row, element, cell) in
                 cell.nicknameLabel.text = "test"
                 cell.contentLabel.text = "content test content test content test content test content test content test content test content test content test"
+                cell.selectionStyle = .none
             }
             .disposed(by: disposeBag)
     }

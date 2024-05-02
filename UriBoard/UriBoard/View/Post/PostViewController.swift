@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import PhotosUI
 import RxSwift
 import RxCocoa
@@ -19,9 +20,19 @@ final class PostViewController: BaseViewController {
     }
 
     let viewModel = PostViewModel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print("Post VC")
+        
+        mainView.profileImage.kf.setImage(
+            with: URL(string: UserDefaultsManager.profileImage),
+            placeholder: UIImage(systemName: "person"),
+            options: [.requestModifier(modifier)]
+        )
+        mainView.nickLabel.text = UserDefaultsManager.nickname
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +42,7 @@ final class PostViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+        
     }
 }
 
@@ -53,7 +65,7 @@ extension PostViewController {
     }
     private func setRightBarButton() {
         let rightButton = UIBarButtonItem(
-            title: "등록",
+            image: UIImage(systemName: "camera.fill"),
             style: .plain,
             target: self,
             action: nil
@@ -67,36 +79,43 @@ extension PostViewController {
 
     override func bind() {
 
-        mainView.nickLabel.text = UserDefaultsManager.nickname
-
         let input = PostViewModel.Input(
             rightNavButtonOnclick: navigationItem.rightBarButtonItem?.rx.tap.asObservable(),
             leftNavButtonOnClick: navigationItem.leftBarButtonItem?.rx.tap.asObservable(),
-            addPhotoButtonOnClick: mainView.photoAddButton.rx.tap.asObservable(),
+            addContentButtonOnClick: mainView.contentAddButton.rx.tap.asObservable(),
             boardContent: mainView.boardTextView.rx.text.orEmpty.asObservable()
         )
 
         let output = viewModel.transform(input: input)
 
         // 게시글 등록 버튼 활성화 유무
-        output.rightNavButtonValid
-            .drive(with: self) { owner, bool in
-                owner.navigationItem.rightBarButtonItem?.isEnabled = bool
-            }
+        output.addContentButtonValid
+            .drive(mainView.contentAddButton.rx.isEnabled)
             .disposed(by: disposeBag)
 
         // 등록 취소
         output.cancelOnClick
             .drive(with: self) { owner, _ in
+                owner.mainView.boardTextView.text = ""
+                owner.viewModel.photoData.accept([])
                 owner.tabBarController?.selectedIndex = 0
             }
             .disposed(by: disposeBag)
 
         // 게시글 등록 성공하면 메인화면으로 가기
-        output.postingOnClick
-            .drive(with: self) { owner, _ in
-                print("onclick")
-                owner.tabBarController?.selectedIndex = 0
+        output.result
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    owner.showToast("업로드에 성공했습니다")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        owner.mainView.boardTextView.text = ""
+                        owner.viewModel.photoData.accept([])
+                        owner.tabBarController?.selectedIndex = 0
+                    }
+                case .failure(let failure):
+                    owner.showToast("업로드에 실패했습니다 다시 시도해 주세요")
+                }
             }
             .disposed(by: disposeBag)
 
@@ -173,7 +192,7 @@ extension PostViewController: PHPickerViewControllerDelegate {
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
 
-            self.viewModel.photoData.onNext(imgDataList)
+            self.viewModel.photoData.accept(imgDataList)
         }
     }
 }
