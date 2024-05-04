@@ -32,9 +32,9 @@
 		7B98DC622BCE5DAA0056373D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC612BCE5DAA0056373D /* Router.swift */; };
 		7B98DC652BCE6DD20056373D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC642BCE6DD20056373D /* HomeViewController.swift */; };
 		7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98DC662BCE6DE00056373D /* HomeView.swift */; };
-		7BC78DCD2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */; };
+		7BC78DCD2BD0FBA3001C2BE4 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DCC2BD0FBA3001C2BE4 /* BoardTableViewCell.swift */; };
 		7BC78DD02BD0FE6C001C2BE4 /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */; };
-		7BC78DD22BD0FE86001C2BE4 /* BoardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */; };
+		7BC78DD22BD0FE86001C2BE4 /* BoardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD12BD0FE86001C2BE4 /* BoardDetailView.swift */; };
 		7BC78DD52BD10102001C2BE4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD42BD10102001C2BE4 /* CustomButton.swift */; };
 		7BC78DD82BD1047A001C2BE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD72BD1047A001C2BE4 /* TabBarController.swift */; };
 		7BC78DDA2BD104DC001C2BE4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78DD92BD104DC001C2BE4 /* ProfileViewController.swift */; };
@@ -65,6 +65,14 @@
 		7BC78E5F2BDA345F001C2BE4 /* ReadUserPostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E5E2BDA345F001C2BE4 /* ReadUserPostsModel.swift */; };
 		7BC78E612BDA52E2001C2BE4 /* InterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC78E602BDA52E2001C2BE4 /* InterceptorManager.swift */; };
 		7BDDB9F22BE3EE8300D2FAFE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9F12BE3EE8300D2FAFE /* HomeViewModel.swift */; };
+		7BDDB9F42BE3FEC400D2FAFE /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9F32BE3FEC400D2FAFE /* LikeRouter.swift */; };
+		7BDDB9F92BE402EE00D2FAFE /* LikeQueryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9F82BE402EE00D2FAFE /* LikeQueryString.swift */; };
+		7BDDB9FB2BE4031D00D2FAFE /* PostLikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9FA2BE4031D00D2FAFE /* PostLikeQuery.swift */; };
+		7BDDB9FD2BE4034300D2FAFE /* PostLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9FC2BE4034300D2FAFE /* PostLikeModel.swift */; };
+		7BDDB9FF2BE4036E00D2FAFE /* ReadLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDB9FE2BE4036E00D2FAFE /* ReadLikeModel.swift */; };
+		7BDDBA012BE40EE600D2FAFE /* BoardTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA002BE40EE600D2FAFE /* BoardTableViewModel.swift */; };
+		7BDDBA032BE4114600D2FAFE /* KingfisherModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA022BE4114600D2FAFE /* KingfisherModifier.swift */; };
+		7BDDBA0F2BE52BE100D2FAFE /* BoardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA0E2BE52BE100D2FAFE /* BoardDetailViewModel.swift */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
 		7BE31C2F2BC680F000D1EDE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2E2BC680F000D1EDE6 /* Assets.xcassets */; };
@@ -118,9 +126,9 @@
 		7B98DC612BCE5DAA0056373D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7B98DC642BCE6DD20056373D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7B98DC662BCE6DE00056373D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		7BC78DCC2BD0FBA3001C2BE4 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
-		7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetail.swift; sourceTree = "<group>"; };
+		7BC78DD12BD0FE86001C2BE4 /* BoardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailView.swift; sourceTree = "<group>"; };
 		7BC78DD42BD10102001C2BE4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		7BC78DD72BD1047A001C2BE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7BC78DD92BD104DC001C2BE4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +158,14 @@
 		7BC78E5E2BDA345F001C2BE4 /* ReadUserPostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadUserPostsModel.swift; sourceTree = "<group>"; };
 		7BC78E602BDA52E2001C2BE4 /* InterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorManager.swift; sourceTree = "<group>"; };
 		7BDDB9F12BE3EE8300D2FAFE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7BDDB9F32BE3FEC400D2FAFE /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
+		7BDDB9F82BE402EE00D2FAFE /* LikeQueryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeQueryString.swift; sourceTree = "<group>"; };
+		7BDDB9FA2BE4031D00D2FAFE /* PostLikeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeQuery.swift; sourceTree = "<group>"; };
+		7BDDB9FC2BE4034300D2FAFE /* PostLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeModel.swift; sourceTree = "<group>"; };
+		7BDDB9FE2BE4036E00D2FAFE /* ReadLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadLikeModel.swift; sourceTree = "<group>"; };
+		7BDDBA002BE40EE600D2FAFE /* BoardTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewModel.swift; sourceTree = "<group>"; };
+		7BDDBA022BE4114600D2FAFE /* KingfisherModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherModifier.swift; sourceTree = "<group>"; };
+		7BDDBA0E2BE52BE100D2FAFE /* BoardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewModel.swift; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,22 +241,6 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		7B8D6BE82BCA608200139BB5 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				7B8D6BE92BCA60BD00139BB5 /* AuthRouter.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		7B8D6BF12BCA72C900139BB5 /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				7BC78E432BD7B21B001C2BE4 /* PostRouter.swift */,
-			);
-			path = Post;
-			sourceTree = "<group>";
-		};
 		7B8D6C132BCD5C4400139BB5 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,7 +263,7 @@
 			children = (
 				7B98DC642BCE6DD20056373D /* HomeViewController.swift */,
 				7B98DC662BCE6DE00056373D /* HomeView.swift */,
-				7BC78DCC2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift */,
+				7BC78DCC2BD0FBA3001C2BE4 /* BoardTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -291,7 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				7BC78DCF2BD0FE6C001C2BE4 /* BoardDetailViewController.swift */,
-				7BC78DD12BD0FE86001C2BE4 /* BoardDetail.swift */,
+				7BC78DD12BD0FE86001C2BE4 /* BoardDetailView.swift */,
 			);
 			path = BoardDetail;
 			sourceTree = "<group>";
@@ -383,9 +383,10 @@
 		7BC78E482BD89CB0001C2BE4 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				7B8D6BF12BCA72C900139BB5 /* Post */,
-				7B8D6BE82BCA608200139BB5 /* Auth */,
 				7B98DC612BCE5DAA0056373D /* Router.swift */,
+				7B8D6BE92BCA60BD00139BB5 /* AuthRouter.swift */,
+				7BC78E432BD7B21B001C2BE4 /* PostRouter.swift */,
+				7BDDB9F32BE3FEC400D2FAFE /* LikeRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -416,8 +417,44 @@
 			isa = PBXGroup;
 			children = (
 				7BDDB9F12BE3EE8300D2FAFE /* HomeViewModel.swift */,
+				7BDDBA002BE40EE600D2FAFE /* BoardTableViewModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		7BDDB9F52BE4006500D2FAFE /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDB9F72BE4007200D2FAFE /* Query */,
+				7BDDB9F62BE4006E00D2FAFE /* Model */,
+			);
+			path = Like;
+			sourceTree = "<group>";
+		};
+		7BDDB9F62BE4006E00D2FAFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDB9FC2BE4034300D2FAFE /* PostLikeModel.swift */,
+				7BDDB9FE2BE4036E00D2FAFE /* ReadLikeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7BDDB9F72BE4007200D2FAFE /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDB9F82BE402EE00D2FAFE /* LikeQueryString.swift */,
+				7BDDB9FA2BE4031D00D2FAFE /* PostLikeQuery.swift */,
+			);
+			path = Query;
+			sourceTree = "<group>";
+		};
+		7BDDBA0D2BE52BD400D2FAFE /* BoardDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDBA0E2BE52BE100D2FAFE /* BoardDetailViewModel.swift */,
+			);
+			path = BoardDetail;
 			sourceTree = "<group>";
 		};
 		7BE31C192BC680ED00D1EDE6 = {
@@ -482,6 +519,7 @@
 		7BE31C502BC68E0B00D1EDE6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7BDDBA0D2BE52BD400D2FAFE /* BoardDetail */,
 				7BDDB9F02BE3EE6E00D2FAFE /* Home */,
 				7B498F062BDD53F80054634D /* Post */,
 				7B8D6C182BCD5CA600139BB5 /* SignUp */,
@@ -493,6 +531,7 @@
 		7BE31C512BC68E1F00D1EDE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7BDDB9F52BE4006500D2FAFE /* Like */,
 				7BC78E452BD7B87D001C2BE4 /* Post */,
 				7BE31C732BC6D1C800D1EDE6 /* Profile */,
 				7BE31C702BC6D14100D1EDE6 /* Auth */,
@@ -532,6 +571,7 @@
 				7B8D6BEB2BCA619100139BB5 /* TargetType.swift */,
 				7B98DC412BCD74D40056373D /* NavigationSettings.swift */,
 				7BC78E4C2BD8EF7E001C2BE4 /* QueryString.swift */,
+				7BDDBA022BE4114600D2FAFE /* KingfisherModifier.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -664,6 +704,7 @@
 			files = (
 				7BE31C6C2BC6B79E00D1EDE6 /* NetworkManager.swift in Sources */,
 				7BE31C752BC6D1DC00D1EDE6 /* MyProfile.swift in Sources */,
+				7BDDB9F92BE402EE00D2FAFE /* LikeQueryString.swift in Sources */,
 				7BE31C5C2BC68F8500D1EDE6 /* BaseViewController.swift in Sources */,
 				7BC78E552BD9F23E001C2BE4 /* CreatePostModel.swift in Sources */,
 				7BC78E4D2BD8EF7E001C2BE4 /* QueryString.swift in Sources */,
@@ -677,16 +718,20 @@
 				7BC78E5F2BDA345F001C2BE4 /* ReadUserPostsModel.swift in Sources */,
 				7BE31C662BC6925C00D1EDE6 /* RxBindSettings.swift in Sources */,
 				7BC78E442BD7B21B001C2BE4 /* PostRouter.swift in Sources */,
+				7BDDBA012BE40EE600D2FAFE /* BoardTableViewModel.swift in Sources */,
 				7BC78DE02BD10538001C2BE4 /* PostViewController.swift in Sources */,
 				7BC78E0F2BD26044001C2BE4 /* EmailValidationModel.swift in Sources */,
 				7BC78DE52BD10796001C2BE4 /* LikeView.swift in Sources */,
+				7BDDB9FB2BE4031D00D2FAFE /* PostLikeQuery.swift in Sources */,
 				7B8D6BEE2BCA6B5300139BB5 /* SignInQuery.swift in Sources */,
 				7BE31C602BC68FFF00D1EDE6 /* SignInView.swift in Sources */,
 				7BE31C642BC6911500D1EDE6 /* UISettings.swift in Sources */,
 				7B8D6C172BCD5C6B00139BB5 /* SignUpViewController.swift in Sources */,
+				7BDDB9F42BE3FEC400D2FAFE /* LikeRouter.swift in Sources */,
 				7B8D6BEA2BCA60BD00139BB5 /* AuthRouter.swift in Sources */,
+				7BDDBA032BE4114600D2FAFE /* KingfisherModifier.swift in Sources */,
 				7BDDB9F22BE3EE8300D2FAFE /* HomeViewModel.swift in Sources */,
-				7BC78DCD2BD0FBA3001C2BE4 /* BoardCollectionViewCell.swift in Sources */,
+				7BC78DCD2BD0FBA3001C2BE4 /* BoardTableViewCell.swift in Sources */,
 				7BE31C6A2BC69CE700D1EDE6 /* APIURL.swift in Sources */,
 				7B8D6BE52BCA5FDE00139BB5 /* WithdrawModel.swift in Sources */,
 				7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */,
@@ -700,9 +745,10 @@
 				7B8D6C152BCD5C5C00139BB5 /* SignUpView.swift in Sources */,
 				7B4C03B72BC6D91300593876 /* SignInViewModel.swift in Sources */,
 				7BE31C6E2BC6B7A800D1EDE6 /* SignInModel.swift in Sources */,
-				7BC78DD22BD0FE86001C2BE4 /* BoardDetail.swift in Sources */,
+				7BC78DD22BD0FE86001C2BE4 /* BoardDetailView.swift in Sources */,
 				7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */,
 				7BC78DE72BD11D47001C2BE4 /* TextButton.swift in Sources */,
+				7BDDB9FD2BE4034300D2FAFE /* PostLikeModel.swift in Sources */,
 				7B498F082BDD54040054634D /* PostViewModel.swift in Sources */,
 				7B98DC672BCE6DE00056373D /* HomeView.swift in Sources */,
 				7BC78E512BD9E559001C2BE4 /* ImageFilesModel.swift in Sources */,
@@ -714,6 +760,7 @@
 				7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */,
 				7BE31C5E2BC68F9600D1EDE6 /* BaseView.swift in Sources */,
 				7BE31C722BC6D16500D1EDE6 /* TokenRefreshModel.swift in Sources */,
+				7BDDBA0F2BE52BE100D2FAFE /* BoardDetailViewModel.swift in Sources */,
 				7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */,
 				7B4C03E32BC7E13F00593876 /* UITextField+Extension.swift in Sources */,
 				7BC78E0A2BD23804001C2BE4 /* UIViewController+Extension.swift in Sources */,
@@ -726,6 +773,7 @@
 				7BC78DD02BD0FE6C001C2BE4 /* BoardDetailViewController.swift in Sources */,
 				7B4C03DC2BC7CF4500593876 /* UIColor+Extension.swift in Sources */,
 				7BC78DD82BD1047A001C2BE4 /* TabBarController.swift in Sources */,
+				7BDDB9FF2BE4036E00D2FAFE /* ReadLikeModel.swift in Sources */,
 				7BC78DDA2BD104DC001C2BE4 /* ProfileViewController.swift in Sources */,
 				7B8D6C1A2BCD5CB400139BB5 /* SignUpViewModel.swift in Sources */,
 				7BC78E4F2BD8F296001C2BE4 /* ReadUserPostsQueryString.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+
 enum PostRouter {
     case imageUpload
     case createPost(query: CreatePostQuery)

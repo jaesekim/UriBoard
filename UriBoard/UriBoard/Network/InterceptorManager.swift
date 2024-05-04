@@ -27,6 +27,7 @@ final class InterceptorManager: RequestInterceptor {
             forHTTPHeaderField: HTTPHeader.auth.rawValue
         )
         
+    
         completion(.success(urlRequest))
     }
     
@@ -49,6 +50,7 @@ final class InterceptorManager: RequestInterceptor {
         if request.retryCount < retryLimit {
             do {
                 let urlRequest = try Router.auth(router: .tokenRefresh).asURLRequest()
+                print("interceptor:", urlRequest.url!)
                 AF
                     .request(urlRequest)
                     .validate(statusCode: 200..<300)

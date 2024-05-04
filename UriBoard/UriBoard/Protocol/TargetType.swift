@@ -24,20 +24,20 @@ extension TargetType {
     func asURLRequest() throws -> URLRequest {
 
         var url: String
-
+        
         if let parameters {
-            url = baseUrl + "/\(parameters)"
+            url = baseUrl + path + "/\(parameters)"
         } else {
-            url = baseUrl
+            url = baseUrl + path
         }
         
         var components = URLComponents(string: url)
         components?.queryItems = queryItems
 
         let targetURL = try components?.url?.asURL() ?? url.asURL()
-
+        
         var urlRequest = try URLRequest(
-            url: targetURL.appendingPathComponent(path),
+            url: targetURL,
             method: method
         )
         
@@ -45,6 +45,9 @@ extension TargetType {
         urlRequest.allHTTPHeaderFields = header
         urlRequest.httpBody = parameters?.data(using: .utf8)
         urlRequest.httpBody = body
+
+        print("&&&&&&&&&&")
+        print(urlRequest.url)
 
         return urlRequest
     }

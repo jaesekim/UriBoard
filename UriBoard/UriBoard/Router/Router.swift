@@ -11,6 +11,7 @@ import Alamofire
 enum Router {
     case auth(router: AuthRouter)
     case post(router: PostRouter)
+    case like(router: LikeRouter)
 }
 
 extension Router: TargetType {
@@ -19,6 +20,8 @@ extension Router: TargetType {
         case .auth(let router):
             return router.baseUrl
         case .post(let router):
+            return router.baseUrl
+        case .like(let router):
             return router.baseUrl
         }
     }
@@ -29,6 +32,8 @@ extension Router: TargetType {
             return router.method
         case .post(let router):
             return router.method
+        case .like(let router):
+            return router.method
         }
     }
     
@@ -37,6 +42,8 @@ extension Router: TargetType {
         case .auth(let router):
             return router.path
         case .post(let router):
+            return router.path
+        case .like(let router):
             return router.path
         }
     }
@@ -47,6 +54,8 @@ extension Router: TargetType {
             return router.header
         case .post(let router):
             return router.header
+        case .like(let router):
+            return router.header
         }
     }
     
@@ -55,6 +64,8 @@ extension Router: TargetType {
         case .auth(let router):
             return router.parameters
         case .post(let router):
+            return router.parameters
+        case .like(let router):
             return router.parameters
         }
     }
@@ -65,6 +76,8 @@ extension Router: TargetType {
             return router.queryItems
         case .post(let router):
             return router.queryItems
+        case .like(let router):
+            return router.queryItems
         }
     }
     
@@ -73,6 +86,8 @@ extension Router: TargetType {
         case .auth(let router):
             return router.body
         case .post(let router):
+            return router.body
+        case .like(let router):
             return router.body
         }
     }

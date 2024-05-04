@@ -22,4 +22,16 @@ extension UIButton.Configuration {
 
         return config
     }
+    
+    static func iconButton(title: String?, systemName: String) -> UIButton.Configuration {
+        
+        var config = UIButton.Configuration.plain()
+        config.baseForegroundColor = ColorStyle.pink
+        config.imagePadding = 8
+        config.title = title
+        config.image = UIImage(systemName: systemName)
+        
+        
+        return config
+    }
 }

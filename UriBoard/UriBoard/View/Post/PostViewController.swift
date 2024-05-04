@@ -19,7 +19,7 @@ final class PostViewController: BaseViewController {
         view = mainView
     }
 
-    let viewModel = PostViewModel()
+    private let viewModel = PostViewModel()
     
 
     override func viewDidLoad() {
@@ -151,7 +151,7 @@ extension PostViewController: PHPickerViewControllerDelegate {
     // PHPicker 열리게 하는 함수
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 5  // 최대한 선택 가능한 사진 숫자
+        configuration.selectionLimit = 4  // 최대한 선택 가능한 사진 숫자
         configuration.filter = .images
         
         let picker = PHPickerViewController(

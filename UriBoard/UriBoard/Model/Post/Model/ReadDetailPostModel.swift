@@ -20,7 +20,7 @@ struct ReadDetailPostModel: Decodable {
     let comments: [String]
     
     enum CodingKeys: String, CodingKey {
-        case id = "user_id"
+        case id = "post_id"
         case productId = "product_id"
         case content, 
              createdAt,
