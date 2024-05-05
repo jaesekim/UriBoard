@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // 라이브러리 사용할 수 있도록 기본 설정
+        IQKeyboardManager.shared.enable = true
+        // done 툴바 추가 여부
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        // 화면 클릭 시 키보드 내려주기
+        IQKeyboardManager.shared.resignOnTouchOutside = true
+        
         return true
     }
 

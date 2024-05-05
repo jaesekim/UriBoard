@@ -17,7 +17,7 @@ struct ReadDetailPostModel: Decodable {
     let likes: [String]
     let likes2: [String]
     let hashTags: [String]
-    let comments: [String]
+    let comments: [CommentModel]
     
     enum CodingKeys: String, CodingKey {
         case id = "post_id"

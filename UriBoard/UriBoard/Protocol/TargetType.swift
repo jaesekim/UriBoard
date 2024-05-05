@@ -46,8 +46,8 @@ extension TargetType {
         urlRequest.httpBody = parameters?.data(using: .utf8)
         urlRequest.httpBody = body
 
-        print("&&&&&&&&&&")
-        print(urlRequest.url)
+//        print("TargetType: &&&&&&&&&&")
+//        print(urlRequest.url!)
 
         return urlRequest
     }

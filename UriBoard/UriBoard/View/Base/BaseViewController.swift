@@ -13,7 +13,7 @@ import Toast
 class BaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
-
+    
     let modifier = AnyModifier { request in
         var request = request
         request.setValue(
@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
         )
         return request
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +43,37 @@ class BaseViewController: UIViewController {
     
     func showToast(_ message: String) {
         view.makeToast(message)
+    }
+    
+    func showActionSheet(
+        updateClosure: ((UIAlertAction) -> Void)?,
+        deleteClosure: ((UIAlertAction) -> Void)?
+    ) {
+        
+        let alert = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let update = UIAlertAction(
+            title: "댓글 수정",
+            style: .default,
+            handler: updateClosure
+        )
+        let delete = UIAlertAction(
+            title: "댓글 삭제",
+            style: .default,
+            handler: deleteClosure
+        )
+        let cancel = UIAlertAction(
+            title: "취소",
+            style: .cancel
+        )
+        alert.addAction(update)
+        alert.addAction(cancel)
+        alert.addAction(cancel)
+        
+        present(alert, animated:true)
     }
 }
 

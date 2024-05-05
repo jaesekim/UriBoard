@@ -61,7 +61,7 @@ extension HomeViewController {
                 case .success(let success):
                     postItems.onNext(success)
                 case .failure(let failure):
-                    owner.showToast("오류 발생: 잠시 후 다시 시도해 주세요")
+                    owner.showToast("잠시 후 다시 시도해 주세요")
                 }
             }
             .disposed(by: disposeBag)

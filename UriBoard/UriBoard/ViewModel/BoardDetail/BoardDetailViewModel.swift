@@ -15,6 +15,9 @@ final class BoardDetailViewModel: ViewModelType {
 
     let viewWillAppearTrigger = PublishSubject<String>()
 
+    let commentUpdateTrigger = PublishRelay<[String]>()
+    let commentDeleteTrigger = PublishRelay<[String]>()
+    
     struct Input {
         let postId: String
         let likeOnClick: Observable<Void>
@@ -26,6 +29,8 @@ final class BoardDetailViewModel: ViewModelType {
         let result: PublishSubject<Result<ReadDetailPostModel, APIError>>
         let likeList: Driver<[String]>
         let reboardList: Driver<[String]>
+        let commentList: Observable<[CommentModel]>
+        let bottomSheetTrigger: Driver<Void>
         let errorMessage: Driver<String>
     }
     func transform(input: Input) -> Output {
@@ -34,11 +39,12 @@ final class BoardDetailViewModel: ViewModelType {
         let reboardStatus = BehaviorRelay(value: false)
         
         let outputResult = PublishSubject<Result<ReadDetailPostModel, APIError>>()
+        let bottomSheetTrigger = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
         
         let likeRelayList = PublishRelay<[String]>()
-        let commentRelayList = PublishRelay<[String]>()
         let reboardRelayList = PublishRelay<[String]>()
+        let commentRelayList = PublishSubject<[CommentModel]>()
         
         let likeContains = likeRelayList
             .map {
@@ -52,7 +58,8 @@ final class BoardDetailViewModel: ViewModelType {
         
         viewWillAppearTrigger
             .flatMap {
-                NetworkManager.shared.requestAPIResult(
+                print("postId :", $0)
+                return NetworkManager.shared.requestAPIResult(
                     type: ReadDetailPostModel.self,
                     router: Router.post(
                         router: .readDetailPost(id: $0)
@@ -64,7 +71,7 @@ final class BoardDetailViewModel: ViewModelType {
                 switch result {
                 case .success(let success):
                     likeRelayList.accept(success.likes)
-                    commentRelayList.accept(success.comments)
+                    commentRelayList.onNext(success.comments)
                     reboardRelayList.accept(success.likes2)
                 case .failure(_):
                     errorMessage.accept("로드에 실패했습니다")
@@ -97,8 +104,7 @@ final class BoardDetailViewModel: ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
-            
-        
+
         input.reboardOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(reboardContains)
@@ -124,6 +130,13 @@ final class BoardDetailViewModel: ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
+
+        // 댓글 등록 버튼 클릭
+        input.commentOnClick
+            .bind(with: self) { owner, _ in
+                bottomSheetTrigger.accept(())
+            }
+            .disposed(by: disposeBag)
         
         likeStatus
             .flatMap { _ in
@@ -139,7 +152,7 @@ final class BoardDetailViewModel: ViewModelType {
                 case .success(let success):
                     likeRelayList.accept(success.likes)
                 case .failure(_):
-                    errorMessage.accept("잠시후 다시 시도해 주세요")
+                    errorMessage.accept("잠시 후 다시 시도해 주세요")
                 }
             }
             .disposed(by: disposeBag)
@@ -166,7 +179,9 @@ final class BoardDetailViewModel: ViewModelType {
         return Output(
             result: outputResult,
             likeList: likeRelayList.asDriver(onErrorJustReturn: []),
-            reboardList: reboardRelayList.asDriver(onErrorJustReturn: []),
+            reboardList: reboardRelayList.asDriver(onErrorJustReturn: []), 
+            commentList: commentRelayList.asObservable(),
+            bottomSheetTrigger: bottomSheetTrigger.asDriver(onErrorJustReturn: ()),
             errorMessage: errorMessage.asDriver(onErrorJustReturn: "")
         )
     }

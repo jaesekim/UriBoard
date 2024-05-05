@@ -9,22 +9,15 @@ import UIKit
 import Then
 import SnapKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 final class BoardDetailView: BaseView {
     let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
     }
     let contentView = UIView()
-
-//    let commentTextField = UITextField.addLeftPadding(
-//        placeholder: "댓글 작성"
-//    )
-//    let sendButton = UIButton().then {
-//        $0.configuration = .iconButton(
-//            title: nil,
-//            systemName: "paperplane.fill"
-//        )
-//    }
+    
     let profileImage = UIImageView(frame: .zero).then {
         $0.image = UIImage(systemName: "person")
         $0.tintColor = ColorStyle.lightPurple
@@ -65,11 +58,7 @@ final class BoardDetailView: BaseView {
         $0.distribution = .equalSpacing
         $0.spacing = 20
     }
-    let commentTableView = UITableView().then {
-        $0.rowHeight = 44
-        $0.separatorStyle = .none
-    }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -110,7 +99,7 @@ extension BoardDetailView {
             contentLabel,
             buttonStack,
         ].forEach { contentView.addSubview($0) }
-
+        
         [
             likeButton,
             commentButton,
@@ -126,8 +115,8 @@ extension BoardDetailView {
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(28)
             make.trailing.equalToSuperview().offset(-16)
             make.leading.equalTo(profileImage.snp.trailing).offset(24)
-            make.height.equalTo(20)
-
+            make.height.equalTo(44)
+            
         }
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
@@ -151,13 +140,13 @@ extension BoardDetailView {
         }
     }
 }
-
+// MARK: UI 세부 세팅
 extension BoardDetailView: KingfisherModifier {
-
+    
     func updateUI(_ element: ReadDetailPostModel) {
         
         let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
-
+        
         let likeStatus = element.likes.contains(
             UserDefaultsManager.userId
         )
@@ -171,9 +160,9 @@ extension BoardDetailView: KingfisherModifier {
             options: [.requestModifier(modifier)])
         nicknameLabel.text = element.creator.nick
         contentLabel.text = element.content
-
+        
         likeButton.configuration = .iconButton(
-            title: "\(element.likes.count)", 
+            title: "\(element.likes.count)",
             systemName: likeStatus ? "heart.fill" : "heart"
         )
         commentButton.configuration = .iconButton(
@@ -202,3 +191,4 @@ extension BoardDetailView {
         
     }
 }
+

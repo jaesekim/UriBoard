@@ -10,25 +10,25 @@ import RxSwift
 import RxCocoa
 
 final class BoardDetailViewController: BaseViewController {
-
+    
     private let mainView = BoardDetailView()
-
+    
     override func loadView() {
         self.view = mainView
     }
-
+    
     var postId = ""
     var userNickname = ""
-
+    
     private let viewModel = BoardDetailViewModel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        print("viewwillappear!!!!!!!")
         viewModel.viewWillAppearTrigger.onNext(postId)
     }
 }
@@ -61,6 +61,22 @@ extension BoardDetailViewController {
             }
             .disposed(by: disposeBag)
         
+        output.bottomSheetTrigger
+            .drive(with: self) { owner, _ in
+                let vc = CommentSheetViewController()
+
+                vc.postId = owner.postId
+                vc.modalPresentationStyle = .formSheet
+
+                guard let sheet = vc.sheetPresentationController else { return }
+                    let fraction = UISheetPresentationController.Detent.custom { _ in 120 }
+                sheet.detents = [.medium()]
+                    sheet.prefersGrabberVisible = true
+                
+                owner.present(vc, animated: true, completion: nil)
+            }
+            .disposed(by: disposeBag)
+        
         output.likeList
             .drive(with: self) { owner, list in
                 let bool = list.contains(UserDefaultsManager.userId)
@@ -70,7 +86,7 @@ extension BoardDetailViewController {
                 )
             }
             .disposed(by: disposeBag)
-        
+
         output.reboardList
             .drive(with: self) { owner, list in
                 let bool = list.contains(UserDefaultsManager.userId)
@@ -80,7 +96,7 @@ extension BoardDetailViewController {
                 )
             }
             .disposed(by: disposeBag)
-        
+
         output.errorMessage
             .drive(with: self) { owner, text in
                 owner.showToast(text)
