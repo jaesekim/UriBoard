@@ -12,7 +12,6 @@ import RxCocoa
 class HomeViewModel: ViewModelType {
 
     var disposeBag = DisposeBag()
-    let viewWillAppearTrigger = PublishRelay<Void>()
     
     struct Input {
         let readPostsQueryString: Observable<ReadPostsQueryString>
@@ -25,12 +24,10 @@ class HomeViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let result = PublishSubject<Result<ReadPostsModel, APIError>>()
         
-        viewWillAppearTrigger
+        input.readPostsQueryString
             .flatMap {
-                input.readPostsQueryString
-            }
-            .flatMap {
-                NetworkManager.shared.requestAPIResult(
+                print("query string:", $0)
+                return NetworkManager.shared.requestAPIResult(
                     type: ReadPostsModel.self,
                     router: Router.post(
                         router: .readPosts(query: $0)

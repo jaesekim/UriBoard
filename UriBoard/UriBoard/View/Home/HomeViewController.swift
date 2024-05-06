@@ -24,8 +24,6 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        viewModel.viewWillAppearTrigger.accept(())
     }
 }
 
@@ -81,15 +79,15 @@ extension HomeViewController {
                 cell.selectionStyle = .none
 
                 // cursor pagination
-                print("totalPages: ", totalPages)
-                if row == totalPages - 2 && nextCursor != "0" {
-                    queryString.onNext(
-                        ReadPostsQueryString(
-                            next: nextCursor,
-                            limit: "10"
-                        )
-                    )
-                }
+//                print("totalPages: ", totalPages)
+//                if row == totalPages - 2 && nextCursor != "0" {
+//                    queryString.onNext(
+//                        ReadPostsQueryString(
+//                            next: nextCursor,
+//                            limit: "10"
+//                        )
+//                    )
+//                }
                 
                 
                 let input = BoardTableViewModel.Input(
@@ -149,24 +147,21 @@ extension HomeViewController {
         .disposed(by: disposeBag)
             
         
-//        mainView.boardTableView.rx
-//            .prefetchRows
-//            .compactMap(\.last?.row)
-//            .bind(with: self) { owner, index in
-////                print(last)
-//                print(nextCursor)
-//                print("totalPages: ", totalPages)
-//                print(index)
-//                print(postData[index])
-//                if index == totalPages - 3 && nextCursor != "0" {
-//                    queryString.onNext(
-//                        ReadPostsQueryString(
-//                            next: nextCursor,
-//                            limit: "10"
-//                        )
-//                    )
-//                }
-//            }
-//            .disposed(by: disposeBag)
+        mainView.boardTableView.rx
+            .prefetchRows
+            .compactMap(\.last?.row)
+            .bind(with: self) { owner, index in
+                print("totalPages: ", totalPages)
+                print(index)
+                if index == totalPages - 3 && nextCursor != "0" {
+                    queryString.onNext(
+                        ReadPostsQueryString(
+                            next: nextCursor,
+                            limit: "10"
+                        )
+                    )
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
