@@ -34,7 +34,7 @@ class CommentTableViewCell: UITableViewCell {
     let commentHandleButton = UIButton().then {
         $0.configuration = .iconButton(
             title: nil,
-            systemName: "ellipsis"
+            systemName: "trash.circle"
         )
     }
     let contentLabel = UILabel().then {
@@ -73,6 +73,7 @@ extension CommentTableViewCell: KingfisherModifier {
         } else {
             commentHandleButton.isHidden = true
         }
+        
     }
 }
 
@@ -98,7 +99,7 @@ extension CommentTableViewCell: UISettings {
 
         }
         commentHandleButton.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(20)
+            make.centerY.equalTo(contentView.snp.centerY)
             make.size.equalTo(20)
             make.trailing.equalToSuperview().offset(-16)
         }

@@ -36,6 +36,17 @@ final class BoardDetailViewController: BaseViewController {
 extension BoardDetailViewController {
     override func setNavigationBar() {
         navigationItem.title = userNickname
+        setRightBarButton()
+    }
+    private func setRightBarButton() {
+        let rightButton = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        rightButton.tintColor = ColorStyle.darkPurple
+        navigationItem.rightBarButtonItem = rightButton
     }
 }
 
@@ -46,7 +57,8 @@ extension BoardDetailViewController {
             postId: postId,
             likeOnClick: mainView.likeButton.rx.tap.asObservable(),
             commentOnClick: mainView.commentButton.rx.tap.asObservable(),
-            reboardOnClick: mainView.repeatButton.rx.tap.asObservable()
+            reboardOnClick: mainView.repeatButton.rx.tap.asObservable(),
+            rightNavOnClick: navigationItem.rightBarButtonItem?.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         
@@ -55,9 +67,31 @@ extension BoardDetailViewController {
                 switch result {
                 case .success(let success):
                     owner.mainView.updateUI(success)
+                    if success.creator.user_id != UserDefaultsManager.userId {
+                        owner.navigationItem.rightBarButtonItem?.isHidden = true
+                    }
                 case .failure(_):
                     owner.showToast("잠시 후 다시 시도해 주세요")
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        output.navButtonTrigger
+            .drive(with: self) { owner, _ in
+                owner.showActionSheet { _ in
+                    owner.viewModel.postUpdateTrigger.accept(owner.postId)
+                } deleteClosure: { _ in
+                    owner.viewModel.postDeleteTrigger.accept(owner.postId)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        owner.showToast("삭제 완료")
+                    }
+                    
+                    owner.navigationController?.popViewController(
+                        animated: true
+                    )
+                }
+
             }
             .disposed(by: disposeBag)
         
@@ -69,14 +103,13 @@ extension BoardDetailViewController {
                 vc.modalPresentationStyle = .formSheet
 
                 guard let sheet = vc.sheetPresentationController else { return }
-                    let fraction = UISheetPresentationController.Detent.custom { _ in 120 }
-                sheet.detents = [.medium()]
+                sheet.detents = [.medium(), .large()]
                     sheet.prefersGrabberVisible = true
                 
                 owner.present(vc, animated: true, completion: nil)
             }
             .disposed(by: disposeBag)
-        
+
         output.likeList
             .drive(with: self) { owner, list in
                 let bool = list.contains(UserDefaultsManager.userId)

@@ -24,6 +24,11 @@ class CommentSheetView: BaseView {
         )
         $0.showsVerticalScrollIndicator = false
     }
+    let noCommentLabel = UILabel().then {
+        $0.text = "댓글이 없습니다!"
+        $0.font = .boldSystemFont(ofSize: 24)
+        $0.textAlignment = .center
+    }
     let commentTextField = UITextField.addLeftPadding(
         placeholder: "댓글 작성"
     )
@@ -44,6 +49,7 @@ extension CommentSheetView {
         [
             commentsTable,
             commentTextField,
+            noCommentLabel,
             sendButton,
         ].forEach { addSubview($0) }
     }
@@ -52,6 +58,12 @@ extension CommentSheetView {
             make.horizontalEdges.equalToSuperview().inset(16)
             make.top.equalTo(safeAreaLayoutGuide).offset(20)
             make.bottom.equalTo(commentTextField.snp.top).offset(-20)
+        }
+        noCommentLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(60)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-44)
         }
         commentTextField.snp.makeConstraints { make in
             make.height.equalTo(44)

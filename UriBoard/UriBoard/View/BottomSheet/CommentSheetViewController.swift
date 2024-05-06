@@ -49,13 +49,30 @@ extension CommentSheetViewController {
             .drive(mainView.sendButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        let commentListCount = output.commentList
+            .map { $0.count > 0 }
+            .share()
+        
+        commentListCount
+            .bind(with: self) { owner, bool in
+                owner.mainView.commentsTable.isHidden = !bool
+                owner.mainView.noCommentLabel.isHidden = bool
+            }
+            .disposed(by: disposeBag)
+    
         output.commentList
             .bind(to: mainView.commentsTable.rx.items(
                 cellIdentifier: "CommentTableViewCell",
                 cellType: CommentTableViewCell.self)
             ) { (row, element, cell) in
+
                 cell.updateUI(element)
                 cell.selectionStyle = .none
+                cell.commentHandleButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.viewModel.commentDeleteTrigger.accept(element.comment_id)
+                    }
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
         
@@ -72,7 +89,11 @@ extension CommentSheetViewController {
             }
             .disposed(by: disposeBag)
         
-        
+        output.deleteCommentResult
+            .drive(with: self) { owner, text in
+                owner.showToast(text)
+            }
+            .disposed(by: disposeBag)
 
     }
 }

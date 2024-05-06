@@ -38,6 +38,10 @@ final class BoardDetailView: BaseView {
         $0.textColor = ColorStyle.black
         $0.numberOfLines = 0
     }
+    let imageArea = ImageLayoutView().then {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 16
+    }
     let likeButton = UIButton().then {
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "heart")
@@ -70,6 +74,7 @@ final class BoardDetailView: BaseView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 extension BoardDetailView {
@@ -88,6 +93,7 @@ extension BoardDetailView {
     }
     override func configureView() {
         super.configureView()
+        
     }
 }
 // MARK: contentView내 레이아웃 설정
@@ -97,6 +103,7 @@ extension BoardDetailView {
             profileImage,
             nicknameLabel,
             contentLabel,
+            imageArea,
             buttonStack,
         ].forEach { contentView.addSubview($0) }
         
@@ -124,9 +131,14 @@ extension BoardDetailView {
             make.trailing.equalToSuperview().offset(-16)
             make.leading.equalTo(nicknameLabel.snp.leading)
         }
-        buttonStack.snp.makeConstraints { make in
+        imageArea.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(32)
-            make.leading.equalTo(contentLabel.snp.leading)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.lessThanOrEqualTo(220)
+        }
+        buttonStack.snp.makeConstraints { make in
+            make.top.equalTo(imageArea.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(contentView).inset(20)
             make.height.equalTo(44)
@@ -134,7 +146,7 @@ extension BoardDetailView {
     }
     private func configureContentView() {
         contentView.backgroundColor = .clear
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+        DispatchQueue.main.async() { [weak self] in
             guard let self = self else { return }
             self.profileImage.layer.cornerRadius = 30
         }
@@ -142,18 +154,18 @@ extension BoardDetailView {
 }
 // MARK: UI 세부 세팅
 extension BoardDetailView: KingfisherModifier {
-    
+
     func updateUI(_ element: ReadDetailPostModel) {
-        
+
         let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
-        
+
         let likeStatus = element.likes.contains(
             UserDefaultsManager.userId
         )
         let reboardStatus = element.likes2.contains(
             UserDefaultsManager.userId
         )
-        
+
         profileImage.kf.setImage(
             with: URL(string: imgUrl),
             placeholder: UIImage(systemName: "person"),
@@ -173,22 +185,12 @@ extension BoardDetailView: KingfisherModifier {
             title: "\(element.likes2.count)",
             systemName: reboardStatus ? "repeat.circle.fill" : "repeat.circle"
         )
+
+        if element.files.isEmpty {
+            imageArea.isHidden = true
+        } else {
+            imageArea.isHidden = false
+        }
+        imageArea.updateImagesLayout(element.files)
     }
 }
-
-// MARK: Image 개수에 따라 레이아웃 다르게 보여주기
-extension BoardDetailView {
-    private func singleImage(data: [UIImageView]) {
-        
-    }
-    private func doubleImages(data: [UIImageView]) {
-        
-    }
-    private func tripleImages(data: [UIImageView]) {
-        
-    }
-    private func quadImages(data: [UIImageView]) {
-        
-    }
-}
-

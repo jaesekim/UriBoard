@@ -83,6 +83,7 @@
 		7BDDBA272BE6307300D2FAFE /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA262BE6307300D2FAFE /* CommentTableViewCell.swift */; };
 		7BDDBA292BE6A2CF00D2FAFE /* CommentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA282BE6A2CF00D2FAFE /* CommentSheetView.swift */; };
 		7BDDBA2D2BE7371F00D2FAFE /* CommentTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA2C2BE7371F00D2FAFE /* CommentTableCellViewModel.swift */; };
+		7BDDBA2F2BE797EF00D2FAFE /* ImageLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDBA2E2BE797EF00D2FAFE /* ImageLayoutView.swift */; };
 		7BE31C262BC680ED00D1EDE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */; };
 		7BE31C282BC680ED00D1EDE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */; };
 		7BE31C2F2BC680F000D1EDE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE31C2E2BC680F000D1EDE6 /* Assets.xcassets */; };
@@ -185,6 +186,7 @@
 		7BDDBA262BE6307300D2FAFE /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		7BDDBA282BE6A2CF00D2FAFE /* CommentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSheetView.swift; sourceTree = "<group>"; };
 		7BDDBA2C2BE7371F00D2FAFE /* CommentTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableCellViewModel.swift; sourceTree = "<group>"; };
+		7BDDBA2E2BE797EF00D2FAFE /* ImageLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLayoutView.swift; sourceTree = "<group>"; };
 		7BE31C222BC680ED00D1EDE6 /* UriBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UriBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE31C252BC680ED00D1EDE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE31C272BC680ED00D1EDE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				7BC78DD42BD10102001C2BE4 /* CustomButton.swift */,
 				7BC78DE62BD11D47001C2BE4 /* TextButton.swift */,
+				7BDDBA2E2BE797EF00D2FAFE /* ImageLayoutView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */,
 				7B8D6BEC2BCA619100139BB5 /* TargetType.swift in Sources */,
 				7BC78E592BDA304D001C2BE4 /* ReadDetailPostModel.swift in Sources */,
+				7BDDBA2F2BE797EF00D2FAFE /* ImageLayoutView.swift in Sources */,
 				7BC78DD52BD10102001C2BE4 /* CustomButton.swift in Sources */,
 				7B98DC622BCE5DAA0056373D /* Router.swift in Sources */,
 				7BC78DE32BD1077A001C2BE4 /* LikeViewController.swift in Sources */,

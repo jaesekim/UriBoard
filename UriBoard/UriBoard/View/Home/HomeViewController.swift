@@ -20,8 +20,6 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("Home VC")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +35,7 @@ extension HomeViewController {
 
         navigationItem.title = "홈"
     }
+    
 }
 
 extension HomeViewController {
@@ -47,8 +46,11 @@ extension HomeViewController {
                 next: nil, limit: "10"
             )
         )
-        let postItems = PublishSubject<ReadPostsModel>()
-        
+        let postItems = PublishSubject<[ReadDetailPostModel]>()
+        var postData: [ReadDetailPostModel] = []
+        var totalPages = 0
+        var nextCursor = ""
+
         let input = HomeViewModel.Input(
             readPostsQueryString: queryString.asObservable()
         )
@@ -59,7 +61,10 @@ extension HomeViewController {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let success):
-                    postItems.onNext(success)
+                    postData.append(contentsOf: success.data)
+                    totalPages += success.data.count
+                    postItems.onNext(postData)
+                    nextCursor = success.cursor
                 case .failure(let failure):
                     owner.showToast("잠시 후 다시 시도해 주세요")
                 }
@@ -67,9 +72,6 @@ extension HomeViewController {
             .disposed(by: disposeBag)
         
         postItems
-            .map {
-                $0.data
-            }
             .bind(to: mainView.boardTableView.rx.items(
                 cellIdentifier: "BoardTableViewCell",
                 cellType: BoardTableViewCell.self)
@@ -135,15 +137,23 @@ extension HomeViewController {
         .disposed(by: disposeBag)
             
         
-//        mainView.boardTableView.rx
-//            .prefetchRows
-//            .compactMap {
-//                // tableView의 마지막 인덱스 가져오기
-//                $0.last?.row
-//            }
-//            .bind(with: self) { owner, last in
-//
-//            }
-//            .disposed(by: disposeBag)
+        mainView.boardTableView.rx
+            .prefetchRows
+            .compactMap(\.last?.row)
+            .bind(with: self) { owner, index in
+//                print(last)
+                print(nextCursor)
+                print("totalPages: ", totalPages)
+                print(index)
+                if index == totalPages - 3 && nextCursor != "0" {
+                    queryString.onNext(
+                        ReadPostsQueryString(
+                            next: nextCursor,
+                            limit: "10"
+                        )
+                    )
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }

@@ -15,15 +15,15 @@ final class BoardDetailViewModel: ViewModelType {
 
     let viewWillAppearTrigger = PublishSubject<String>()
 
-    let commentUpdateTrigger = PublishRelay<[String]>()
-    let commentDeleteTrigger = PublishRelay<[String]>()
+    let postUpdateTrigger = PublishRelay<String>()
+    let postDeleteTrigger = PublishRelay<String>()
     
     struct Input {
         let postId: String
         let likeOnClick: Observable<Void>
         let commentOnClick: Observable<Void>
         let reboardOnClick: Observable<Void>
-        
+        let rightNavOnClick: Observable<()>?
     }
     struct Output {
         let result: PublishSubject<Result<ReadDetailPostModel, APIError>>
@@ -31,7 +31,9 @@ final class BoardDetailViewModel: ViewModelType {
         let reboardList: Driver<[String]>
         let commentList: Observable<[CommentModel]>
         let bottomSheetTrigger: Driver<Void>
+        let navButtonTrigger: Driver<Void>
         let errorMessage: Driver<String>
+        let deletePostResult: Driver<String>
     }
     func transform(input: Input) -> Output {
         
@@ -40,6 +42,7 @@ final class BoardDetailViewModel: ViewModelType {
         
         let outputResult = PublishSubject<Result<ReadDetailPostModel, APIError>>()
         let bottomSheetTrigger = PublishRelay<Void>()
+        let navButtonTrigger = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
         
         let likeRelayList = PublishRelay<[String]>()
@@ -76,6 +79,13 @@ final class BoardDetailViewModel: ViewModelType {
                 case .failure(_):
                     errorMessage.accept("로드에 실패했습니다")
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        input.rightNavOnClick?
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                navButtonTrigger.accept(())
             }
             .disposed(by: disposeBag)
         
@@ -176,13 +186,33 @@ final class BoardDetailViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        // 게시물 삭제
+        let deletePostResult = PublishRelay<String>()
+        postDeleteTrigger
+            .flatMap {
+                NetworkManager.shared.requestDelete(
+                    router: PostRouter.deletePost(id: $0)
+                )
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    deletePostResult.accept("삭제가 완료됐습니다")
+                case .failure(_):
+                    deletePostResult.accept("오류가 발생했습니다")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
             result: outputResult,
             likeList: likeRelayList.asDriver(onErrorJustReturn: []),
             reboardList: reboardRelayList.asDriver(onErrorJustReturn: []), 
             commentList: commentRelayList.asObservable(),
             bottomSheetTrigger: bottomSheetTrigger.asDriver(onErrorJustReturn: ()),
-            errorMessage: errorMessage.asDriver(onErrorJustReturn: "")
+            navButtonTrigger: navButtonTrigger.asDriver(onErrorJustReturn: ()),
+            errorMessage: errorMessage.asDriver(onErrorJustReturn: ""), 
+            deletePostResult: deletePostResult.asDriver(onErrorJustReturn: "")
         )
     }
 }

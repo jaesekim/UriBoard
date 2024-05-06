@@ -36,7 +36,7 @@ extension NetworkManager {
                         urlRequest,
                         interceptor: InterceptorManager()
                     )
-                    .validate(statusCode: 200..<401)
+                    .validate(statusCode: 200..<300)
                     .responseDecodable(of: T.self) { response in
                         switch response.result {
                         case .success(let success):
@@ -62,6 +62,45 @@ extension NetworkManager {
     }
 }
 
+// delete 통신(응답 모델 필요 없음)
+extension NetworkManager {
+    func requestDelete<R: TargetType>(
+        router: R
+    ) -> Single<Result<Int, APIError>> {
+        
+        return Single.create { single in
+            do {
+                let urlRequest = try router.asURLRequest()
+                
+                AF
+                    .request(
+                        urlRequest,
+                        interceptor: InterceptorManager()
+                    )
+                    .validate(statusCode: 200..<300)
+                    .response { response in
+                        guard let statusCode = response.response?.statusCode else {
+                            single(.success(.failure(APIError.serverError)))
+                            return
+                        }
+                        switch response.result {
+                        case .success(_):
+                            single(.success(.success(statusCode)))
+                        case .failure(_):
+                            let errorCode = APIError(
+                                rawValue: statusCode
+                            ) ?? APIError.serverError
+                            single(.success(.failure(errorCode)))
+                        }
+                    }
+            } catch {
+                single(.success(.failure(APIError.serverError)))
+            }
+            return Disposables.create()
+        }
+    }
+}
+
 // 이미지 업로드
 extension NetworkManager {
     func uploadFiles<T: Decodable, R: TargetType>(
@@ -70,7 +109,7 @@ extension NetworkManager {
         imgData: [Data]
     ) -> Single<Result<T, APIError>> {
         return Single.create { single -> Disposable in
-
+            
             do {
                 let urlRequest = try router.asURLRequest()
                 

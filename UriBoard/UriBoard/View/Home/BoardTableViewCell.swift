@@ -37,6 +37,10 @@ class BoardTableViewCell: UITableViewCell {
         $0.textColor = ColorStyle.black
         $0.numberOfLines = 0
     }
+    let imageArea = ImageLayoutView().then {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 16
+    }
     let likeButton = UIButton().then {
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "heart")
@@ -52,8 +56,6 @@ class BoardTableViewCell: UITableViewCell {
         $0.tintColor = ColorStyle.pink
     }
 
-    let imgStackView = UIStackView()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureHierarchy()
@@ -73,51 +75,56 @@ extension BoardTableViewCell: UISettings {
             profileImage,
             nicknameLabel,
             contentLabel,
+            imageArea,
             likeButton,
             commentButton,
             repeatButton,
-            imgStackView,
         ].forEach { contentView.addSubview($0) }
     }
     
     func configureConstraints() {
         profileImage.snp.makeConstraints { make in
             make.size.equalTo(44)
-            make.top.leading.equalTo(contentView.safeAreaLayoutGuide).offset(16)
+            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(8)
         }
         nicknameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(profileImage.snp.centerY)
-            make.trailing.equalToSuperview().offset(-16)
-            make.leading.equalTo(profileImage.snp.trailing).offset(24)
+            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalToSuperview().offset(-8)
+            make.leading.equalTo(profileImage.snp.trailing).offset(8)
             make.height.equalTo(20)
 
         }
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(20)
             make.height.lessThanOrEqualTo(200)
-            make.trailing.equalToSuperview().offset(-16)
+            make.trailing.equalToSuperview().offset(-8)
             make.leading.equalTo(nicknameLabel.snp.leading)
         }
-        likeButton.snp.makeConstraints { make in
-            make.size.equalTo(44)
+        imageArea.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(32)
+            make.leading.equalTo(nicknameLabel.snp.leading)
+            make.trailing.equalToSuperview().offset(-8)
+            make.height.equalTo(200)
+        }
+        likeButton.snp.makeConstraints { make in
+            make.width.equalTo(44)
+            make.top.equalTo(imageArea.snp.bottom).offset(32)
             make.leading.equalTo(contentLabel.snp.leading)
+            make.bottom.equalToSuperview().offset(-16)
         }
         commentButton.snp.makeConstraints { make in
-            make.size.equalTo(44)
-            make.top.equalTo(contentLabel.snp.bottom).offset(32)
+            make.width.equalTo(44)
+            make.top.equalTo(imageArea.snp.bottom).offset(32)
             make.leading.equalTo(likeButton.snp.trailing).offset(24)
+            make.bottom.equalToSuperview().offset(-16)
         }
         repeatButton.snp.makeConstraints { make in
-            make.size.equalTo(44)
-            make.top.equalTo(contentLabel.snp.bottom).offset(32)
+            make.width.equalTo(44)
+            make.top.equalTo(imageArea.snp.bottom).offset(32)
             make.leading.equalTo(commentButton.snp.trailing).offset(24)
-        }
-        imgStackView.snp.makeConstraints { make in
-            make.top.equalTo(likeButton.snp.bottom).offset(24)
-            make.leading.equalTo(contentLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
+            
         }
     }
     
@@ -164,9 +171,13 @@ extension BoardTableViewCell: KingfisherModifier {
         nicknameLabel.text = element.creator.nick
         contentLabel.text = element.content
 
+        
         if element.files.isEmpty {
-            imgStackView.isHidden = true
+            imageArea.isHidden = true
+        } else {
+            imageArea.isHidden = false
         }
+        imageArea.updateImagesLayout(element.files)
     }
 }
 

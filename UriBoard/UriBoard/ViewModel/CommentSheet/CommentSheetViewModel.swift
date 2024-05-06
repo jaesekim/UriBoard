@@ -14,6 +14,7 @@ class CommentSheetViewModel: ViewModelType {
     var disposeBag = DisposeBag()
     
     let screenUpdateTrigger = PublishRelay<Void>()
+    let commentDeleteTrigger = PublishRelay<String>()
     
     struct Input {
         let commentText: Observable<String>
@@ -25,6 +26,7 @@ class CommentSheetViewModel: ViewModelType {
         let sendButtonStatus: Driver<Bool>
         let commentList: Observable<[CommentModel]>
         let doneTirgger: Driver<Void>
+        let deleteCommentResult: Driver<String>
         let errorMessage: Driver<String>
     }
     func transform(input: Input) -> Output {
@@ -88,11 +90,53 @@ class CommentSheetViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        // 댓글 삭제
+        let deleteCommentResult = PublishRelay<String>()
+
+        commentDeleteTrigger
+            .flatMap {
+                NetworkManager.shared.requestDelete(
+                    router: CommentRouter.deleteComment(
+                        postId: input.postId,
+                        commentId: $0
+                    )
+                )
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    deleteCommentResult.accept("삭제가 완료됐습니다")
+                case .failure(_):
+                    deleteCommentResult.accept("오류가 발생했습니다")
+                }
+            }
+            .disposed(by: disposeBag)
+
+        deleteCommentResult
+            .flatMap { _ in
+                NetworkManager.shared.requestAPIResult(
+                    type: ReadDetailPostModel.self,
+                    router: Router.post(
+                        router: .readDetailPost(id: input.postId)
+                    )
+                )
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    commentRelayList.onNext(success.comments)
+                case .failure(_):
+                    errorMessage.accept("잠시 후 다시 시도해 주세요")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
             result: outputResult,
             sendButtonStatus: sendButtonStatus.asDriver(),
             commentList: commentRelayList.asObservable(),
             doneTirgger: doneTrigger.asDriver(onErrorJustReturn: ()),
+            deleteCommentResult: deleteCommentResult.asDriver(onErrorJustReturn: ""),
             errorMessage: errorMessage.asDriver(onErrorJustReturn: "")
         )
     }
