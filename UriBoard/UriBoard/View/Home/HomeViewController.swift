@@ -79,6 +79,18 @@ extension HomeViewController {
 
                 cell.updateUI(element)
                 cell.selectionStyle = .none
+
+                // cursor pagination
+                print("totalPages: ", totalPages)
+                if row == totalPages - 2 && nextCursor != "0" {
+                    queryString.onNext(
+                        ReadPostsQueryString(
+                            next: nextCursor,
+                            limit: "10"
+                        )
+                    )
+                }
+                
                 
                 let input = BoardTableViewModel.Input(
                     likeOnClick: cell.likeButton.rx.tap.asObservable(),
@@ -137,23 +149,24 @@ extension HomeViewController {
         .disposed(by: disposeBag)
             
         
-        mainView.boardTableView.rx
-            .prefetchRows
-            .compactMap(\.last?.row)
-            .bind(with: self) { owner, index in
-//                print(last)
-                print(nextCursor)
-                print("totalPages: ", totalPages)
-                print(index)
-                if index == totalPages - 3 && nextCursor != "0" {
-                    queryString.onNext(
-                        ReadPostsQueryString(
-                            next: nextCursor,
-                            limit: "10"
-                        )
-                    )
-                }
-            }
-            .disposed(by: disposeBag)
+//        mainView.boardTableView.rx
+//            .prefetchRows
+//            .compactMap(\.last?.row)
+//            .bind(with: self) { owner, index in
+////                print(last)
+//                print(nextCursor)
+//                print("totalPages: ", totalPages)
+//                print(index)
+//                print(postData[index])
+//                if index == totalPages - 3 && nextCursor != "0" {
+//                    queryString.onNext(
+//                        ReadPostsQueryString(
+//                            next: nextCursor,
+//                            limit: "10"
+//                        )
+//                    )
+//                }
+//            }
+//            .disposed(by: disposeBag)
     }
 }

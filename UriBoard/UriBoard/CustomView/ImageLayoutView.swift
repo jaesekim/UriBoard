@@ -52,7 +52,7 @@ extension ImageLayoutView: KingfisherModifier {
         
         // 레이아웃 초기화하고 시작
         imageViews.forEach { $0.snp.removeConstraints() }
-        
+
         for (idx, imgURL) in imgURLs.enumerated() {
             let url = APIURL.baseURL + "/v1/" + imgURL
             imageViews[idx].kf.setImage(
