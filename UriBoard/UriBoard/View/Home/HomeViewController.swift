@@ -18,12 +18,28 @@ final class HomeViewController: BaseViewController {
 
     private let viewModel = HomeViewModel()
     
+    let queryString = BehaviorSubject(
+        value: ReadPostsQueryString(
+            next: nil, limit: "10"
+        )
+    )
+    let postItems = PublishSubject<[ReadDetailPostModel]>()
+    var postData: [ReadDetailPostModel] = []
+    var totalPages = 0
+    var nextCursor = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        queryString.onNext(ReadPostsQueryString(
+            next: nil, limit: "10"
+        ))
+        postData = []
+        totalPages = 0
     }
 }
 
@@ -33,21 +49,10 @@ extension HomeViewController {
 
         navigationItem.title = "홈"
     }
-    
 }
 
 extension HomeViewController {
     override func bind() {
-        
-        let queryString = BehaviorSubject(
-            value: ReadPostsQueryString(
-                next: nil, limit: "10"
-            )
-        )
-        let postItems = PublishSubject<[ReadDetailPostModel]>()
-        var postData: [ReadDetailPostModel] = []
-        var totalPages = 0
-        var nextCursor = ""
 
         let input = HomeViewModel.Input(
             readPostsQueryString: queryString.asObservable()
@@ -59,10 +64,10 @@ extension HomeViewController {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let success):
-                    postData.append(contentsOf: success.data)
-                    totalPages += success.data.count
-                    postItems.onNext(postData)
-                    nextCursor = success.cursor
+                    owner.postData.append(contentsOf: success.data)
+                    owner.totalPages += success.data.count
+                    owner.postItems.onNext(owner.postData)
+                    owner.nextCursor = success.cursor
                 case .failure(let failure):
                     owner.showToast("잠시 후 다시 시도해 주세요")
                 }
@@ -78,18 +83,6 @@ extension HomeViewController {
                 cell.updateUI(element)
                 cell.selectionStyle = .none
 
-                // cursor pagination
-//                print("totalPages: ", totalPages)
-//                if row == totalPages - 2 && nextCursor != "0" {
-//                    queryString.onNext(
-//                        ReadPostsQueryString(
-//                            next: nextCursor,
-//                            limit: "10"
-//                        )
-//                    )
-//                }
-                
-                
                 let input = BoardTableViewModel.Input(
                     likeOnClick: cell.likeButton.rx.tap.asObservable(),
                     reboardOnClick: cell.repeatButton.rx.tap.asObservable(),
@@ -151,12 +144,10 @@ extension HomeViewController {
             .prefetchRows
             .compactMap(\.last?.row)
             .bind(with: self) { owner, index in
-                print("totalPages: ", totalPages)
-                print(index)
-                if index == totalPages - 3 && nextCursor != "0" {
-                    queryString.onNext(
+                if index == owner.totalPages - 3 && owner.nextCursor != "0" {
+                    owner.queryString.onNext(
                         ReadPostsQueryString(
-                            next: nextCursor,
+                            next: owner.nextCursor,
                             limit: "10"
                         )
                     )

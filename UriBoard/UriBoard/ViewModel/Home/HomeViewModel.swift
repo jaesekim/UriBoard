@@ -12,7 +12,7 @@ import RxCocoa
 class HomeViewModel: ViewModelType {
 
     var disposeBag = DisposeBag()
-    
+
     struct Input {
         let readPostsQueryString: Observable<ReadPostsQueryString>
     }
