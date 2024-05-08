@@ -25,8 +25,8 @@ class HomeViewModel: ViewModelType {
         let result = PublishSubject<Result<ReadPostsModel, APIError>>()
         
         input.readPostsQueryString
+            .debug()
             .flatMap {
-                print("query string:", $0)
                 return NetworkManager.shared.requestAPIResult(
                     type: ReadPostsModel.self,
                     router: Router.post(

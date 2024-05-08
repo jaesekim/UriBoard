@@ -68,7 +68,7 @@ extension HomeViewController {
                     owner.totalPages += success.data.count
                     owner.postItems.onNext(owner.postData)
                     owner.nextCursor = success.cursor
-                case .failure(let failure):
+                case .failure(let _):
                     owner.showToast("잠시 후 다시 시도해 주세요")
                 }
             }
@@ -82,16 +82,21 @@ extension HomeViewController {
 
                 cell.updateUI(element)
                 cell.selectionStyle = .none
-
+                print(UserDefaultsManager.userId)
+                dump(element.likes)
+                print("#asd#")
                 let input = BoardTableViewModel.Input(
                     likeOnClick: cell.likeButton.rx.tap.asObservable(),
+                    inputLikeList: element.likes,
                     reboardOnClick: cell.repeatButton.rx.tap.asObservable(),
+                    inputReboardList: element.likes2,
                     postId: element.id
                 )
-                
+                print(input, "cell: \(row)")
                 let output = cell.viewModel.transform(input: input)
 
                 output.likeList
+                    .debug()
                     .drive(with: self) { owner, list in
                         let bool = list.contains(UserDefaultsManager.userId)
                         cell.likeButton.configuration = .iconButton(
@@ -144,6 +149,7 @@ extension HomeViewController {
             .prefetchRows
             .compactMap(\.last?.row)
             .bind(with: self) { owner, index in
+    
                 if index == owner.totalPages - 3 && owner.nextCursor != "0" {
                     owner.queryString.onNext(
                         ReadPostsQueryString(

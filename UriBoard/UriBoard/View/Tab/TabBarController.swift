@@ -11,23 +11,23 @@ class TabBarController: UITabBarController {
 
     enum TabBarItem: CaseIterable {
         case home
-        case search
+//        case search
         case post
-        case like
-        case profile
+        case pay
+//        case profile
         
         var screen: UIViewController {
             switch self {
             case .home:
                 return HomeViewController()
-            case .search:
-                return SearchViewController()
+//            case .search:
+//                return SearchViewController()
             case .post:
                 return PostViewController()
-            case .like:
-                return LikeViewController()
-            case .profile:
-                return ProfileViewController()
+            case .pay:
+                return PaymentsViewController()
+//            case .profile:
+//                return ProfileViewController()
             }
         }
         
@@ -35,14 +35,14 @@ class TabBarController: UITabBarController {
             switch self {
             case .home:
                 return UIImage(systemName: "house")
-            case .search:
-                return UIImage(systemName: "number")
+//            case .search:
+//                return UIImage(systemName: "number")
             case .post:
                 return UIImage(systemName: "square.and.pencil")
-            case .like:
-                return UIImage(systemName: "heart")
-            case .profile:
-                return UIImage(systemName: "person")
+            case .pay:
+                return UIImage(systemName: "creditcard")
+//            case .profile:
+//                return UIImage(systemName: "person")
             }
         }
         
@@ -50,14 +50,14 @@ class TabBarController: UITabBarController {
             switch self {
             case .home:
                 return UIImage(systemName: "house")
-            case .search:
-                return UIImage(systemName: "number")
+//            case .search:
+//                return UIImage(systemName: "number")
             case .post:
                 return UIImage(systemName: "square.and.pencil")
-            case .like:
-                return UIImage(systemName: "heart.fill")
-            case .profile:
-                return UIImage(systemName: "person.fill")
+            case .pay:
+                return UIImage(systemName: "creditcard.fill")
+//            case .profile:
+//                return UIImage(systemName: "person.fill")
             }
         }
     }
@@ -73,18 +73,27 @@ extension TabBarController {
 
     private func setTabBar() {
         var tabList: [UIViewController] = []
-        tabBar.tintColor = ColorStyle.darkPurple
+        tabBar.tintColor = ColorStyle.moreLightDark
         
         for item in TabBarItem.allCases {
             // NavigationController 달아주기
-            let tabVC = UINavigationController(
-                rootViewController: item.screen
-            )
-            
-            tabVC.tabBarItem.selectedImage = item.iconActive
-            tabVC.tabBarItem.image = item.iconInactive
+            if item != .pay {
+                let tabVC = UINavigationController(
+                    rootViewController: item.screen
+                )
+                
+                tabVC.tabBarItem.selectedImage = item.iconActive
+                tabVC.tabBarItem.image = item.iconInactive
 
-            tabList.append(tabVC)
+                tabList.append(tabVC)
+            } else {
+                let tabVC = item.screen
+                
+                tabVC.tabBarItem.selectedImage = item.iconActive
+                tabVC.tabBarItem.image = item.iconInactive
+
+                tabList.append(tabVC)
+            }
         }
         viewControllers = tabList
         

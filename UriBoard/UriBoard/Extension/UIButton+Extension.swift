@@ -26,7 +26,7 @@ extension UIButton.Configuration {
     static func iconButton(title: String?, systemName: String) -> UIButton.Configuration {
         
         var config = UIButton.Configuration.plain()
-        config.baseForegroundColor = ColorStyle.pink
+        config.baseForegroundColor = ColorStyle.lightDark
         config.imagePadding = 8
         config.title = title
         config.image = UIImage(systemName: systemName)

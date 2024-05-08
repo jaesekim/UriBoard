@@ -60,7 +60,7 @@ extension PostViewController {
             target: self,
             action: nil
         )
-        leftButton.tintColor = ColorStyle.deepPurple
+        leftButton.tintColor = ColorStyle.moreLightDark
         navigationItem.leftBarButtonItem = leftButton
     }
     private func setRightBarButton() {
@@ -70,7 +70,7 @@ extension PostViewController {
             target: self,
             action: nil
         )
-        rightButton.tintColor = ColorStyle.deepPurple
+        rightButton.tintColor = ColorStyle.moreLightDark
         navigationItem.rightBarButtonItem = rightButton
     }
 }

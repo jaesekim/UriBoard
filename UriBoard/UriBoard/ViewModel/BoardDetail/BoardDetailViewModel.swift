@@ -45,9 +45,9 @@ final class BoardDetailViewModel: ViewModelType {
         let navButtonTrigger = PublishRelay<Void>()
         let errorMessage = PublishRelay<String>()
         
-        let likeRelayList = PublishRelay<[String]>()
-        let reboardRelayList = PublishRelay<[String]>()
-        let commentRelayList = PublishSubject<[CommentModel]>()
+        let likeRelayList = BehaviorRelay<[String]>(value: [])
+        let reboardRelayList = BehaviorRelay<[String]>(value: [])
+        let commentRelayList = BehaviorSubject<[CommentModel]>(value: [])
         
         let likeContains = likeRelayList
             .map {
@@ -93,7 +93,8 @@ final class BoardDetailViewModel: ViewModelType {
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(likeContains)
             .flatMap {
-                NetworkManager.shared.requestAPIResult(
+                print("detail like onclick")
+                return NetworkManager.shared.requestAPIResult(
                     type: PostLikeModel.self,
                     router: Router.like(
                         router: .postLike(
@@ -119,7 +120,8 @@ final class BoardDetailViewModel: ViewModelType {
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(reboardContains)
             .flatMap {
-                NetworkManager.shared.requestAPIResult(
+                print("detail reboard onclick")
+                return NetworkManager.shared.requestAPIResult(
                     type: PostLikeModel.self,
                     router: Router.like(
                         router: .postReboard(

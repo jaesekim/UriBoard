@@ -7,14 +7,17 @@
 
 import UIKit
 import SnapKit
-import Then
 import Kingfisher
+import Then
 
 class ImageLayoutView: BaseView {
-    let imageView1 = UIImageView(frame: .zero).then {
-        $0.clipsToBounds = true
-        $0.contentMode = .scaleAspectFill
-    }
+    let imageView1 = {
+        let view = UIImageView(frame: .zero)
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
+
     let imageView2 = UIImageView(frame: .zero).then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill

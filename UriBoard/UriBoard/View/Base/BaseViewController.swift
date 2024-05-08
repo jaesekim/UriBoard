@@ -39,6 +39,12 @@ class BaseViewController: UIViewController {
         configureConstraints()
         configureView()
         bind()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     func showToast(_ message: String) {
@@ -87,7 +93,7 @@ extension BaseViewController: NavigationSettings {
             target: self,
             action: nil
         )
-        backBarButtonItem.tintColor = ColorStyle.darkPurple
+        backBarButtonItem.tintColor = ColorStyle.moreLightDark
         navigationItem.backBarButtonItem = backBarButtonItem
     }
 }

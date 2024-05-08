@@ -13,9 +13,13 @@ class BoardTableViewModel {
     
     var disposeBag = DisposeBag()
     
+    let a = [String]()
+
     struct Input {
         let likeOnClick: Observable<Void>
+        let inputLikeList: [String]
         let reboardOnClick: Observable<Void>
+        let inputReboardList: [String]
         let postId: String
     }
     
@@ -28,28 +32,23 @@ class BoardTableViewModel {
     func transform(input: Input) -> Output {
         let likeStatus = BehaviorRelay(value: false)
         let reboardStatus = BehaviorRelay(value: false)
-        
+
         let likeRelayList = PublishRelay<[String]>()
-        let commentRelayList = PublishRelay<[String]>()
         let reboardRelayList = PublishRelay<[String]>()
-        
         let errorMessage = PublishRelay<String>()
-        
-        let likeContains = likeRelayList
-            .map {
-                $0.contains(UserDefaultsManager.userId)
-            }
-        
-        let reboardContains = reboardRelayList
-            .map {
-                $0.contains(UserDefaultsManager.userId)
-            }
         
         input.likeOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .withLatestFrom(likeContains)
+            .map {
+                print("##############")
+                print($0)
+                // 포함돼 있다면 true -> 다시 누른것이니까 좋아요 취소
+                return input.inputLikeList.contains(UserDefaultsManager.userId)
+            }
+            .debug()
             .flatMap {
-                NetworkManager.shared.requestAPIResult(
+                print("=======like OnClick=======")
+                return NetworkManager.shared.requestAPIResult(
                     type: PostLikeModel.self,
                     router: Router.like(
                         router: .postLike(
@@ -61,6 +60,7 @@ class BoardTableViewModel {
                     )
                 )
             }
+            .debug()
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let success):
@@ -73,7 +73,9 @@ class BoardTableViewModel {
         
         input.reboardOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .withLatestFrom(reboardContains)
+            .map {
+                input.inputReboardList.contains(UserDefaultsManager.userId)
+            }
             .flatMap {
                 NetworkManager.shared.requestAPIResult(
                     type: PostLikeModel.self,
