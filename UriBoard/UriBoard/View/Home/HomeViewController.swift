@@ -68,7 +68,7 @@ extension HomeViewController {
                     owner.totalPages += success.data.count
                     owner.postItems.onNext(owner.postData)
                     owner.nextCursor = success.cursor
-                case .failure(let _):
+                case .failure(_):
                     owner.showToast("잠시 후 다시 시도해 주세요")
                 }
             }
@@ -105,7 +105,7 @@ extension HomeViewController {
                         )
                     }
                     .disposed(by: cell.disposeBag)
-                
+
                 output.reboardList
                     .drive(with: self) { owner, list in
                         let bool = list.contains(UserDefaultsManager.userId)
@@ -123,7 +123,7 @@ extension HomeViewController {
                     .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
-        
+
         Observable.zip(
             mainView.boardTableView.rx.itemSelected,
             mainView.boardTableView.rx.modelSelected(
@@ -145,13 +145,12 @@ extension HomeViewController {
             owner.present(nav, animated: true)
         }
         .disposed(by: disposeBag)
-            
-        
+
         mainView.boardTableView.rx
             .prefetchRows
             .compactMap(\.last?.row)
             .bind(with: self) { owner, index in
-    
+
                 if index == owner.totalPages - 3 && owner.nextCursor != "0" {
                     owner.queryString.onNext(
                         ReadPostsQueryString(

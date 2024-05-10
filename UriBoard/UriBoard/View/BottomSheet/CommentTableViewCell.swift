@@ -62,7 +62,7 @@ extension CommentTableViewCell: KingfisherModifier {
         let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
         profileImage.kf.setImage(
             with: URL(string: imgUrl),
-            placeholder: UIImage(systemName: "person"),
+            placeholder: UIImage(named: "profile"),
             options: [.requestModifier(modifier)]
         )
         nicknameLabel.text = element.creator.nick

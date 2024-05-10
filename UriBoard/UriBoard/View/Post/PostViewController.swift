@@ -29,7 +29,7 @@ final class PostViewController: BaseViewController {
         
         mainView.profileImage.kf.setImage(
             with: URL(string: UserDefaultsManager.profileImage),
-            placeholder: UIImage(systemName: "person"),
+            placeholder: UIImage(named: "profile"),
             options: [.requestModifier(modifier)]
         )
         mainView.nickLabel.text = UserDefaultsManager.nickname

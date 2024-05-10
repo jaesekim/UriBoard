@@ -38,7 +38,7 @@ class TabBarController: UITabBarController {
 //            case .search:
 //                return UIImage(systemName: "number")
             case .post:
-                return UIImage(systemName: "square.and.pencil")
+                return UIImage(systemName: "plus.square")
             case .pay:
                 return UIImage(systemName: "creditcard")
             case .profile:
@@ -53,7 +53,7 @@ class TabBarController: UITabBarController {
 //            case .search:
 //                return UIImage(systemName: "number")
             case .post:
-                return UIImage(systemName: "square.and.pencil")
+                return UIImage(systemName: "plus.square.fill")
             case .pay:
                 return UIImage(systemName: "creditcard.fill")
             case .profile:
@@ -77,7 +77,7 @@ extension TabBarController {
         
         for item in TabBarItem.allCases {
             // NavigationController 달아주기
-            if item == .pay || item == .home {
+            if item == .pay || item == .home || item == .profile {
                 let tabVC = item.screen
                 
                 tabVC.tabBarItem.selectedImage = item.iconActive

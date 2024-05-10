@@ -23,6 +23,24 @@ final class ProfileView: BaseView {
         $0.numberOfLines = 0
         $0.text = "Jess"
     }
+    let profileEditButton = UIButton().then {
+        $0.configuration = .iconButton(
+            title: nil,
+            systemName: "pencil.circle"
+        )
+    }
+    let donateButton = UIButton().then {
+        $0.configuration = .iconButton(
+            title: nil,
+            systemName: "wonsign.circle"
+        )
+    }
+    let followingButton = UIButton().then {
+        $0.configuration = .iconButton(
+            title: nil,
+            systemName: "person.badge.plus"
+        )
+    }
 
     let postStack = UIStackView().then {
         $0.axis = .vertical
@@ -101,16 +119,10 @@ final class ProfileView: BaseView {
             systemName: "square.grid.2x2"
         )
     }
-    let likePostButton = UIButton().then {
+    let commentButton = UIButton().then {
         $0.configuration = .iconButton(
             title: nil,
-            systemName: "heart"
-        )
-    }
-    let reboardPostButton = UIButton().then {
-        $0.configuration = .iconButton(
-            title: nil,
-            systemName: "repeat"
+            systemName: "message"
         )
     }
 
@@ -151,6 +163,9 @@ extension ProfileView {
         [
             imageLayoutView,
             nicknameLabel,
+            profileEditButton,
+            donateButton,
+            followingButton,
             profileStatusStack,
             lineView,
             buttonStack,
@@ -184,18 +199,32 @@ extension ProfileView {
         
         [
             totalPostButton,
-            likePostButton,
-            reboardPostButton,
+            commentButton,
         ].forEach { buttonStack.addArrangedSubview($0) }
         
     }
     override func configureConstraints() {
-        print(#function)
+
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(12)
             make.height.lessThanOrEqualTo(40)
             make.leading.equalToSuperview().offset(28)
-            make.trailing.equalToSuperview().inset(16)
+            make.trailing.equalTo(donateButton.snp.leading).offset(-8)
+        }
+        profileEditButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+            make.centerY.equalTo(nicknameLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        followingButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+            make.centerY.equalTo(nicknameLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        donateButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+            make.centerY.equalTo(nicknameLabel.snp.centerY)
+            make.trailing.equalTo(profileEditButton.snp.leading).offset(-8)
         }
         imageLayoutView.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(32)
@@ -296,11 +325,21 @@ extension ProfileView: KingfisherModifier {
         nicknameLabel.text = element.nick
         profileImage.kf.setImage(
             with: URL(string: imgUrl),
-            placeholder: UIImage(systemName: "person"),
+            placeholder: UIImage(named: "profile"),
             options: [.requestModifier(modifier)]
         )
         postCounts.text = "\(element.posts.count)"
         followersCounts.text = "\(element.followers.count)"
         followingsCounts.text = "\(element.following.count)"
+        
+        if element.user_id == UserDefaultsManager.userId {
+            followingButton.isHidden = true
+            profileEditButton.isHidden = false
+            donateButton.isHidden = false
+        } else {
+            followingButton.isHidden = false
+            profileEditButton.isHidden = true
+            donateButton.isHidden = true
+        }
     }
 }

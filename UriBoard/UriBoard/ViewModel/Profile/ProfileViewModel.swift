@@ -15,10 +15,11 @@ class ProfileViewModel: ViewModelType {
     let viewWillAppearTrigger = PublishRelay<String>()
     
     struct Input {
-        
+        let profileEditButtonOnClick: Observable<Void>
     }
     struct Output {
         let result: PublishSubject<Result<ProfileModel, APIError>>
+        let profileEditButtonTrigger: Driver<Void>
     }
 
     func transform(input: Input) -> Output {
@@ -47,7 +48,8 @@ class ProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         return Output(
-            result: outputResult
+            result: outputResult,
+            profileEditButtonTrigger: input.profileEditButtonOnClick.asDriver(onErrorJustReturn: ())
         )
     }
 }

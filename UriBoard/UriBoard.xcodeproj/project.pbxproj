@@ -122,6 +122,9 @@
 		7BFDE8482BECB96900F46241 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8472BECB96900F46241 /* ProfileViewModel.swift */; };
 		7BFDE84E2BEDFAF000F46241 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE84D2BEDFAF000F46241 /* ProfileRouter.swift */; };
 		7BFDE8502BEDFBCE00F46241 /* ProfileQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE84F2BEDFBCE00F46241 /* ProfileQuery.swift */; };
+		7BFDE8522BEE7B2A00F46241 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8512BEE7B2A00F46241 /* EditProfileViewController.swift */; };
+		7BFDE8542BEE7B3600F46241 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8532BEE7B3600F46241 /* EditProfileView.swift */; };
+		7BFDE8562BEE7B5500F46241 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8552BEE7B5500F46241 /* EditProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -234,6 +237,9 @@
 		7BFDE8472BECB96900F46241 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7BFDE84D2BEDFAF000F46241 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		7BFDE84F2BEDFBCE00F46241 /* ProfileQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQuery.swift; sourceTree = "<group>"; };
+		7BFDE8512BEE7B2A00F46241 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		7BFDE8532BEE7B3600F46241 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		7BFDE8552BEE7B5500F46241 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +330,8 @@
 				7BFDE8402BECB85700F46241 /* TotalPostTableViewCell.swift */,
 				7BFDE8422BECB86200F46241 /* LikePostTableViewCell.swift */,
 				7BFDE8442BECB86F00F46241 /* ReboardPostTableViewCell.swift */,
+				7BFDE8512BEE7B2A00F46241 /* EditProfileViewController.swift */,
+				7BFDE8532BEE7B3600F46241 /* EditProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -742,6 +750,7 @@
 			isa = PBXGroup;
 			children = (
 				7BFDE8472BECB96900F46241 /* ProfileViewModel.swift */,
+				7BFDE8552BEE7B5500F46241 /* EditProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -879,10 +888,12 @@
 				7B8D6BE72BCA603600139BB5 /* EmailValidationQuery.swift in Sources */,
 				7BFDE8412BECB85700F46241 /* TotalPostTableViewCell.swift in Sources */,
 				7B8D6BEC2BCA619100139BB5 /* TargetType.swift in Sources */,
+				7BFDE8562BEE7B5500F46241 /* EditProfileViewModel.swift in Sources */,
 				7BC78E592BDA304D001C2BE4 /* ReadDetailPostModel.swift in Sources */,
 				7BDDBA582BEA400200D2FAFE /* ButtonGroupView.swift in Sources */,
 				7BFDE8452BECB86F00F46241 /* ReboardPostTableViewCell.swift in Sources */,
 				7BDDBA2F2BE797EF00D2FAFE /* ImageLayoutView.swift in Sources */,
+				7BFDE8522BEE7B2A00F46241 /* EditProfileViewController.swift in Sources */,
 				7BC78DD52BD10102001C2BE4 /* CustomButton.swift in Sources */,
 				7BFDE84E2BEDFAF000F46241 /* ProfileRouter.swift in Sources */,
 				7B98DC622BCE5DAA0056373D /* Router.swift in Sources */,
@@ -891,6 +902,7 @@
 				7BE31C682BC69C5300D1EDE6 /* APIKey.swift in Sources */,
 				7B8D6C152BCD5C5C00139BB5 /* SignUpView.swift in Sources */,
 				7B4C03B72BC6D91300593876 /* SignInViewModel.swift in Sources */,
+				7BFDE8542BEE7B3600F46241 /* EditProfileView.swift in Sources */,
 				7BE31C6E2BC6B7A800D1EDE6 /* SignInModel.swift in Sources */,
 				7BC78DD22BD0FE86001C2BE4 /* BoardDetailView.swift in Sources */,
 				7B4C03E52BC7EBF300593876 /* ColorStyle.swift in Sources */,

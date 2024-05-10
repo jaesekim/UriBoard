@@ -41,7 +41,9 @@ extension ProfileViewController {
 
 extension ProfileViewController {
     override func bind() {
-        let input = ProfileViewModel.Input()
+        let input = ProfileViewModel.Input(
+            profileEditButtonOnClick: mainView.profileEditButton.rx.tap.asObservable()
+        )
         let output = viewModel.transform(input: input)
         
         output.result
@@ -53,6 +55,17 @@ extension ProfileViewController {
                     owner.showToast("Error: \(failure.rawValue) 잠시 후 다시 시도해 주세요")
                 }
                 
+            }
+            .disposed(by: disposeBag)
+        
+        output.profileEditButtonTrigger
+            .drive(with: self) { owner, _ in
+                let vc = EditProfileViewController()
+
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                
+                owner.present(nav, animated: true)
             }
             .disposed(by: disposeBag)
     }
