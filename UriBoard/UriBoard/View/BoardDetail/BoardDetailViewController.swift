@@ -36,7 +36,18 @@ final class BoardDetailViewController: BaseViewController {
 extension BoardDetailViewController {
     override func setNavigationBar() {
         navigationItem.title = userNickname
+        setLeftBarButton()
         setRightBarButton()
+    }
+    private func setLeftBarButton() {
+        let leftButton = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        leftButton.tintColor = ColorStyle.moreLightDark
+        navigationItem.leftBarButtonItem = leftButton
     }
     private func setRightBarButton() {
         let rightButton = UIBarButtonItem(
@@ -45,7 +56,7 @@ extension BoardDetailViewController {
             target: self,
             action: nil
         )
-        rightButton.tintColor = ColorStyle.darkPurple
+        rightButton.tintColor = ColorStyle.moreLightDark
         navigationItem.rightBarButtonItem = rightButton
     }
 }
@@ -87,9 +98,7 @@ extension BoardDetailViewController {
                         owner.showToast("삭제 완료")
                     }
                     
-                    owner.navigationController?.popViewController(
-                        animated: true
-                    )
+                    owner.dismiss(animated: true)
                 }
 
             }
@@ -135,5 +144,13 @@ extension BoardDetailViewController {
                 owner.showToast(text)
             }
             .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                print("click")
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
     }
 }

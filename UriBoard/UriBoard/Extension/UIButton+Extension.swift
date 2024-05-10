@@ -34,4 +34,14 @@ extension UIButton.Configuration {
         
         return config
     }
+    
+    static func iconFilledButton(systemName: String) -> UIButton.Configuration {
+        var config = UIButton.Configuration.filled()
+
+        config.cornerStyle = .medium
+        config.baseForegroundColor = ColorStyle.lightDark
+        config.image = UIImage(systemName: systemName)
+
+        return config
+    }
 }

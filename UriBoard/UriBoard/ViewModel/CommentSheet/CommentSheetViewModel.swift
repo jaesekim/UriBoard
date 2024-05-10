@@ -49,7 +49,7 @@ class CommentSheetViewModel: ViewModelType {
                 switch result {
                 case .success(let success):
                     commentRelayList.onNext(success.comments)
-                case .failure(_):
+                case .failure(let failure):
                     errorMessage.accept("잠시 후 다시 시도해 주세요")
                 }
             }

@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
 //        case search
         case post
         case pay
-//        case profile
+        case profile
         
         var screen: UIViewController {
             switch self {
@@ -26,8 +26,8 @@ class TabBarController: UITabBarController {
                 return PostViewController()
             case .pay:
                 return PaymentsViewController()
-//            case .profile:
-//                return ProfileViewController()
+            case .profile:
+                return ProfileViewController()
             }
         }
         
@@ -41,8 +41,8 @@ class TabBarController: UITabBarController {
                 return UIImage(systemName: "square.and.pencil")
             case .pay:
                 return UIImage(systemName: "creditcard")
-//            case .profile:
-//                return UIImage(systemName: "person")
+            case .profile:
+                return UIImage(systemName: "person")
             }
         }
         
@@ -56,8 +56,8 @@ class TabBarController: UITabBarController {
                 return UIImage(systemName: "square.and.pencil")
             case .pay:
                 return UIImage(systemName: "creditcard.fill")
-//            case .profile:
-//                return UIImage(systemName: "person.fill")
+            case .profile:
+                return UIImage(systemName: "person.fill")
             }
         }
     }
@@ -77,17 +77,17 @@ extension TabBarController {
         
         for item in TabBarItem.allCases {
             // NavigationController 달아주기
-            if item != .pay {
-                let tabVC = UINavigationController(
-                    rootViewController: item.screen
-                )
+            if item == .pay || item == .home {
+                let tabVC = item.screen
                 
                 tabVC.tabBarItem.selectedImage = item.iconActive
                 tabVC.tabBarItem.image = item.iconInactive
 
                 tabList.append(tabVC)
             } else {
-                let tabVC = item.screen
+                let tabVC = UINavigationController(
+                    rootViewController: item.screen
+                )
                 
                 tabVC.tabBarItem.selectedImage = item.iconActive
                 tabVC.tabBarItem.image = item.iconInactive

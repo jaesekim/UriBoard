@@ -133,14 +133,16 @@ extension HomeViewController {
         .map { $0.1 }
         .bind(with: self) { owner, value in
             let vc = BoardDetailViewController()
-
             vc.postId = value.id
             vc.userNickname = value.creator.nick
             vc.hidesBottomBarWhenPushed = true
-            
-            owner.navigationController?.pushViewController(
-                vc, animated: true
+
+            let nav = UINavigationController(
+                rootViewController: vc
             )
+            nav.modalPresentationStyle = .fullScreen
+
+            owner.present(nav, animated: true)
         }
         .disposed(by: disposeBag)
             

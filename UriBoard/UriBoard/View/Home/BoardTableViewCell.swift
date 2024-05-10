@@ -18,7 +18,8 @@ class BoardTableViewCell: UITableViewCell {
     let viewModel = BoardTableViewModel()
     // let passDelegate: PassDataProtocol?
     
-    var imageCounts = 0
+    var likeButtonClosure: (() -> Void)?
+    var reboardButtonClosure: (() -> Void)?
     
     let profileImage = UIImageView(frame: .zero).then {
         $0.image = UIImage(systemName: "person")
@@ -51,8 +52,8 @@ class BoardTableViewCell: UITableViewCell {
     let buttonStack = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .fill
-        $0.distribution = .equalSpacing
-        $0.spacing = 10
+        $0.distribution = .fillEqually
+        $0.spacing = 0
     }
     let likeButton = UIButton().then {
         var config = UIButton.Configuration.plain()
@@ -68,41 +69,18 @@ class BoardTableViewCell: UITableViewCell {
         )
         $0.tintColor = ColorStyle.lightDark
     }
-    
+    let totalStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 10
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureHierarchy()
         configureConstraints()
         configureView()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if imageCounts != 0 {
-            imageArea.snp.makeConstraints { make in
-                make.top.equalTo(contentLabel.snp.bottom).offset(32)
-                make.leading.equalTo(nicknameLabel.snp.leading)
-                make.trailing.equalToSuperview().offset(-8)
-                make.height.equalTo(200)
-            }
-            buttonStack.snp.makeConstraints { make in
-                make.top.equalTo(imageArea.snp.bottom).offset(32)
-                make.leading.equalTo(contentLabel.snp.leading)
-                make.trailing.equalToSuperview().offset(-16)
-                make.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(20)
-                make.height.equalTo(40)
-            }
-        } else {
-            buttonStack.snp.makeConstraints { make in
-                make.top.equalTo(contentLabel.snp.bottom).offset(32)
-                make.leading.equalTo(contentLabel.snp.leading)
-                make.trailing.equalToSuperview().offset(-16)
-                make.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(20)
-                make.height.equalTo(40)
-            }
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -118,14 +96,17 @@ extension BoardTableViewCell: UISettings {
             nicknameLabel,
             contentLabel,
             lineView,
-            imageArea,
-            buttonStack,
+            totalStack,
         ].forEach { contentView.addSubview($0) }
         [
             likeButton,
             commentButton,
             repeatButton,
         ].forEach { buttonStack.addArrangedSubview($0) }
+        [
+            imageArea,
+            buttonStack
+        ].forEach { totalStack.addArrangedSubview($0) }
     }
     
     func configureConstraints() {
@@ -141,9 +122,9 @@ extension BoardTableViewCell: UISettings {
             make.bottom.equalToSuperview().offset(-12)
         }
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(28)
+            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.trailing.equalToSuperview().offset(-8)
-            make.leading.equalTo(profileImage.snp.trailing).offset(8)
+            make.leading.equalTo(profileImage.snp.trailing).offset(12)
             make.height.lessThanOrEqualTo(24)
             
         }
@@ -154,6 +135,27 @@ extension BoardTableViewCell: UISettings {
             make.leading.equalTo(nicknameLabel.snp.leading)
         }
         
+//        likeButton.snp.makeConstraints { make in
+//            make.width.equalTo(44)
+//        }
+//        commentButton.snp.makeConstraints { make in
+//            make.width.equalTo(44)
+//        }
+//        repeatButton.snp.makeConstraints { make in
+//            make.width.equalTo(44)
+//        }
+        imageArea.snp.makeConstraints { make in
+            make.height.equalTo(200)
+        }
+        buttonStack.snp.makeConstraints { make in
+            make.height.equalTo(44)
+        }
+        totalStack.snp.makeConstraints { make in
+            make.top.equalTo(contentLabel.snp.bottom).offset(32)
+            make.leading.equalTo(contentLabel.snp.leading)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(16)
+        }
     }
     
     func configureView() {
@@ -169,8 +171,7 @@ extension BoardTableViewCell: UISettings {
 extension BoardTableViewCell: KingfisherModifier {
     
     func updateUI(_ element: ReadDetailPostModel) {
-        
-        imageCounts = element.files.count
+
         let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
         let likeStatus = element.likes.contains(
             UserDefaultsManager.userId

@@ -30,6 +30,8 @@ final class SignInViewController: BaseViewController {
     }
     override func bind() {
 
+        mainView.passwordTextField.isSecureTextEntry = true
+        
         let input = SignInViewModel.Input(
             emailText: mainView.emailTextField.rx.text.orEmpty.asObservable(),
             passwordText: mainView.passwordTextField.rx.text.orEmpty.asObservable(),
