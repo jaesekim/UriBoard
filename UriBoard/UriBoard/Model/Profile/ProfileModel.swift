@@ -9,7 +9,7 @@ import Foundation
 
 struct ProfileModel: Codable {
     let user_id: String
-    let email: String
+    let email: String?
     let nick: String
     let profileImage: String?
     let followers: [UserInfo]

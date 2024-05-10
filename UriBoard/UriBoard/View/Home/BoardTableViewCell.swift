@@ -11,6 +11,7 @@ import Then
 import Kingfisher
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class BoardTableViewCell: UITableViewCell {
     
@@ -18,6 +19,7 @@ class BoardTableViewCell: UITableViewCell {
     let viewModel = BoardTableViewModel()
     // let passDelegate: PassDataProtocol?
     
+    var nicknameGestureClosure: (() -> Void)?
     var likeButtonClosure: (() -> Void)?
     var reboardButtonClosure: (() -> Void)?
     
@@ -78,12 +80,14 @@ class BoardTableViewCell: UITableViewCell {
         $0.spacing = 10
     }
     let bufferView = UIView()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureHierarchy()
         configureConstraints()
         configureView()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -93,6 +97,21 @@ class BoardTableViewCell: UITableViewCell {
 
 extension BoardTableViewCell {
     func bind() {
+        
+        profileImage.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.nicknameGestureClosure?()
+            }
+            .disposed(by: disposeBag)
+        nicknameLabel.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.nicknameGestureClosure?()
+            }
+            .disposed(by: disposeBag)
         likeButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.likeButtonClosure?()

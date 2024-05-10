@@ -22,4 +22,5 @@ enum ColorStyle {
     static let lightDark = UIColor(hexCode: "222831")
     static let moreLightDark = UIColor(hexCode: "31363F")
     static let skyblue = UIColor(hexCode: "76ABAE")
+    static let confirmBlue = UIColor(hexCode: "0079FF")
 }

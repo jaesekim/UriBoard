@@ -11,8 +11,13 @@ import SnapKit
 import Kingfisher
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class BoardDetailView: BaseView {
+    
+    let disposeBag = DisposeBag()
+    var nicknameGestureClosure: (() -> Void)?
+    
     let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
     }
@@ -69,12 +74,33 @@ final class BoardDetailView: BaseView {
         contentViewHierarchy()
         contentViewConstraints()
         configureContentView()
+        bind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension BoardDetailView {
+    func bind() {
+
+        profileImage.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.nicknameGestureClosure?()
+            }
+            .disposed(by: disposeBag)
+        nicknameLabel.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.nicknameGestureClosure?()
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 extension BoardDetailView {

@@ -9,8 +9,14 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import RxSwift
+import RxCocoa
+
 
 final class ProfileView: BaseView {
+
+    let disposeBag = DisposeBag()
+    var followingCallBack: (() -> Void)?
     
     let imageLayoutView = UIView()
 
@@ -155,6 +161,27 @@ final class ProfileView: BaseView {
         $0.showsVerticalScrollIndicator = false
         $0.rowHeight = UITableView.automaticDimension
         $0.estimatedRowHeight = 200
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        bind()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProfileView {
+    func bind() {
+        followingButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.followingCallBack?()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -306,13 +333,12 @@ extension ProfileView {
     }
     override func configureView() {
         super.configureView()
-        print(#function)
+ 
         imageLayoutView.layer.cornerRadius = 40
         imageLayoutView.clipsToBounds = true
         imageLayoutView.contentMode = .scaleAspectFill
         imageLayoutView.layer.borderColor = ColorStyle.lightDark.cgColor
-        imageLayoutView.layer.borderWidth = 1
-        imageLayoutView.backgroundColor = .lightGray
+        imageLayoutView.layer.borderWidth = 1.5
     }
 }
 
@@ -340,6 +366,12 @@ extension ProfileView: KingfisherModifier {
             followingButton.isHidden = false
             profileEditButton.isHidden = true
             donateButton.isHidden = true
+        }
+        
+        if element.followers.contains(where: { user in
+            user.user_id == UserDefaultsManager.userId
+        }) {
+            
         }
     }
 }

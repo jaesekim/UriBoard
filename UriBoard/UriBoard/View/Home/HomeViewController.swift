@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class HomeViewController: BaseViewController {
 
@@ -82,9 +83,7 @@ extension HomeViewController {
 
                 cell.updateUI(element)
                 cell.selectionStyle = .none
-                print(UserDefaultsManager.userId)
-                dump(element.likes)
-                print("#asd#")
+
                 let input = BoardTableViewModel.Input(
                     likeOnClick: cell.likeButton.rx.tap.asObservable(),
                     inputLikeList: element.likes,
@@ -121,6 +120,7 @@ extension HomeViewController {
                         owner.showToast(text)
                     }
                     .disposed(by: cell.disposeBag)
+
             }
             .disposed(by: disposeBag)
 
@@ -135,6 +135,7 @@ extension HomeViewController {
             let vc = BoardDetailViewController()
             vc.postId = value.id
             vc.userNickname = value.creator.nick
+            vc.userId = value.creator.user_id
             vc.hidesBottomBarWhenPushed = true
 
             let nav = UINavigationController(

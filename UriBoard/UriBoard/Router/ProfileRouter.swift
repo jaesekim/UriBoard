@@ -19,9 +19,9 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return APIURL.baseURL + "/v1"
-        case .updateProfile(let query):
+        case .updateProfile(_):
             return APIURL.baseURL + "/v1"
-        case .otherProfile(let userId):
+        case .otherProfile(_):
             return APIURL.baseURL + "/v1"
         }
     }
@@ -30,9 +30,9 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return .get
-        case .updateProfile(let query):
+        case .updateProfile:
             return .put
-        case .otherProfile(let userId):
+        case .otherProfile:
             return .get
         }
     }

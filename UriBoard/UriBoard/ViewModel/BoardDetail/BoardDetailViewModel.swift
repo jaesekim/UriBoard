@@ -61,8 +61,7 @@ final class BoardDetailViewModel: ViewModelType {
         
         viewWillAppearTrigger
             .flatMap {
-                print("postId :", $0)
-                return NetworkManager.shared.requestAPIResult(
+                NetworkManager.shared.requestAPIResult(
                     type: ReadDetailPostModel.self,
                     router: Router.post(
                         router: .readDetailPost(id: $0)

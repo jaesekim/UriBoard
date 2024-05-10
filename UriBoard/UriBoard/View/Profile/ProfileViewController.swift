@@ -27,7 +27,7 @@ final class ProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         viewModel.viewWillAppearTrigger.accept(userId)
     }
 
@@ -42,7 +42,8 @@ extension ProfileViewController {
 extension ProfileViewController {
     override func bind() {
         let input = ProfileViewModel.Input(
-            profileEditButtonOnClick: mainView.profileEditButton.rx.tap.asObservable()
+            profileEditButtonOnClick: mainView.profileEditButton.rx.tap.asObservable(), 
+            userId: userId
         )
         let output = viewModel.transform(input: input)
         
@@ -66,6 +67,22 @@ extension ProfileViewController {
                 nav.modalPresentationStyle = .fullScreen
                 
                 owner.present(nav, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.followerList
+            .map { userList in
+                userList.contains { user in
+                    user.user_id == UserDefaultsManager.userId
+                }
+            }
+            .drive(with: self) { owner, bool in
+                // true이면 이미 상대를 팔로잉한 상태이므로 팔로우 취소 버튼 활성화
+                // false이면 상대를 팔로잉하지 않았으므로 팔로우 추가 버튼 활성화
+                owner.mainView.followingButton.configuration = .followingButton(status: bool)
+                owner.mainView.followingCallBack = {
+                    owner.viewModel.followingButtonOnClick.accept(!bool)
+                }
             }
             .disposed(by: disposeBag)
     }

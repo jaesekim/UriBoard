@@ -35,12 +35,16 @@ extension UIButton.Configuration {
         return config
     }
     
-    static func iconFilledButton(systemName: String) -> UIButton.Configuration {
-        var config = UIButton.Configuration.filled()
+    static func followingButton(status: Bool) -> UIButton.Configuration {
 
-        config.cornerStyle = .medium
-        config.baseForegroundColor = ColorStyle.lightDark
-        config.image = UIImage(systemName: systemName)
+        var config = UIButton.Configuration.plain()
+        if status {  // 팔로우 취소 활성화
+            config.baseForegroundColor = ColorStyle.reject
+            config.image = UIImage(systemName: "person.badge.minus")
+        } else { // 팔로우 추가 활성화
+            config.baseForegroundColor = ColorStyle.confirmBlue
+            config.image = UIImage(systemName: "person.badge.plus")
+        }
 
         return config
     }

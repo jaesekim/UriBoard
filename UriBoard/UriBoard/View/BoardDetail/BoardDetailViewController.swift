@@ -19,7 +19,8 @@ final class BoardDetailViewController: BaseViewController {
     
     var postId = ""
     var userNickname = ""
-    
+    var userId = ""
+
     private let viewModel = BoardDetailViewModel()
     
     override func viewDidLoad() {
@@ -144,6 +145,15 @@ extension BoardDetailViewController {
                 owner.showToast(text)
             }
             .disposed(by: disposeBag)
+        
+        mainView.nicknameGestureClosure = { [weak self] in
+            guard let self = self else { return }
+            
+            let vc = ProfileViewController()
+            vc.userId = self.userId
+            
+            self.present(vc, animated: true)
+        }
         
         navigationItem.leftBarButtonItem?.rx.tap
             .bind(with: self) { owner, _ in
