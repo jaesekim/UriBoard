@@ -97,14 +97,14 @@ extension PostViewController {
         output.result
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let success):
+                case .success(_):
                     owner.showToast("업로드에 성공했습니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         owner.mainView.boardTextView.text = ""
                         owner.viewModel.photoData.accept([])
                         owner.tabBarController?.selectedIndex = 0
                     }
-                case .failure(let failure):
+                case .failure(_):
                     owner.showToast("업로드에 실패했습니다 다시 시도해 주세요")
                 }
             }

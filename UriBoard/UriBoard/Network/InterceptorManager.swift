@@ -63,7 +63,7 @@ final class InterceptorManager: RequestInterceptor {
                             // 토큰 갱신 성공!
                             UserDefaultsManager.accessToken = success.accessToken
                             completion(.retry)
-                        case .failure(let failure):
+                        case .failure(_):
                             // 토큰 갱신 실패... -> 아예 로그인 자체를 다시 해 줘야 한다.
                             // 왜 와이? 토큰 자체가 이상하거나 리프레시 토큰이 만료되었기 때문이다.
                             completion(.doNotRetryWithError(error))

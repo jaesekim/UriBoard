@@ -89,9 +89,9 @@ extension SignUpViewModel {
             }
             .subscribe(with: self) { owner, value in
                 switch value {
-                case .success(let success):
+                case .success(_):
                     emailValidCheck = true
-                case .failure(let failure):
+                case .failure(_):
                     emailValidCheck = false
                 }
             } onError: { object, error in
@@ -211,7 +211,7 @@ extension SignUpViewModel {
             }
             .subscribe(with: self) { owner, value in
                 switch value {
-                case .success(let success):
+                case .success(_):
                     signUpTirgger.accept(())
                 case .failure(let failure):
                     signUpFailure.accept(failure)
