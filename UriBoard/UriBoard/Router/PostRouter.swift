@@ -119,11 +119,11 @@ extension PostRouter: TargetType {
             return nil
         case .readDetailPost(let id):
             return id
-        case .updatePost(let id, let query):
+        case .updatePost(let id, _):
             return id
         case .deletePost(let id):
             return id
-        case .readUserPosts(let id, let query):
+        case .readUserPosts(let id, _):
             return id
         }
     }

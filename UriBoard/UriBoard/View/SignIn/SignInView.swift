@@ -66,7 +66,7 @@ final class SignInView: BaseView {
     }()
     let singUpButton = TextButton(
         text: "회원이 아니십니까?",
-        color: ColorStyle.deepPurple
+        color: ColorStyle.moreLightDark
     )
 }
 

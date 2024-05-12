@@ -81,6 +81,17 @@ class BaseViewController: UIViewController {
 
         present(alert, animated:true)
     }
+    
+    func errorHandling(errorCode: Int) {
+        
+        // 재로그인 필요
+        if errorCode == 419 {
+            showToast("다시 로그인 해 주세요")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.signInViewTransition()
+            }
+        }
+    }
 }
 
 extension BaseViewController: NavigationSettings {

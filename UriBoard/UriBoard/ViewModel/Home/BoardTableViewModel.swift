@@ -40,14 +40,11 @@ class BoardTableViewModel {
         input.likeOnClick
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .map {
-                print("##############")
                 print($0)
                 // 포함돼 있다면 true -> 다시 누른것이니까 좋아요 취소
                 return input.inputLikeList.contains(UserDefaultsManager.userId)
             }
-            .debug()
             .flatMap {
-                print("=======like OnClick=======")
                 return NetworkManager.shared.requestAPIResult(
                     type: PostLikeModel.self,
                     router: Router.like(
@@ -60,7 +57,6 @@ class BoardTableViewModel {
                     )
                 )
             }
-            .debug()
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let success):

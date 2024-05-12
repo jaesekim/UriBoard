@@ -30,18 +30,87 @@ final class EditProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        guard let imgData = mainView.profileImage.image?.jpegData(
+            compressionQuality: 1
+        ) else { return }
+        viewModel.existedImage.accept(imgData)
+        viewModel.profileImage.accept(imgData)
     }
 }
 
 extension EditProfileViewController {
     override func setNavigationBar() {
+        setLeftNavigationItem()
         navigationItem.title = "프로필 수정"
+    }
+    private func setLeftNavigationItem() {
+        let leftItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        leftItem.tintColor = ColorStyle.lightDark
+        navigationItem.leftBarButtonItem = leftItem
     }
 }
 
 extension EditProfileViewController {
     override func bind() {
         
+        // 화면 전환
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        mainView.profileImageCallback = { [weak self] in
+
+            guard let self = self else { return }
+            self.presentPHPicker()
+        }
+        mainView.deleteImageCallBack = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.profileImage.accept(
+                UIImage(named: "profile")?.jpegData(
+                    compressionQuality: 1
+                ) ?? Data()
+            )
+            self.mainView.profileImage.image = UIImage(
+                named: "profile"
+            )
+        }
+        
+        
+        let input = EditProfileViewModel.Input(
+            nickTextField: mainView.nicknameTextField.rx.text.orEmpty.asObservable(),
+            confirmButtonOnClick: mainView.confirmButton.rx.tap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.updateValidation
+            .drive(with: self) { owner, bool in
+                owner.mainView.nickGuide.textColor = bool ? ColorStyle.confirm : ColorStyle.reject
+                owner.mainView.confirmButton.isEnabled = bool
+            }
+            .disposed(by: disposeBag)
+        
+        output.validationGuide
+            .drive(mainView.nickGuide.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.updateCompleteTrigger
+            .drive(with: self) { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.errorMessage
+            .drive(with: self) { owner, text in
+                owner.showToast(text)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -74,12 +143,24 @@ extension EditProfileViewController: PHPickerViewControllerDelegate {
         }
         if itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self)
-            { image, error in
+            { [weak self] image, error in
+                
+                guard let self = self else { return }
                 guard let image = image as? UIImage else { return }
                 guard let imgData = image.jpegData(
                     compressionQuality: 0.5
-                ) else { return }
-                //            self.viewModel.photoData.accept(imgDataList)
+                ) else {
+                    self.viewModel.profileImage.accept(
+                        UIImage(named: "profile")?.jpegData(
+                            compressionQuality: 1
+                        ) ?? Data()
+                    )
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.mainView.profileImage.image = image
+                    self.viewModel.profileImage.accept(imgData)
+                }
             }
         }
     }

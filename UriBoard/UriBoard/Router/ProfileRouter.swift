@@ -10,7 +10,7 @@ import Alamofire
 
 enum ProfileRouter {
     case myProfile
-    case updateProfile(query: ProfileQuery)
+    case updateProfile
     case otherProfile(userId: String)
 }
 
@@ -19,7 +19,7 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return APIURL.baseURL + "/v1"
-        case .updateProfile(_):
+        case .updateProfile:
             return APIURL.baseURL + "/v1"
         case .otherProfile(_):
             return APIURL.baseURL + "/v1"
@@ -41,7 +41,7 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return "/users/me/profile"
-        case .updateProfile(let query):
+        case .updateProfile:
             return "/users/me/profile"
         case .otherProfile(let userId):
             return "/users/\(userId)/profile"
@@ -68,9 +68,9 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return nil
-        case .updateProfile(let query):
+        case .updateProfile:
             return nil
-        case .otherProfile(let userId):
+        case .otherProfile:
             return nil
         }
     }
@@ -79,22 +79,20 @@ extension ProfileRouter: TargetType {
         switch self {
         case .myProfile:
             return nil
-        case .updateProfile(let query):
+        case .updateProfile:
             return nil
-        case .otherProfile(let userId):
+        case .otherProfile:
             return nil
         }
     }
     
     var body: Data? {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .useDefaultKeys
         switch self {
         case .myProfile:
             return nil
-        case .updateProfile(let query):
-            return try? encoder.encode(query)
-        case .otherProfile(let userId):
+        case .updateProfile:
+            return nil
+        case .otherProfile:
             return nil
         }
     }

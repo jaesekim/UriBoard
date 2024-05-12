@@ -13,6 +13,12 @@ protocol KingfisherModifier {
 }
 
 extension KingfisherModifier {
+    
+    func createImgURL(path: String?) -> String {
+        
+        guard let path = path else { return "" }
+        return APIURL.baseURL + "/v1/" + path
+    }
 
     var modifier: AnyModifier {
         return AnyModifier { request in

@@ -49,8 +49,11 @@ final class InterceptorManager: RequestInterceptor {
         // 최대 3회 리트라이
         if request.retryCount < retryLimit {
             do {
-                let urlRequest = try Router.auth(router: .tokenRefresh).asURLRequest()
+                let urlRequest = try Router.auth(
+                    router: .tokenRefresh
+                ).asURLRequest()
                 print("interceptor:", urlRequest.url!)
+                print(urlRequest.headers)
                 AF
                     .request(urlRequest)
                     .validate(statusCode: 200..<300)

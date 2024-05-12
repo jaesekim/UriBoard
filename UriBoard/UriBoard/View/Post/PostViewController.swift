@@ -24,15 +24,6 @@ final class PostViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("Post VC")
-        
-        mainView.profileImage.kf.setImage(
-            with: URL(string: UserDefaultsManager.profileImage),
-            placeholder: UIImage(named: "profile"),
-            options: [.requestModifier(modifier)]
-        )
-        mainView.nickLabel.text = UserDefaultsManager.nickname
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -346,7 +346,7 @@ extension ProfileView {
 extension ProfileView: KingfisherModifier {
     func updateUI(_ element: ProfileModel) {
 
-        let imgUrl = APIURL.baseURL + "/v1/" + (element.profileImage ?? "")
+        let imgUrl = createImgURL(path: element.profileImage)
 
         nicknameLabel.text = element.nick
         profileImage.kf.setImage(

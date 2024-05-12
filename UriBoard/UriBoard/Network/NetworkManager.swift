@@ -151,3 +151,54 @@ extension NetworkManager {
         }
     }
 }
+
+// 프로필 수정
+extension NetworkManager {
+    
+    func updateProfile(
+        query: ProfileQuery
+    ) -> Single<Result<ProfileModel, APIError>> {
+        return Single.create { single -> Disposable in
+            do {
+                let urlRequest = try ProfileRouter.updateProfile.asURLRequest()
+                let nick = query.nick
+                
+                AF.upload(
+                    multipartFormData: { multipartFormData in
+                        multipartFormData.append(
+                            nick.data(using: .utf8)!,
+                            withName: "nick"
+                        )
+                        multipartFormData.append(
+                            query.profile,
+                            withName: "profile",
+                            fileName: "\(query.profile).jpg",
+                            mimeType: "image/jpg")
+                   
+                    },
+                    with: urlRequest,
+                    interceptor: InterceptorManager()
+                )
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: ProfileModel.self) { response in
+                    switch response.result {
+                    case .success(let success):
+                        single(.success(.success(success)))
+                    case .failure(let failure):
+                        guard let statusCode = response.response?.statusCode else {
+                            return single(.success(.failure(.serverError)))
+                        }
+                        let errorCode = APIError(
+                            rawValue: statusCode
+                        ) ?? APIError.serverError
+                        
+                        single(.success(.failure(errorCode)))
+                    }
+                }
+            } catch {
+                single(.success(.failure(.serverError)))
+            }
+            return Disposables.create()
+        }
+    }
+}

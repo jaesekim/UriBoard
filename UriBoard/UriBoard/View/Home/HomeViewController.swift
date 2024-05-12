@@ -69,8 +69,10 @@ extension HomeViewController {
                     owner.totalPages += success.data.count
                     owner.postItems.onNext(owner.postData)
                     owner.nextCursor = success.cursor
-                case .failure(_):
-                    owner.showToast("잠시 후 다시 시도해 주세요")
+                case .failure(let failure):
+                    let errorCode = failure.rawValue
+                    
+                    owner.errorHandling(errorCode: errorCode)
                 }
             }
             .disposed(by: disposeBag)
@@ -91,11 +93,9 @@ extension HomeViewController {
                     inputReboardList: element.likes2,
                     postId: element.id
                 )
-                print(input, "cell: \(row)")
                 let output = cell.viewModel.transform(input: input)
 
                 output.likeList
-                    .debug()
                     .drive(with: self) { owner, list in
                         let bool = list.contains(UserDefaultsManager.userId)
                         cell.likeButton.configuration = .iconButton(

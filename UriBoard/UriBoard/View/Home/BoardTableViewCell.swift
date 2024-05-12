@@ -220,7 +220,9 @@ extension BoardTableViewCell: KingfisherModifier {
     
     func updateUI(_ element: ReadDetailPostModel) {
 
-        let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
+        let imgUrl = createImgURL(
+            path: element.creator.profileImage
+        )
         let likeStatus = element.likes.contains(
             UserDefaultsManager.userId
         )

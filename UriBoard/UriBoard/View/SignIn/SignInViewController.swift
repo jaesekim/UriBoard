@@ -43,7 +43,7 @@ final class SignInViewController: BaseViewController {
         
         output.signInValidation
             .drive(with: self) { owner, bool in
-                let color: UIColor = bool ? ColorStyle.lightPurple : ColorStyle.gray
+                let color: UIColor = bool ? ColorStyle.confirm : ColorStyle.gray
 
                 owner.mainView.confirmButton.configuration = .confirmButton(
                     message: "로그인",

@@ -129,6 +129,7 @@
 		7BFDE8632BEEA5E900F46241 /* FollowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8622BEEA5E900F46241 /* FollowModel.swift */; };
 		7BFDE8652BEEA6A400F46241 /* FollowCancelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8642BEEA6A400F46241 /* FollowCancelModel.swift */; };
 		7BFDE8672BEEA6C600F46241 /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8662BEEA6C600F46241 /* FollowRouter.swift */; };
+		7BFDE8692BF086C900F46241 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDE8682BF086C900F46241 /* FollowListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -247,6 +248,7 @@
 		7BFDE8622BEEA5E900F46241 /* FollowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowModel.swift; sourceTree = "<group>"; };
 		7BFDE8642BEEA6A400F46241 /* FollowCancelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCancelModel.swift; sourceTree = "<group>"; };
 		7BFDE8662BEEA6C600F46241 /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
+		7BFDE8682BF086C900F46241 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 				7BFDE8442BECB86F00F46241 /* ReboardPostTableViewCell.swift */,
 				7BFDE8512BEE7B2A00F46241 /* EditProfileViewController.swift */,
 				7BFDE8532BEE7B3600F46241 /* EditProfileView.swift */,
+				7BFDE8682BF086C900F46241 /* FollowListViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				7BE31C6C2BC6B79E00D1EDE6 /* NetworkManager.swift in Sources */,
 				7BE31C752BC6D1DC00D1EDE6 /* ProfileModel.swift in Sources */,
 				7BDDB9F92BE402EE00D2FAFE /* LikeQueryString.swift in Sources */,
+				7BFDE8692BF086C900F46241 /* FollowListViewController.swift in Sources */,
 				7BE31C5C2BC68F8500D1EDE6 /* BaseViewController.swift in Sources */,
 				7BFDE8632BEEA5E900F46241 /* FollowModel.swift in Sources */,
 				7BC78E552BD9F23E001C2BE4 /* CreatePostModel.swift in Sources */,
@@ -1122,6 +1126,7 @@
 				DEVELOPMENT_TEAM = J296P9NM3P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UriBoard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "우리보드";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1156,6 +1161,7 @@
 				DEVELOPMENT_TEAM = J296P9NM3P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UriBoard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "우리보드";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -17,8 +17,8 @@ class CommentTableViewCell: UITableViewCell {
     var disposeBag = DisposeBag()
 
     let profileImage = UIImageView(frame: .zero).then {
-        $0.image = UIImage(systemName: "person")
-        $0.tintColor = ColorStyle.lightPurple
+        $0.image = UIImage(named: "profile")
+        $0.tintColor = ColorStyle.moreLightDark
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .white
         $0.clipsToBounds = true
@@ -59,7 +59,9 @@ class CommentTableViewCell: UITableViewCell {
 extension CommentTableViewCell: KingfisherModifier {
     func updateUI(_ element: CommentModel) {
         
-        let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
+        let imgUrl = createImgURL(
+            path: element.creator.profileImage
+        )
         profileImage.kf.setImage(
             with: URL(string: imgUrl),
             placeholder: UIImage(named: "profile"),

@@ -89,6 +89,7 @@ extension BoardDetailView {
         profileImage.rx
             .tapGesture()
             .when(.recognized)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, _ in
                 owner.nicknameGestureClosure?()
             }
@@ -96,6 +97,7 @@ extension BoardDetailView {
         nicknameLabel.rx
             .tapGesture()
             .when(.recognized)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, _ in
                 owner.nicknameGestureClosure?()
             }
@@ -183,7 +185,9 @@ extension BoardDetailView: KingfisherModifier {
 
     func updateUI(_ element: ReadDetailPostModel) {
 
-        let imgUrl = APIURL.baseURL + "/v1/" + (element.creator.profileImage ?? "")
+        let imgUrl = createImgURL(
+            path: element.creator.profileImage
+        )
 
         let likeStatus = element.likes.contains(
             UserDefaultsManager.userId

@@ -80,7 +80,7 @@ extension SignInViewModel {
                     UserDefaultsManager.userEmail = success.email
                     UserDefaultsManager.nickname = success.nick
                     UserDefaultsManager.userId = success.user_id
-                    UserDefaultsManager.profileImage = APIURL.baseURL + "/v1/" + (success.profileImage ?? "")
+                    UserDefaultsManager.profileImage = success.profileImage ?? ""
                     UserDefaultsManager.accessToken = success.accessToken
                     UserDefaultsManager.refreshToken = success.refreshToken
                     signInButtonTrigger.accept(())

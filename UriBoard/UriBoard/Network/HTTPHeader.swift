@@ -13,5 +13,5 @@ enum HTTPHeader: String {
     case multiPart = "multipart/form-data"
     case sesacKey =  "SesacKey"
     case auth = "Authorization"
-    case refresh = "Refresh"
+    case refresh = "refresh"
 }

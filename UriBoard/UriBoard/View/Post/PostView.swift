@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 final class PostView: BaseView {
 
@@ -54,7 +55,7 @@ final class PostView: BaseView {
     }
 }
 
-extension PostView {
+extension PostView: KingfisherModifier {
     override func configureHierarchy() {
         [
             profileImage,
@@ -96,6 +97,18 @@ extension PostView {
     override func configureView() {
         super.configureView()
 
+        let imgURL = createImgURL(path: UserDefaultsManager.profileImage
+        )
+        
+        profileImage.kf.setImage(
+            with: URL(
+                string: imgURL
+            ),
+            placeholder: UIImage(named: "profile"),
+            options: [.requestModifier(modifier)]
+        )
+        nickLabel.text = UserDefaultsManager.nickname
+        
         DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
 
             guard let self = self else { return }
