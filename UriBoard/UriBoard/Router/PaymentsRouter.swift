@@ -46,11 +46,13 @@ extension PaymentsRouter: TargetType {
         case .validation:
             return [
                 HTTPHeader.auth.rawValue: UserDefaultsManager.accessToken,
+                HTTPHeader.contentType.rawValue: HTTPHeader.json.rawValue,
                 HTTPHeader.sesacKey.rawValue: APIKey.key
             ]
         case .list:
             return [
                 HTTPHeader.auth.rawValue: UserDefaultsManager.accessToken,
+                HTTPHeader.contentType.rawValue: HTTPHeader.json.rawValue,
                 HTTPHeader.sesacKey.rawValue: APIKey.key
             ]
         }
@@ -79,6 +81,7 @@ extension PaymentsRouter: TargetType {
         encoder.keyEncodingStrategy = .useDefaultKeys
         switch self {
         case .validation(let query):
+            print("router:", query)
             return try? encoder.encode(query)
         case .list:
             return nil
